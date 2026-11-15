@@ -444,7 +444,7 @@ void main(){
     float cl=fbm(p/170.+vec2(t*.03,-t*.02)+9.)*.5+.5;
     float lum=dot(o,vec3(.3,.5,.2));
     vec3 lit=o+(uD*.7+vec3(.3))*(.25+1.1*smoothstep(.3,.8,cl))*(.35+lum*1.4);
-    o=mix(o,min(lit,vec3(1.)),clamp(uFl*.8*(.35+.65*rad),0.,1.));
+    o=mix(o,min(lit,vec3(1.)),clamp(uFl*.55*(.3+.7*rad),0.,1.));
   }
   o+=(fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453)-.5)/255.;
   gl_FragColor=vec4(o,1.);
@@ -591,7 +591,8 @@ function moodOf(w){return w.mood||ACT_MOOD[w.act]||(w.words==='none'?'calm':'non
 function autoName(w){
   const G=(w.genres||[]).filter(g=>GEN[g]);
   if(w.act)return ACT[w.act];
-  if(G.length>=2)return cap1(G.slice(0,2).map(g=>GEN[g][0]).join(' и '));
+  if(G.length>2)return w.mood?adj(w.mood,'f').replace(/^./,c=>c.toUpperCase())+' музыка':'Разные жанры';
+  if(G.length===2)return cap1(G.map(g=>GEN[g][0]).join(' и '));
   if(G.length===1)return cap1((w.mood?adj(w.mood,GEN[G[0]][1])+' ':'')+GEN[G[0]][0]);
   if(w.mood)return adj(w.mood,'f').replace(/^./,c=>c.toUpperCase())+' музыка'+(w.words?' '+WORDN[w.words]:'');
   if(w.words)return 'Музыка '+WORDN[w.words];
@@ -599,7 +600,9 @@ function autoName(w){
   return 'Своя волна';
 }
 function waveName(w){return (w.name&&w.name.trim())||autoName(w)}
-function parts(w){return [w.act&&ACTW[w.act],w.mood&&MOODN[w.mood].toLowerCase(),...(w.genres||[]).map(g=>GEN[g][0]),w.char&&CHARN[w.char].toLowerCase(),w.words&&WORDN[w.words]].filter(Boolean)}
+const plural=(n,a,b,c)=>n%10===1&&n%100!==11?a:n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?b:c;
+function genParts(w){const G=(w.genres||[]).filter(g=>GEN[g]);return G.length===Object.keys(GEN).length?['все жанры']:G.length>2?[`${G.length} ${plural(G.length,'жанр','жанра','жанров')}`]:G.map(g=>GEN[g][0])}
+function parts(w){return [w.act&&ACTW[w.act],w.mood&&MOODN[w.mood].toLowerCase(),...genParts(w),w.char&&CHARN[w.char].toLowerCase(),w.words&&WORDN[w.words]].filter(Boolean)}
 function capOf(w){
   const nm=waveName(w).toLowerCase(),p=parts(w).filter(x=>!nm.includes(x.slice(0,Math.max(4,x.length-3)))&&!(w.act&&x===ACTW[w.act]&&!w.name));
   return p.length?cap1(p.join(', ')):'Своя волна';
@@ -663,7 +666,7 @@ function ghostSVG(){
 </svg>`;
 }
 /* иконка: прогрессивное размытие (верх-лево мыло → низ-право резко) + светлый внутренний кант */
-function iconSVG(k,fill,rimc,size){
+function iconSVG(k,fill,rimc,size,blur=2.9){
   const v=typeof k==='string'?ICONS[k]:k,id='i'+(UID++),pad=9,W=v.w+pad*2,H=v.h+pad*2,s=(size||1)*(v.sc||1);
   const R=`x="${-pad}" y="${-pad}" width="${W}" height="${H}"`;
   return `<svg class="isvg" width="${(W*s).toFixed(2)}" height="${(H*s).toFixed(2)}" viewBox="${-pad} ${-pad} ${W} ${H}" style="left:${(-W*s/2).toFixed(2)}px;top:${(-H*s/2).toFixed(2)}px;position:absolute;overflow:visible"><defs>
@@ -673,7 +676,7 @@ function iconSVG(k,fill,rimc,size){
 <mask id="${id}S" maskUnits="userSpaceOnUse" ${R}><rect ${R} fill="url(#${id}sg)"/></mask>
 <mask id="${id}B" maskUnits="userSpaceOnUse" ${R}><rect ${R} fill="url(#${id}bg)"/></mask>
 <mask id="${id}R" maskUnits="userSpaceOnUse" ${R}><rect ${R} fill="url(#${id}rg)"/></mask>
-<filter id="${id}f" filterUnits="userSpaceOnUse" ${R}><feGaussianBlur stdDeviation="2.9"/></filter>
+<filter id="${id}f" filterUnits="userSpaceOnUse" ${R}><feGaussianBlur stdDeviation="${blur}"/></filter>
 <filter id="${id}f1" filterUnits="userSpaceOnUse" ${R}><feGaussianBlur stdDeviation="1.1"/></filter>
 <clipPath id="${id}c"><path d="${v.d}" fill-rule="evenodd"/></clipPath></defs>
 <g mask="url(#${id}B)"><path d="${v.d}" fill-rule="evenodd" fill="${fill}" filter="url(#${id}f)"/></g>
@@ -1356,7 +1359,7 @@ function syncLike(){const on=liked.has(cur.id);[$('#plLike'),$('#plMiniLk'),$('#
 /* огибающая молнии: короткая вспышка, провал, вторая — ярче, затем мягкое затухание */
 let FL0=-1e9;
 function flashAt(now){const t=(now-FL0)/1000;if(t<0||t>2.4)return 0;
-  if(t<.07)return t/.07*.6;if(t<.15)return .6-(t-.07)/.08*.35;if(t<.24)return .25+(t-.15)/.09*.75;return Math.exp(-(t-.24)/.42)}
+  if(t<.32){const k=t/.32;return k*k*(3-2*k)}return Math.exp(-(t-.32)/.55)}
 function likeFlash(){FL0=performance.now()}
 [$('#plLike'),$('#plMiniLk')].forEach(b=>b.addEventListener('click',()=>{const on=!liked.has(cur.id);on?liked.add(cur.id):liked.delete(cur.id);syncLike();likeAnim(b,on)}));
 function toggleLike(btn){const on=!liked.has(cur.id);on?liked.add(cur.id):liked.delete(cur.id);syncLike();btn.querySelector('svg').animate([{transform:'scale(1)'},{transform:'scale(1.22)'},{transform:'scale(1)'}],{duration:320,easing:EASE.std});if(on)likeFlash()}
@@ -1456,8 +1459,7 @@ function moodDot(m){const col=MOOD_COL[m],C=NAT[col],id='md'+(UID++),dk=rgb(hex(
   return `<svg viewBox="0 0 54 54" width="54" height="54" style="position:absolute;left:0;top:0"><defs>
 <radialGradient id="${id}g" cx=".72" cy=".2" r="1"><stop offset="0" stop-color="${C.c1}"/><stop offset=".55" stop-color="${rgb(hex(C.c1).map(v=>v*.62))}"/><stop offset="1" stop-color="${dk}"/></radialGradient>
 <linearGradient id="${id}r" x1="1" y1="0" x2=".2" y2=".8"><stop offset="0" stop-color="${C.rim}" stop-opacity=".9"/><stop offset=".6" stop-color="${C.rim}" stop-opacity="0"/></linearGradient></defs>
-<circle cx="27" cy="27" r="27" fill="url(#${id}g)"/><circle cx="27" cy="27" r="26.1" fill="none" stroke="url(#${id}r)" stroke-width="1.6"/></svg><i class="mi"><svg viewBox="0 0 24 24" width="25" height="25" style="position:absolute;left:-12.5px;top:-12.5px" fill="${C.icr}">${MOOD_GL[m]}</svg></i>`}
-const MOOD_GL={energy:'<path d="M13.6 2 4.8 13.6h6.1L9.9 22l9.3-12.2h-6.3L13.6 2Z"/>',fun:'<path fill-rule="evenodd" d="M12 2.6a9.4 9.4 0 1 1 0 18.8 9.4 9.4 0 0 1 0-18.8ZM8.9 8.3a1.45 1.45 0 1 0 0 2.9 1.45 1.45 0 0 0 0-2.9Zm6.2 0a1.45 1.45 0 1 0 0 2.9 1.45 1.45 0 0 0 0-2.9ZM7.4 13.4a4.6 4.6 0 0 0 9.2 0Z"/>',calm:'<path fill-rule="evenodd" d="M20.6 3.2C12 3.2 4 7.3 4 15c0 1.9.6 3.6 1.6 5 1.3-4.7 4.5-8.6 8.8-11-3.8 2.9-6.6 6.7-7.8 11.6 1.3.6 2.9.9 4.6.9 8.4 0 9.4-8.9 9.4-18.3Z"/>',dream:'<path d="M7.2 19.2h10.3a4.6 4.6 0 0 0 .7-9.15 6.2 6.2 0 0 0-11.9-.4A4.8 4.8 0 0 0 7.2 19.2Z"/>',sad:'<path d="M12 2.6c-3.2 4.6-6.3 8-6.3 11.9a6.3 6.3 0 0 0 12.6 0c0-3.9-3.1-7.3-6.3-11.9Z"/>',romantic:'<path d="M12 20.6 4.3 13A5.1 5.1 0 0 1 12 6.4a5.1 5.1 0 0 1 7.7 6.6Z"/>'};
+<circle cx="27" cy="27" r="27" fill="url(#${id}g)"/><circle cx="27" cy="27" r="26.1" fill="none" stroke="url(#${id}r)" stroke-width="1.6"/></svg><i class="mi">${iconSVG(MOOD_IC[m],C.ic,C.icr,.5,1.4)}</i>`}
 
 document.querySelectorAll('.md').forEach(b=>{const col=MOOD_COL[b.dataset.v];b.querySelector('.dot').innerHTML=moodDot(b.dataset.v);b.style.setProperty('--dc',NAT[col].c1+'88')});
 function openSheet(key){
@@ -1483,7 +1485,8 @@ function paintSheet(first){
   document.querySelectorAll('.seg').forEach(g=>{const th=g.querySelector('.th'),on=g.querySelector('button.on');if(on){th.style.width=on.offsetWidth+'px';th.style.transform=`translateX(${on.offsetLeft}px)`;th.style.opacity=1}else th.style.opacity=0});
   const any=['act','mood','words','char'].some(k=>sel[k])||sel.genres.length>0;$('#save').disabled=!any;
   if(!nameTouched)nameIn.value=any?autoName(sel):'';
-  const nl=nameIn.value.toLowerCase(),p=parts(sel).filter(x=>!nl.includes(x.slice(0,Math.max(4,x.length-3))));$('#nmcap').textContent=p.join(', ');
+  nameIn.placeholder=any?autoName(sel):'Назовите волну';
+  const nl=(nameIn.value||nameIn.placeholder).toLowerCase(),p=parts(sel).filter(x=>!nl.includes(x.slice(0,Math.max(4,x.length-3))));$('#nmcap').textContent=p.join(', ');
   const col=any?MOOD_COL[moodOf(sel)]:'slate',C=NAT[col];
   sheet.style.setProperty('--acc',C.c1);
   $('#sglow').style.background=`radial-gradient(46% 50% at 50% 50%,${C.c1},rgba(0,0,0,0))`;
@@ -1503,7 +1506,7 @@ document.querySelectorAll('[data-g]').forEach(g=>g.addEventListener('click',e=>{
   if(g.dataset.multi){const a=sel.genres,i=a.indexOf(v);if(i>=0)a.splice(i,1);else{a.push(v);if(a.length>+g.dataset.multi)a.shift()}}
   else{sel[k]=sel[k]===v?undefined:v;if(!sel[k])delete sel[k]}
   paintSheet()}));
-nameIn.addEventListener('input',()=>{nameTouched=nameIn.value.trim()!=='';paintSheet()});
+nameIn.addEventListener('input',()=>{nameTouched=true;paintSheet()});
 nameIn.addEventListener('keydown',e=>{if(e.key==='Enter')nameIn.blur()});
 /* пузырь перекрашивается на месте */
 function refreshItem(key){
