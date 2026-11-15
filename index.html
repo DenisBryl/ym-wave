@@ -180,36 +180,37 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-down{left:7px}.pl-dev{left:303px}.pl-q{left:343px}
 .pl-ttl{position:absolute;left:84px;right:84px;top:0;height:44px;text-align:center;color:rgba(255,255,255,.88)}
 .pl-ttl span{position:absolute;left:0;right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s cubic-bezier(.3,0,.2,1),transform .3s cubic-bezier(.2,0,0,1)}
-.pl-ttl .one{top:0;font:500 15px/44px var(--f-text);letter-spacing:-.2px}
+.pl-ttl .one{top:-.7px;font:500 14.6px/44px var(--f-text);letter-spacing:-.75px}
 .pl-ttl .k{top:var(--sp-hdr-top);font:400 13px/16px var(--f-text);letter-spacing:-.1px;color:rgba(255,255,255,.5);opacity:0;transform:translateY(4px)}
 .pl-ttl .q{top:var(--sp-hdr-q);font:600 13px/16px var(--f-text);letter-spacing:-.1px;color:#fff;opacity:0;transform:translateY(4px)}
 .pl-ttl.two .one{opacity:0;transform:translateY(-4px)}
 .pl-ttl.two .k,.pl-ttl.two .q{opacity:1;transform:none}
-.pl-track{position:absolute;left:0;right:0;top:115px;height:345px}
+.pl-track{position:absolute;left:0;right:0;top:116px;height:345px}
 .pl-cv{position:absolute;left:24px;top:0;width:345px;height:345px;will-change:transform}
 .pl-cv .in{position:relative;width:345px;height:345px;border-radius:8px;overflow:hidden;box-shadow:0 22px 48px rgba(0,0,0,.34),0 2px 8px rgba(0,0,0,.2);transform-origin:50% 50%;will-change:transform}
-.pl-meta{position:absolute;left:24px;right:24px;top:487px;height:48px}
-.pl-title{position:absolute;left:0;right:84px;top:0;font:700 22px/27px var(--f-text);letter-spacing:-.45px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pl-artist{position:absolute;left:0;right:84px;top:28px;font:400 17px/21px var(--f-text);letter-spacing:-.25px;color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pl-share,.pl-more{position:absolute;top:8px;width:36px;height:36px;display:grid;place-items:center}
-.pl-share{right:34px}.pl-more{right:-6px}
-.pl-prog{position:absolute;left:24px;right:24px;top:552px;height:44px;touch-action:none;cursor:pointer}
+.pl-meta{position:absolute;left:24px;right:24px;top:485.6px;height:48px}
+.pl-title{position:absolute;left:0;right:84px;top:1.3px;font:600 21px/27px var(--f-text);letter-spacing:-.8px;color:rgba(255,255,255,.9);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-artist{position:absolute;left:0;right:84px;top:28px;font:500 16.5px/21px var(--f-text);letter-spacing:-.45px;color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-share,.pl-more{position:absolute;top:6.8px;width:36px;height:36px;display:grid;place-items:center}
+.pl-share{right:34.7px}.pl-more{right:-6px;top:8.3px}
+.pl-prog{position:absolute;left:24px;right:24px;top:547px;height:44px;touch-action:none;cursor:pointer}
 .pl-prog .ln{position:absolute;left:0;right:0;top:15.8px;height:2.4px;border-radius:2px;background:rgba(255,255,255,.14)}
 .pl-prog .fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:2px;background:#fff}
 .pl-prog .knob{position:absolute;top:17px;left:0;width:8.5px;height:8.5px;margin:-4.25px 0 0 -4.25px;border-radius:50%;background:#fff;transition:transform .15s cubic-bezier(.3,0,.2,1)}
 .pl-prog.drag .knob{transform:scale(1.6)}
-.pl-prog .tm{position:absolute;top:32.4px;font:400 12px/14px var(--f-text);letter-spacing:-.1px;color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums}
+.pl-prog .tm{position:absolute;top:31.4px;font:400 11.5px/14px var(--f-text);letter-spacing:-.3px;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums}
 .pl-prog .tm.r{right:0}
-.pl-ctrl{position:absolute;left:0;right:0;top:616px;height:64px}
+.pl-ctrl{position:absolute;left:0;right:0;top:610.6px;height:64px}
 .pl-ctrl button{position:absolute;top:0;height:64px;width:56px;margin-left:-28px;display:grid;place-items:center}
 .pl-ctrl .pp{top:-.5px;width:65px;height:65px;margin-left:-32.5px;border-radius:50%;background:var(--c-yellow)}
 .pl-ctrl button:not(.pp) svg{transition:opacity .2s}.pl-ctrl button:not(.pp):active svg{opacity:.45;transition:none}
-.pl-row{position:absolute;left:24px;right:24px;top:722px;height:48px}
-.pl-row button{position:absolute;top:0;width:74px;height:48px;margin-left:-37px;border-radius:24px;background:rgba(255,255,255,.04);display:grid;place-items:center;transition:background-color .2s}
+.pl-row{position:absolute;left:24px;right:24px;top:714.6px;height:48px}
+.pl-row button{position:absolute;top:0;width:74px;height:48px;margin-left:-37px;border-radius:24px;background:rgba(255,255,255,.05);display:grid;place-items:center;transition:background-color .2s}
 .pl-row button:active{background:rgba(255,255,255,.1);transition:none}
 .nop svg{transition:opacity .2s}.nop:active svg{opacity:.45;transition:none}
+.pl-row .off svg{opacity:.2}.pl-row .off:active svg{opacity:.2}
 /* карточка «Моя волна по треку» */
-.pl-card{position:absolute;left:24px;top:799px;width:345px;height:65px;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.12);text-align:center;transition:filter .2s}
+.pl-card{position:absolute;left:24px;top:795.6px;width:345px;height:65px;border-radius:14px;overflow:hidden;background:rgba(0,0,0,.12);text-align:center;transition:filter .2s}
 .pl-card svg.wv{position:absolute;inset:0;width:100%;height:100%}
 .pl-card:active{filter:brightness(1.25);transition:none}
 .pl-card .k{position:absolute;left:0;right:0;top:var(--card-k);font:500 14px/17px var(--f-text);letter-spacing:-.15px;color:var(--pl-acc,#F59AE8)}
@@ -217,7 +218,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-card .n b{font-weight:700;overflow:hidden;text-overflow:ellipsis}
 .pl-card .n svg{flex:none}
 /* карточка артиста */
-.pl-art{position:absolute;left:24px;top:896px;width:345px;height:420px;border-radius:16px;overflow:hidden;background:var(--pl-card,#2A2A2A)}
+.pl-art{position:absolute;left:24px;top:892.6px;width:345px;height:420px;border-radius:16px;overflow:hidden;background:var(--pl-card,#2A2A2A)}
 .pl-art .ph{position:absolute;left:0;top:0;width:345px;height:345px}
 .pl-art .ph img,.pl-art .ph svg{display:block;width:345px;height:345px;object-fit:cover}
 .pl-art .gr{position:absolute;left:0;right:0;top:110px;height:236px;background:linear-gradient(rgba(0,0,0,0),color-mix(in srgb,var(--pl-card,#2A2A2A) 78%,transparent) 62%,var(--pl-card,#2A2A2A))}
@@ -227,8 +228,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-art .fl{position:absolute;right:16px;top:284px;width:44px;height:44px;border-radius:50%;background:var(--fill-media);display:grid;place-items:center}
 .pl-art .fl:active{background:rgba(255,255,255,.26)}
 /* похожие треки */
-.pl-h{position:absolute;left:24px;top:1346px;font:900 22px/28px var(--f-display);letter-spacing:-.02em;display:flex;align-items:center;gap:6px}
-.pl-sim{position:absolute;left:0;right:0;top:1390px}
+.pl-h{position:absolute;left:24px;top:1342.6px;font:900 22px/28px var(--f-display);letter-spacing:-.02em;display:flex;align-items:center;gap:6px}
+.pl-sim{position:absolute;left:0;right:0;top:1386.6px}
 .pl-it{position:relative;height:72px;padding:0 24px;display:flex;align-items:center;gap:14px;cursor:pointer}
 .pl-it .cv{flex:none;width:53px;height:53px;border-radius:6px;overflow:hidden}
 .pl-it .cv img,.pl-it .cv svg{display:block;width:53px;height:53px;object-fit:cover}
@@ -352,19 +353,19 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
         <div class="pl-glow"></div>
         <div class="pl-track" id="plTrack"></div>
         <div class="pl-meta"><div class="pl-title" id="plTitle"></div><div class="pl-artist" id="plArtist"></div>
-        <button class="pl-share nop" aria-label="Поделиться"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 14V2.5M5.5 7 10 2.5 14.5 7M2 11v7.5A1.5 1.5 0 0 0 3.5 20h13a1.5 1.5 0 0 0 1.5-1.5V11" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="pl-more nop" aria-label="Ещё"><svg width="22" height="6" viewBox="0 0 22 6"><circle cx="3" cy="3" r="2.3" fill="rgba(255,255,255,.5)"/><circle cx="11" cy="3" r="2.3" fill="rgba(255,255,255,.5)"/><circle cx="19" cy="3" r="2.3" fill="rgba(255,255,255,.5)"/></svg></button></div>
+        <button class="pl-share nop" aria-label="Поделиться"><svg width="17.5" height="20" viewBox="0 0 17.5 20"><path d="M8.75 13.5V1M2.5 7 8.75 1 15 7M1.5 11.6V15.9Q1.5 19 4.6 19H12.9Q16 19 16 15.9V11.6" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="pl-more nop" aria-label="Ещё"><svg width="22" height="6" viewBox="0 0 22 6"><circle cx="3" cy="3" r="2.3" fill="rgba(255,255,255,.55)"/><circle cx="11" cy="3" r="2.3" fill="rgba(255,255,255,.55)"/><circle cx="19" cy="3" r="2.3" fill="rgba(255,255,255,.55)"/></svg></button></div>
         <div class="pl-prog" id="plProg"><div class="ln"><div class="fill" id="plFill"></div></div><div class="knob" id="plKnob"></div><span class="tm" id="plCur">0:00</span><span class="tm r" id="plDur">0:50</span></div>
         <div class="pl-ctrl">
-        <button class="nop" style="left:36px" id="plDis" aria-label="Не нравится"><svg width="26" height="24" viewBox="-2 -2 26 24"><defs><mask id="disM" maskUnits="userSpaceOnUse" x="-2" y="-2" width="26" height="24"><rect x="-2" y="-2" width="26" height="24" fill="#fff"/><path d="M1.5 .5 20.5 19.5" stroke="#000" stroke-width="5.6" stroke-linecap="round"/></mask></defs><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.1" stroke-linejoin="round" mask="url(#disM)"/><path d="M1.5 .5 20.5 19.5" stroke="rgba(255,255,255,.5)" stroke-width="2.1" stroke-linecap="round"/></svg></button>
-        <button style="left:120px" id="plPrev" aria-label="Предыдущий"><svg width="26" height="26" viewBox="0 0 26 26" fill="#fff"><g transform="translate(26 0) scale(-1 1)"><path d="M4.1 4.4Q4.1 3.25 5.1 3.85L19.3 12.4Q20.3 13 19.3 13.6L5.1 22.15Q4.1 22.75 4.1 21.6Z"/><rect x="19.3" y="3.25" width="2.6" height="19.5" rx=".6"/></g></svg></button>
+        <button class="nop" style="left:36px" id="plDis" aria-label="Не нравится"><svg width="26" height="24" viewBox="-2 -2 26 24"><defs><mask id="disM" maskUnits="userSpaceOnUse" x="-2" y="-2" width="26" height="24"><rect x="-2" y="-2" width="26" height="24" fill="#fff"/><path d="M1.2 1.6 19.3 16.5" stroke="#000" stroke-width="5" stroke-linecap="round"/></mask></defs><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.1" stroke-linejoin="round" mask="url(#disM)"/><path d="M1.2 1.6 19.3 16.5" stroke="rgba(255,255,255,.55)" stroke-width="2.3" stroke-linecap="round"/></svg></button>
+        <button style="left:120px" id="plPrev" aria-label="Предыдущий"><svg width="27" height="27.8" viewBox="0 0 26 26" preserveAspectRatio="none" fill="rgba(255,255,255,.9)"><g transform="translate(26 0) scale(-1 1)"><path d="M4.1 4.4Q4.1 3.25 5.1 3.85L19.3 12.4Q20.3 13 19.3 13.6L5.1 22.15Q4.1 22.75 4.1 21.6Z"/><rect x="19.3" y="3.25" width="2.6" height="19.5" rx=".6"/></g></svg></button>
         <button class="pp" style="left:196.5px" id="plPP" aria-label="Пауза"><svg width="26" height="28" viewBox="0 0 26 28"><g id="plBars"><rect x="5" y="3" width="5.6" height="22" rx="1.6" fill="#111"/><rect x="15.4" y="3" width="5.6" height="22" rx="1.6" fill="#111"/></g><path id="plTri" d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4C-5.18 -14.05 -4.07 -13.10 -3.10 -12.30C-2.13 -11.50 -0.83 -10.38 0.20 -9.60C1.23 -8.82 2.10 -8.27 3.10 -7.60C4.10 -6.93 5.27 -6.16 6.20 -5.60C7.13 -5.04 7.83 -4.70 8.70 -4.25C9.57 -3.80 10.68 -3.24 11.40 -2.90C12.12 -2.56 12.47 -2.43 13.00 -2.20C13.53 -1.97 14.15 -1.71 14.60 -1.50C15.05 -1.29 15.52 -1.04 15.70 -0.95Q16.05 0 15.7 0.95C15.52 1.04 15.05 1.29 14.60 1.50C14.15 1.71 13.53 1.97 13.00 2.20C12.47 2.43 12.12 2.56 11.40 2.90C10.68 3.24 9.57 3.80 8.70 4.25C7.83 4.70 7.13 5.04 6.20 5.60C5.27 6.16 4.10 6.93 3.10 7.60C2.10 8.27 1.23 8.82 0.20 9.60C-0.83 10.38 -2.13 11.50 -3.10 12.30C-4.07 13.10 -5.18 14.05 -5.60 14.40Q-7.7 14.4 -7.7 12.6Z" transform="translate(11.6 14) scale(.78)" fill="#0A0A0A" opacity="0"/></svg></button>
-        <button style="left:273.5px" id="plNext" aria-label="Следующий"><svg width="26" height="26" viewBox="0 0 26 26" fill="#fff"><path d="M4.1 4.4Q4.1 3.25 5.1 3.85L19.3 12.4Q20.3 13 19.3 13.6L5.1 22.15Q4.1 22.75 4.1 21.6Z"/><rect x="19.3" y="3.25" width="2.6" height="19.5" rx=".6"/></svg></button>
-        <button style="left:357px" id="plLike" data-off="rgba(255,255,255,.5)" aria-label="Нравится"><svg width="26" height="24" viewBox="-2 -2 26 24"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
+        <button style="left:273.5px" id="plNext" aria-label="Следующий"><svg width="27" height="27.8" viewBox="0 0 26 26" preserveAspectRatio="none" fill="rgba(255,255,255,.9)"><path d="M4.1 4.4Q4.1 3.25 5.1 3.85L19.3 12.4Q20.3 13 19.3 13.6L5.1 22.15Q4.1 22.75 4.1 21.6Z"/><rect x="19.3" y="3.25" width="2.6" height="19.5" rx=".6"/></svg></button>
+        <button style="left:357px" id="plLike" data-off="rgba(255,255,255,.55)" aria-label="Нравится"><svg width="26" height="24" viewBox="-2 -2 26 24"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
       </div>
-        <div class="pl-row"><button class="nop" style="left:37px" aria-label="Повтор"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M2 10V7.5A3.5 3.5 0 0 1 5.5 4H19m0 0-3-3m3 3-3 3M20 10v2.5A3.5 3.5 0 0 1 16.5 16H3m0 0 3 3m-3-3 3-3" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="nop" style="left:172.5px" aria-label="Текст"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M3 2h9M7.5 2v16M13.5 10h6M13.5 14h6M13.5 18h6" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.9" stroke-linecap="round"/></svg></button>
-        <button class="nop" style="left:308px" aria-label="Скачать"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 2v13m-5-5 5 5 5-5M3 20h14" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <div class="pl-row"><button class="nop" style="left:37px" aria-label="Повтор"><svg width="20.5" height="20" viewBox="0 0 20.5 20"><path d="M1 16.7V8.2Q1 4.2 5 4.2H14.6M11.6 1.2 14.6 4.2 11.6 7.2M19.5 3.3V11.8Q19.5 15.8 15.5 15.8H5.9M8.9 12.8 5.9 15.8 8.9 18.8" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="nop off" style="left:172.5px" aria-label="Текст"><svg width="19" height="18" viewBox="0 0 19 18"><path d="M1 1.3H13.4M7.2 1.3V13.3M12.6 6.1H17.3M11.5 11.1H17.3M6.5 16.7H17.3" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <button class="nop" style="left:308px" aria-label="Скачать"><svg width="20" height="18.5" viewBox="0 0 20 18.5"><path d="M10 1V15.6M2.2 8 10 15.8 17.8 8M1 17.4H19" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         <button class="pl-card" id="plCardBtn"><svg class="wv" viewBox="0 0 345 65" preserveAspectRatio="none"><defs><linearGradient id="cwA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".55" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#fff" stop-opacity=".05"/></linearGradient><linearGradient id="cwB" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".34"/><stop offset=".45" stop-color="#fff" stop-opacity=".06"/><stop offset=".75" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".36"/></linearGradient><filter id="cwF" x="-5%" y="-30%" width="110%" height="160%"><feGaussianBlur stdDeviation="2.4"/></filter><filter id="cwF2" x="-5%" y="-30%" width="110%" height="160%"><feGaussianBlur stdDeviation="1"/></filter></defs><path d="M0 44C60 30 110 58 175 52S285 22 345 14V65H0Z" fill="url(#cwA)" filter="url(#cwF)"/><path d="M0 54C50 40 105 47 160 57S270 62 345 34V65H0Z" fill="url(#cwB)" filter="url(#cwF)"/><path d="M0 54C50 40 105 47 160 57S270 62 345 34" fill="none" stroke="#fff" stroke-opacity=".32" stroke-width="1.2" filter="url(#cwF2)"/><path d="M215 50C260 44 300 30 345 16" fill="none" stroke="#fff" stroke-opacity=".38" stroke-width="1.4" filter="url(#cwF2)"/></svg><div class="k">Моя волна по треку</div><div class="n" id="plCard"></div></button>
         <div class="pl-art" id="plArt"><div class="ph" id="plArtPh"></div><div class="gr"></div><div class="an" id="plArtNm"></div>
           <button class="fl" id="plArtFl" aria-label="Нравится"><svg width="20" height="18" viewBox="0 0 22 20"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
@@ -373,10 +374,10 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
         <div class="pl-h">Похожие треки<svg width="9" height="15" viewBox="0 0 9 15"><path d="M1.5 1.5 7.5 7.5 1.5 13.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="pl-sim" id="plSim"></div>
       </div></div>
-      <div class="pl-hdr"><button class="pl-down" id="plDown" aria-label="Свернуть"><svg width="20" height="12" viewBox="0 0 20 12"><path d="M2 2l8 8 8-8" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="pl-hdr"><button class="pl-down" id="plDown" aria-label="Свернуть"><svg width="20" height="12" viewBox="0 0 20 12"><path d="M2.45 2.1l7.55 7.55 7.55-7.55" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="pl-ttl" id="plTtl"><span class="one" id="plTtl1">Моя волна</span><span class="k" id="plTtlK">Моя волна по треку</span><span class="q" id="plTtlQ"></span></div>
-        <button class="pl-dev nop" aria-label="Устройства"><svg width="23.6" height="20" viewBox="0 0 26 22" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1.9" stroke-linejoin="round"><path d="M12 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h13A2.5 2.5 0 0 1 20 4.5V8"/><rect x="15" y="9.5" width="9" height="11" rx="2.4"/><circle cx="19.5" cy="16.4" r="1.6"/></svg></button>
-        <button class="pl-q nop" aria-label="Очередь"><svg width="21.6" height="18" viewBox="0 0 24 20" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2" stroke-linecap="round"><path d="M9 3.5h13M9 10h13M9 16.5h13"/><circle cx="3.2" cy="3.5" r="1.3" fill="rgba(255,255,255,.5)"/><circle cx="3.2" cy="10" r="1.3" fill="rgba(255,255,255,.5)"/><circle cx="3.2" cy="16.5" r="1.3" fill="rgba(255,255,255,.5)"/></svg></button></div>
+        <button class="pl-dev nop" aria-label="Устройства"><svg width="21" height="20.6" viewBox="0 0 21 20.6" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7.1 12.4H3.4Q1 12.4 1 10V3.6Q1 1.2 3.4 1.2H19.5M1.9 17.3H7.1"/><ellipse cx="15.3" cy="7.1" rx="3.3" ry="1.2" stroke-width="1.5"/><path d="M10.9 10.8H19.7V16.1Q19.7 18.4 15.3 19.4Q10.9 18.4 10.9 16.1Z" fill="rgba(255,255,255,.55)" stroke="none"/></svg></button>
+        <button class="pl-q nop" aria-label="Очередь"><svg width="21.6" height="18" viewBox="0 0 24 20" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"><path d="M9 3.5h13M9 10h13M9 16.5h13"/><circle cx="3.2" cy="3.5" r="1.3" fill="rgba(255,255,255,.55)"/><circle cx="3.2" cy="10" r="1.3" fill="rgba(255,255,255,.55)"/><circle cx="3.2" cy="16.5" r="1.3" fill="rgba(255,255,255,.55)"/></svg></button></div>
       <div class="pl-mini" id="plMini"><div class="cv" id="plMiniCv"></div><div class="t1" id="plMiniT"></div><div class="t2" id="plMiniA"></div>
         <button class="lk" id="plMiniLk" data-off="#fff" data-on="#E83032" aria-label="Нравится"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
         <button class="pp" id="plMiniPP" aria-label="Пауза"><svg width="18" height="20" viewBox="0 0 18 20"><g id="plMiniBars"><rect x="2.5" y="1" width="4.6" height="18" rx="1.3" fill="#fff"/><rect x="10.9" y="1" width="4.6" height="18" rx="1.3" fill="#fff"/></g><path id="plMiniTri" d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4L15.7 -0.95Q16.05 0 15.7 0.95L-5.6 14.4Q-7.7 14.4 -7.7 12.6Z" transform="translate(7 10) scale(.62)" fill="#fff" opacity="0"/></svg></button></div>
@@ -715,7 +716,7 @@ const BR='x="-140" y="-70" width="290" height="360"';
 function bodySVG(c){
   const id='b'+(UID++),c1=hex(c.c1),mid=rgb(c1.map(v=>v*.58)),dk=rgb(c1.map(v=>v*.2));
   return `<svg class="bd" width="190" height="300" viewBox="${VB}"><defs>
-<linearGradient id="${id}g" gradientUnits="userSpaceOnUse" x1="60" y1="6" x2="-40" y2="186"><stop offset="0" stop-color="${c.c1}"/><stop offset=".38" stop-color="${mid}"/><stop offset=".72" stop-color="${dk}"/><stop offset="1" stop-color="${dk}" stop-opacity="0"/></linearGradient>
+<linearGradient id="${id}g" gradientUnits="userSpaceOnUse" x1="49.5" y1="24.9" x2="-20.5" y2="150.9"><stop offset="0" stop-color="${c.c1}"/><stop offset=".38" stop-color="${mid}"/><stop offset=".72" stop-color="${dk}"/><stop offset="1" stop-color="${dk}" stop-opacity="0"/></linearGradient>
 <linearGradient id="${id}h" gradientUnits="userSpaceOnUse" x1="-52" y1="0" x2="8" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity="1"/></linearGradient>
 <linearGradient id="${id}hb" gradientUnits="userSpaceOnUse" x1="-52" y1="0" x2="8" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="1"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
 <linearGradient id="${id}r" gradientUnits="userSpaceOnUse" x1="0" y1="10" x2="0" y2="128"><stop offset="0" stop-color="${c.rim}" stop-opacity=".95"/><stop offset=".55" stop-color="${c.rim}" stop-opacity=".55"/><stop offset="1" stop-color="${c.rim}" stop-opacity="0"/></linearGradient>
@@ -886,7 +887,7 @@ const GHOST_RK='ghost';let GHOST_INNER=null;
 function colParts(key){
   const C=colorsOf(key);let ic,ik;
   if(key==='create'){ic='plus';ik='plus'}else if(isOwn(key)){ic=ownIcon(waveOf(key));ik=ic}else{ic=PRESETS[key].icon;ik=ic}
-  const body=bodySVG(C),icon=iconSVG(ic,C.ic,C.icr);
+  const body=bodySVG(C),icon=iconSVG(ic,C.ic,C.icr,1.08);
   return {rk:C.c1+C.ic+ik,svg:`${body}<div class="ic" style="left:-1px;top:-75.7px">${icon}</div>`,inner:nestBody(body)+nestIcon(icon,-1,-75.7)};
 }
 function colHTML(key){
@@ -1610,7 +1611,7 @@ function paintSheet(first){
   if(key!==pvKey){
     pvKey=key;const prev=$('#prev'),old=[...prev.children];
     const v=document.createElement('div');v.className='pv';
-    v.innerHTML=bodySVG(C)+`<div class="ic">${iconSVG(any?ownIcon(sel):'plus',C.ic,C.icr)}</div>`;
+    v.innerHTML=bodySVG(C)+`<div class="ic">${iconSVG(any?ownIcon(sel):'plus',C.ic,C.icr,1.08)}</div>`;
     prev.appendChild(v);
     if(!first){v.style.opacity=0;tw(v,{opacity:1},{dur:300});old.forEach(o=>{tw(o,{opacity:0},{dur:300});setTimeout(()=>o.remove(),320)});
       const ic=v.querySelector('.ic');ic.animate([{transform:'scale(.82) rotate(-14deg)'},{transform:'scale(1.08) rotate(4deg)',offset:.6},{transform:'scale(1) rotate(0)'}],{duration:560,easing:EASE.std})}
