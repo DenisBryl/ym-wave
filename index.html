@@ -37,6 +37,20 @@
   --fill:rgba(255,255,255,.08);        /* кнопки, плашки, чипсы на любом фоне */
   --fill-press:rgba(255,255,255,.16);  /* нажатие любой заливки */
   --fill-media:rgba(255,255,255,.16);  /* кнопка поверх фото */
+  /* Отступы фичи (шкала 4 · 8 · 12 · 16 · 24 · 32 · 40). Все зазоры между текстами меряются по «чернилам»:
+     от базовой линии верхнего текста до верха прописных нижнего — так кегль и интерлиньяж не искажают ритм.
+     • пара внутри блока (заголовок + подпись, надзаголовок + заголовок): 0,35 × кегль крупного текста;
+     • заголовок секции → её содержимое: 12;  • секция → секция: 32;  • главный блок шторки → первая секция: 40;
+     • многострочный заголовок: интерлиньяж ≈ 1,15–1,2 кегля, пара считается от его последней строки;
+     • текст в плашке: поля сверху (до прописных) и снизу (от базовой линии) равны. */
+  --sh-top:172.5px;
+  --sp-name-cap:-1px;        /* название 27 → подпись 14: зазор 9,5 */
+  --sp-hero-section:32.5px;   /* подпись → «Настроение»: 40 */
+  --sp-section:28px;        /* плашки → заголовок следующей секции: 32 */
+  --sp-head-content:7px;    /* заголовок секции → плашки: 12 */
+  --sp-drum-pair:-1.5px;    /* «Своя волна» 11,5 → название 15: 5 */
+  --sp-card-shift:1.5px;--sp-card-pair:-.5px;   /* 14 → 18: 6; кнопка центрует блок, сдвиг выравнивает поля по прописным и базовой */
+  --sp-hdr-top:5px;--sp-hdr-q:20px;        /* 13 → 16: 6 */
   /* значки: основной — белый; второстепенный и «выключенное» состояние — белый 60 %; «включено» — белый с заливкой */
   --ic-1:#FFFFFF;
   --ic-2:rgba(255,255,255,.6);
@@ -137,10 +151,10 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .item .lbl{position:absolute;left:-64px;width:128px;top:-32.4px;text-align:center;font:500 14.2px/16.6px var(--f-text);letter-spacing:-.1px;color:#fff;text-wrap:balance;-webkit-hyphens:manual;hyphens:manual}
 .item .lbl.two{top:-37.2px}
 .item .cap{display:block;font:400 11.5px/14px var(--f-text);color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.item .ttl2{display:block;margin-top:4.2px;font:600 15px/18px var(--f-text);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .ttl2{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;margin-top:var(--sp-drum-pair);font:600 15px/18px var(--f-text);letter-spacing:-.2px;overflow:hidden;text-wrap:balance}
 .item.bare .lbl{color:var(--c-yellow)}
 .item .bimg{position:absolute}
-.item .rc{position:absolute;left:-115px;top:-150px;width:230px;height:370px}
+.item .rc{position:absolute;left:-80px;top:-125px;width:164px;height:335px}
 
 /* ---------- таббар ---------- */
 .tabs{position:absolute;left:0;right:0;top:760px;height:92px;z-index:14;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,0),#000 26px)}
@@ -160,8 +174,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-ttl{position:absolute;left:84px;right:84px;top:0;height:44px;text-align:center;color:rgba(255,255,255,.88)}
 .pl-ttl span{position:absolute;left:0;right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s cubic-bezier(.3,0,.2,1),transform .3s cubic-bezier(.2,0,0,1)}
 .pl-ttl .one{top:0;font:500 15px/44px var(--f-text);letter-spacing:-.2px}
-.pl-ttl .k{top:5px;font:400 13px/16px var(--f-text);letter-spacing:-.1px;color:rgba(255,255,255,.55);opacity:0;transform:translateY(4px)}
-.pl-ttl .q{top:21px;font:500 16px/20px var(--f-text);letter-spacing:-.25px;color:#fff;opacity:0;transform:translateY(4px)}
+.pl-ttl .k{top:var(--sp-hdr-top);font:400 13px/16px var(--f-text);letter-spacing:-.1px;color:rgba(255,255,255,.55);opacity:0;transform:translateY(4px)}
+.pl-ttl .q{top:var(--sp-hdr-q);font:500 16px/20px var(--f-text);letter-spacing:-.25px;color:#fff;opacity:0;transform:translateY(4px)}
 .pl-ttl.two .one{opacity:0;transform:translateY(-4px)}
 .pl-ttl.two .k,.pl-ttl.two .q{opacity:1;transform:none}
 .pl-track{position:absolute;left:0;right:0;top:115px;height:345px}
@@ -188,10 +202,10 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-row button:active{background:var(--fill-press);transition:none}
 .nop svg{transition:opacity .2s}.nop:active svg{opacity:.45;transition:none}
 /* карточка «Моя волна по треку» */
-.pl-card{position:absolute;left:24px;top:799px;width:345px;height:64px;border-radius:14px;overflow:hidden;background:var(--fill);text-align:center;transition:background-color .2s}
+.pl-card{position:absolute;left:24px;top:799px;width:345px;height:64px;border-radius:14px;overflow:hidden;background:var(--fill);text-align:center;padding:var(--sp-card-shift) 0 0;transition:background-color .2s}
 .pl-card:active{background:var(--fill-press);transition:none}
-.pl-card .k{position:relative;margin-top:10px;font:500 14px/17px var(--f-text);letter-spacing:-.15px;color:var(--pl-acc,#F59AE8)}
-.pl-card .n{position:relative;margin-top:3px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 24px;font:700 18px/22px var(--f-text);letter-spacing:-.3px;white-space:nowrap}
+.pl-card .k{position:relative;margin-top:0;font:500 14px/17px var(--f-text);letter-spacing:-.15px;color:var(--pl-acc,#F59AE8)}
+.pl-card .n{position:relative;margin-top:var(--sp-card-pair);display:flex;align-items:center;justify-content:center;gap:7px;padding:0 24px;font:700 18px/22px var(--f-text);letter-spacing:-.3px;white-space:nowrap}
 .pl-card .n b{font-weight:700;overflow:hidden;text-overflow:ellipsis}
 .pl-card .n svg{flex:none}
 /* карточка артиста */
@@ -232,7 +246,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:80;height:796px;background:var(--c-sheet);border-radius:var(--r-sheet) var(--r-sheet) 0 0;transform:translateY(110%);will-change:transform;overflow:hidden;--acc:#395B8C;--acc2:#6F8BC8}
 .sbody{position:absolute;left:0;right:0;top:0;bottom:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;padding:0 0 128px}
 .sbody::-webkit-scrollbar{display:none}
-.shead{position:relative;height:262px;touch-action:none}
+.shead{position:relative;padding:var(--sh-top) 0 0;touch-action:none}
 .handle{position:absolute;left:50%;top:9px;width:35px;height:4.5px;margin-left:-17.5px;border-radius:3px;background:var(--c-handle)}
 .s-ttl{position:absolute;left:0;right:0;top:24px;text-align:center;font:500 15px/20px var(--f-text);color:rgba(255,255,255,.62)}
 .s-close{position:absolute;right:10px;top:16px;width:36px;height:36px;border-radius:50%;background:var(--fill);display:grid;place-items:center}
@@ -241,14 +255,15 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .prev .pv{position:absolute;left:0;top:0;width:0;height:0;will-change:transform,opacity}
 .prev .bd{position:absolute;left:-95px;top:-93.1px}
 .prev .ic{position:absolute;left:-1px;top:-75.7px;will-change:transform}
-.nmw{position:absolute;left:24px;right:24px;top:168px;text-align:center}
-.nm{display:block;width:100%;height:40px;padding:0;border:0;background:none;text-align:center;color:#fff;font:900 27px/40px var(--f-display);letter-spacing:-.02em;font-feature-settings:var(--f-display-feat);caret-color:var(--c-yellow);outline:none;-webkit-user-select:text;user-select:text}
+.nmw{position:relative;margin:0 24px;text-align:center}
+.nm{display:block;width:100%;height:31px;padding:0;border:0;background:none;resize:none;overflow:hidden;text-wrap:balance;text-align:center;color:#fff;font:900 27px/31px var(--f-display);letter-spacing:-.02em;font-feature-settings:var(--f-display-feat);caret-color:var(--c-yellow);outline:none;-webkit-user-select:text;user-select:text}
 .nm::placeholder{color:rgba(255,255,255,.5)}
-.nmcap{margin:4px auto 0;max-width:330px;max-height:36px;font:400 14px/18px var(--f-text);color:rgba(255,255,255,.55);text-wrap:balance;overflow:hidden;min-height:18px}
-.grp{position:relative;margin:22px 16px 0}
-.grp h4{font:600 17px/22px var(--f-text);letter-spacing:-.3px;color:#fff;margin:0 0 12px 2px;display:flex;align-items:baseline;gap:8px}
+.nmcap{margin:var(--sp-name-cap) auto 0;max-width:330px;max-height:36px;font:400 14px/18px var(--f-text);color:rgba(255,255,255,.55);text-wrap:balance;overflow:hidden;min-height:18px}
+.grp{position:relative;margin:var(--sp-section) 16px 0}
+.shead+.grp{margin-top:var(--sp-hero-section)}
+.grp h4{font:600 17px/22px var(--f-text);letter-spacing:-.3px;color:#fff;margin:0 0 var(--sp-head-content) 2px;display:flex;align-items:baseline;gap:8px}
 .grp h4 span{font:400 14px/18px var(--f-text);color:var(--c-text-3)}
-.chips{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;touch-action:pan-x;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none}
+.chips{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;touch-action:pan-x;margin:0 -16px;padding:0 16px;scrollbar-width:none}
 .chips.wrap{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
 .chips::-webkit-scrollbar{display:none}
 .c{flex:none;height:40px;padding:0 16px;border-radius:var(--r-pill);background:var(--c-sheet-control);font:500 15px/40px var(--f-text);letter-spacing:-.15px;color:#fff;display:flex;align-items:center;gap:7px;transition:background-color .22s cubic-bezier(.3,0,.2,1),color .22s cubic-bezier(.3,0,.2,1),transform .22s cubic-bezier(.3,0,.2,1)}
@@ -364,7 +379,7 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
         <div class="shead" id="shead"><div class="handle"></div><div class="s-ttl" id="sTtl">Новая волна</div><button class="del" id="del">Удалить</button>
           <button class="s-close" id="sClose" aria-label="Закрыть"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></button>
           <div class="prev" id="prev"></div>
-          <div class="nmw"><input class="nm" id="wname" type="text" maxlength="32" autocomplete="off" enterkeyhint="done" spellcheck="false" placeholder="Назовите волну"><div class="nmcap" id="nmcap"></div></div></div>
+          <div class="nmw"><textarea class="nm" id="wname" rows="1" maxlength="32" autocomplete="off" enterkeyhint="done" spellcheck="false" placeholder="Назовите волну"></textarea><div class="nmcap" id="nmcap"></div></div></div>
         <div class="grp"><h4>Настроение</h4><div class="chips" data-g="mood"><button class="c" data-v="energy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5 4.5 13.5h7l-1 8 8.5-11h-7l1-8Z"/></svg>Бодрое</button><button class="c" data-v="fun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.3 14.2a4.6 4.6 0 0 0 7.4 0M9 9.6v.4M15 9.6v.4"/></svg>Весёлое</button><button class="c" data-v="calm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5c1.5-1.4 3-1.4 4.5 0s3 1.4 4.5 0 3-1.4 4.5 0 3 1.4 4.5 0M3 14.5c1.5-1.4 3-1.4 4.5 0s3 1.4 4.5 0 3-1.4 4.5 0 3 1.4 4.5 0"/></svg>Спокойное</button><button class="c" data-v="dream"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H8a6 6 0 1 1 5.8-7.5h1.2"/><path d="M17.5 19a4 4 0 0 0 0-8h-2.5"/></svg>Мечтательное</button><button class="c" data-v="sad"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2c-2.9 3.9-6 6.5-6 10.3a6 6 0 0 0 12 0c0-3.8-3.1-6.4-6-10.3Z"/></svg>Грустное</button><button class="c" data-v="romantic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.1 4 12.4A5 5 0 0 1 12 4.7a5 5 0 0 1 8 7.7Z"/></svg>Романтичное</button></div></div>
         <div class="grp"><h4>Чем заняты</h4><div class="chips" data-g="act"><button class="c" data-v="wake"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h1M20 17h1M5.6 10.6l.7.7M18.4 10.6l-.7.7M8 17a4 4 0 0 1 8 0M3 21h18M12 9V3M9 6l3-3 3 3"/></svg>Просыпаюсь</button><button class="c" data-v="work"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M3 19h18"/></svg>Работаю</button><button class="c" data-v="study"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 5 2 9l10 4 10-4v6"/><path d="M6 10.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.4"/></svg>Учусь</button><button class="c" data-v="workout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h1M21 12h1M9 12h6"/><rect x="6" y="6" width="3" height="12" rx="1"/><rect x="15" y="6" width="3" height="12" rx="1"/><path d="M6 8.5H4.5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1H6M18 8.5h1.5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H18"/></svg>Тренируюсь</button><button class="c" data-v="run"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="1.6"/><path d="M4 17l5 1 .75-1.5M15 21v-4l-4-3 1-6M7 12V9l5-1 3 3 3 1"/></svg>Бегаю</button><button class="c" data-v="road"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2M15 17H9M3 11h15M12 11V6"/></svg>В дороге</button><button class="c" data-v="cook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 3.9 3.15 4 4 0 0 1 2.1 7.72V21H6v-7.13a4 4 0 1 1 2.1-7.72A4 4 0 0 1 12 3Z"/><path d="M6.2 17H18"/></svg>Готовлю</button><button class="c" data-v="rest"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a2 2 0 0 1 2 2v1h12v-1a2 2 0 1 1 4 0v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-5a2 2 0 0 1 2-2Z"/><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3M12 5v9"/></svg>Отдыхаю</button><button class="c" data-v="party"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h2M5 4v2M11.5 4 11 6M18 5h2M19 4v2M15 9l-1 1M18 13l2-.5M18 19h2M19 18v2"/><path d="M14 16.5 7.5 10l-4.4 9.6a1 1 0 0 0 1.3 1.3Z"/></svg>Вечеринка</button><button class="c" data-v="sleep"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h.4a7.5 7.5 0 0 0 7.9 12.45A9 9 0 1 1 12 3Z"/><path d="M17 4a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2M19 11h2M20 10v2"/></svg>Засыпаю</button></div></div>
         <div class="grp"><h4>Жанры</h4><div class="chips wrap" data-g="genres" data-multi="99"><button class="c" data-v="indie">Инди</button><button class="c" data-v="rock">Рок</button><button class="c" data-v="electronic">Электроника</button><button class="c" data-v="hiphop">Хип-хоп</button><button class="c" data-v="jazz">Джаз</button><button class="c" data-v="lofi">Лоу-фай</button><button class="c" data-v="classical">Классика</button><button class="c" data-v="folk">Фолк</button><button class="c" data-v="latin">Латина</button><button class="c" data-v="ambient">Эмбиент</button><button class="c" data-v="blues">Блюз</button><button class="c" data-v="funk">Фанк</button></div></div>
@@ -503,6 +518,9 @@ function typo(t){if(!t||!/\s/.test(t))return t;
   let r=t.replace(/\s+—\s+/g,NB+'—'+NB);
   for(let i=0;i<2;i++)r=r.replace(RX_SHORT,(m,a,w)=>a+w+NB);   /* дважды — для цепочек «и в», «не с» */
   return r}
+/* то же для поля ввода: подменяем только пробелы на неразрывные — длина строки и курсор не меняются */
+const RX_SHORT_K=new RegExp(`(^|[\\s«„"(${NB}])(${SHORTW}) (?=\\S)`,'giu');
+function typoKeep(t){let r=t.replace(/ (?=—)/g,NB).replace(/— /g,'—'+NB);for(let i=0;i<2;i++)r=r.replace(RX_SHORT_K,(m,a,w)=>a+w+NB);return r}
 function typoNode(n){
   if(n.nodeType===3){const p=n.parentNode;if(!p||p.closest&&p.closest('svg,script,style,textarea'))return;const v=n.nodeValue,t=typo(v);if(t!==v)n.nodeValue=t;return}
   if(n.nodeType===1&&!n.closest('svg')){const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT);let x;while(x=w.nextNode())typoNode(x)}
@@ -707,28 +725,31 @@ function ghostSVG(){
 </svg>`;
 }
 /* иконка: прогрессивное размытие (верх-лево мыло → низ-право резко) + светлый внутренний кант */
-function iconSVG(k,fill,rimc,size,blur=2.9){
+function iconSVG(k,fill,rimc,size,blur=2.6){
   const v=typeof k==='string'?ICONS[k]:k,id='i'+(UID++),pad=14,W=v.w+pad*2,H=v.h+pad*2,s=(size||1)*(v.sc||1);
   const R=`x="${-pad}" y="${-pad}" width="${W}" height="${H}"`;
   return `<svg class="isvg" width="${(W*s).toFixed(2)}" height="${(H*s).toFixed(2)}" viewBox="${-pad} ${-pad} ${W} ${H}" style="left:${(-W*s/2).toFixed(2)}px;top:${(-H*s/2).toFixed(2)}px;position:absolute;overflow:visible"><defs>
-<linearGradient id="${id}sg" gradientUnits="userSpaceOnUse" x1="${v.w*.1}" y1="${v.h*.1}" x2="${v.w*.6}" y2="${v.h*.6}"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
-<linearGradient id="${id}bg" gradientUnits="userSpaceOnUse" x1="${v.w*.38}" y1="${v.h*.38}" x2="${v.w*.8}" y2="${v.h*.8}"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
-<linearGradient id="${id}rg" gradientUnits="userSpaceOnUse" x1="${v.w*.32}" y1="${v.h*.32}" x2="${v.w*.78}" y2="${v.h*.78}"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
+<linearGradient id="${id}sg" gradientUnits="userSpaceOnUse" x1="${v.w*.04}" y1="${v.h*.04}" x2="${v.w*.5}" y2="${v.h*.5}"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
+<linearGradient id="${id}bg" gradientUnits="userSpaceOnUse" x1="${v.w*.3}" y1="${v.h*.3}" x2="${v.w*.72}" y2="${v.h*.72}"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
+<linearGradient id="${id}rg" gradientUnits="userSpaceOnUse" x1="${v.w*.02}" y1="${v.h*.02}" x2="${v.w*.5}" y2="${v.h*.5}"><stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff"/></linearGradient>
 <mask id="${id}S" maskUnits="userSpaceOnUse" ${R}><rect ${R} fill="url(#${id}sg)"/></mask>
 <mask id="${id}B" maskUnits="userSpaceOnUse" ${R}><rect ${R} fill="url(#${id}bg)"/></mask>
 <mask id="${id}R" maskUnits="userSpaceOnUse" ${R}><rect ${R} fill="url(#${id}rg)"/></mask>
-<filter id="${id}f" filterUnits="userSpaceOnUse" ${R}><feGaussianBlur stdDeviation="${blur}"/></filter>
+<filter id="${id}c" filterUnits="userSpaceOnUse" ${R}><feMorphology operator="erode" radius="${(blur*.75).toFixed(2)}"/></filter>
+<filter id="${id}f" filterUnits="userSpaceOnUse" ${R}><feMorphology operator="dilate" radius="${(blur*.45).toFixed(2)}"/><feGaussianBlur stdDeviation="${blur}"/></filter>
 <filter id="${id}f1" filterUnits="userSpaceOnUse" ${R}><feGaussianBlur stdDeviation="1.1"/></filter>
-<clipPath id="${id}c"><path d="${v.d}" fill-rule="evenodd"/></clipPath></defs>
+<clipPath id="${id}cp"><path d="${v.d}" fill-rule="evenodd"/></clipPath></defs>
+<path d="${v.d}" fill-rule="evenodd" fill="${fill}" filter="url(#${id}c)"/>
 <g mask="url(#${id}B)"><path d="${v.d}" fill-rule="evenodd" fill="${fill}" filter="url(#${id}f)"/></g>
 <g mask="url(#${id}S)"><path d="${v.d}" fill-rule="evenodd" fill="${fill}"/></g>
-<g mask="url(#${id}R)" clip-path="url(#${id}c)"><path d="${v.d}" fill="none" stroke="${rimc}" stroke-width="4" stroke-opacity=".35" filter="url(#${id}f1)"/><path d="${v.d}" fill="none" stroke="${rimc}" stroke-width="1.9"/></g>
+<g mask="url(#${id}R)" clip-path="url(#${id}cp)"><path d="${v.d}" fill="none" stroke="${rimc}" stroke-width="4" stroke-opacity=".3" filter="url(#${id}f1)"/><path d="${v.d}" fill="none" stroke="${rimc}" stroke-width="1.7"/></g>
 </svg>`;
 }
 
 /* ================= барабан: бесконечное кольцо ================= */
 const SP=121,CX=196.5,OY=140.5,ARC=18.3;   /* шаг, центр, базовая линия подписи (абс. 688.5 при top 548), подъём центра */
-const TUNE_SVG='<svg width="46" height="40" viewBox="0 0 46 40"><path d="M4.5 11h37M4.5 29h37" stroke="#FEFE00" stroke-width="4.4" stroke-linecap="round"/><circle cx="29" cy="11" r="7.2" fill="#FEFE00"/><circle cx="16" cy="29" r="7.2" fill="#FEFE00"/></svg>';
+/* «Настроить волну»: линия 4,6 с прямыми концами, как у «Встряхнуть» и «Назад к привычному»; без заливок */
+const TUNE_SVG='<svg width="46" height="40" viewBox="0 0 46 40" fill="none" stroke="#FEFE00" stroke-width="4.6"><path d="M4 11H21.30M36.70 11H42M4 29H8.30M23.70 29H42"/><circle cx="29" cy="11" r="5.4"/><circle cx="16" cy="29" r="5.4"/></svg>';
 const PRESETS={
   unknown:{col:'orange',label:'Незнакомое',icon:'unknown',track:'mal_poly'},
   motiv:{col:'crimson',label:'Мотивация на максимум',icon:'motiv',track:'sf_empower'},
@@ -816,14 +837,15 @@ const MOOD_IC={energy:'energy',fun:'joy',calm:'calm',dream:'pink',sad:'sadbird',
 /* без настроения — нейтральный знак Моей волны, без цвета */
 function ownIcon(w){return MOOD_IC[moodOf(w)]||'flash'}
 /* ===== растр пузырей: SVG с фильтрами рисуется один раз в bitmap; барабан двигает готовые картинки — без перерисовки фильтров в каждом кадре ===== */
-const RDPR=SHOT?2:Math.min(2.5,Math.max(1.5,devicePixelRatio||1));
+/* растр — в разрешении экрана с учётом масштаба мокапа: иконки не «размазываются» при увеличении */
+const RDPR=SHOT?3:Math.min(3,Math.max(1.5,(devicePixelRatio||1)*(($('#stage').getBoundingClientRect().width/393)||1)));
 const RAST=new Map(),RDONE=new Map();
 function nestBody(svg){return svg.replace('<svg class="bd" ','<svg x="-95" y="-93.1" overflow="visible" ')}
 function nestIcon(svg,ox,oy){return svg.replace(/<svg class="isvg" ([^>]*?)style="left:([-\d.]+)px;top:([-\d.]+)px;position:absolute;overflow:visible"/,(m,a,l,t)=>`<svg ${a}x="${(ox+ +l).toFixed(2)}" y="${(oy+ +t).toFixed(2)}" overflow="visible"`)}
 function rasterize(rk,inner){
   if(RAST.has(rk))return RAST.get(rk);
-  const W=Math.round(230*RDPR),H=Math.round(370*RDPR);
-  const doc=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="-115 -150 230 370">${inner}</svg>`;
+  const W=Math.round(164*RDPR),H=Math.round(335*RDPR);
+  const doc=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="-80 -125 164 335">${inner}</svg>`;
   const pr=new Promise((res,rej)=>{const im=new Image();im.decoding='async';
     im.onload=()=>{try{const c=document.createElement('canvas');c.width=W;c.height=H;c.getContext('2d').drawImage(im,0,0,W,H);RDONE.set(rk,c);res(c)}catch(e){rej(e)}};
     im.onerror=rej;im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(doc)});
@@ -1333,7 +1355,7 @@ function sim(a,b){
 function similar(T,n,excl=[]){return Object.values(TRACKS).filter(x=>x.id!==T.id&&!excl.includes(x.id)).sort((x,y)=>sim(T,y)-sim(T,x)).slice(0,n)}
 
 /* ---------- содержимое плеера ---------- */
-const PLAY_I='<svg width="12" height="14" viewBox="-8 -15 24 30"><path d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4L15.7 -0.95Q16.05 0 15.7 0.95L-5.6 14.4Q-7.7 14.4 -7.7 12.6Z" fill="#fff"/></svg>';
+const PLAY_I='<svg width="12" height="14" viewBox="-8 -15 24 30"><path d="M-7.7 -9.78A2.6 2.6 0 0 1 -3.75 -12.01L12.38 -2.22A2.6 2.6 0 0 1 12.38 2.22L-3.75 12.01A2.6 2.6 0 0 1 -7.7 9.78Z" fill="#fff"/></svg>';
 const PAUSE_I='<svg width="12" height="14" viewBox="0 0 12 14"><rect x="1" y="0" width="3.6" height="14" rx="1" fill="#fff"/><rect x="7.4" y="0" width="3.6" height="14" rx="1" fill="#fff"/></svg>';
 const MORE_I='<svg width="20" height="5" viewBox="0 0 20 5"><circle cx="2.5" cy="2.5" r="2" fill="rgba(255,255,255,.6)"/><circle cx="10" cy="2.5" r="2" fill="rgba(255,255,255,.6)"/><circle cx="17.5" cy="2.5" r="2" fill="rgba(255,255,255,.6)"/></svg>';
 function setCard(T,loading){$('#plCard').innerHTML=(loading?PAUSE_I:PLAY_I)+`<b>${esc(T.title)}</b>`}
@@ -1547,7 +1569,7 @@ function paintSheet(first){
   const any=['act','mood','words','char'].some(k=>sel[k])||sel.genres.length>0;$('#save').disabled=!any;
   if(!nameTouched)nameIn.value=any?autoName(sel):'';
   nameIn.placeholder=any?autoName(sel):'Назовите волну';
-  const nv=nameIn.value.trim(),p=capParts(sel,!!nv&&nv!==autoName(sel));$('#nmcap').textContent=p.join(', ');
+  const nv=nameIn.value.replace(/\u00A0/g,' ').trim(),p=capParts(sel,!!nv&&nv!==autoName(sel));$('#nmcap').textContent=p.join(', ');fitName();
   const col=any?MOOD_COL[moodOf(sel)]:'slate',C=NAT[col];
   const key=JSON.stringify([col,any?ownIcon(sel):'plus']);
   if(key!==pvKey){
@@ -1565,8 +1587,11 @@ document.querySelectorAll('[data-g]').forEach(g=>g.addEventListener('click',e=>{
   if(g.dataset.multi){const a=sel.genres,i=a.indexOf(v);if(i>=0)a.splice(i,1);else{a.push(v);if(a.length>+g.dataset.multi)a.shift()}}
   else{sel[k]=sel[k]===v?undefined:v;if(!sel[k])delete sel[k]}
   paintSheet()}));
-nameIn.addEventListener('input',()=>{nameTouched=true;paintSheet()});
-nameIn.addEventListener('keydown',e=>{if(e.key==='Enter')nameIn.blur()});
+function fitName(){
+  const v=nameIn.value,t=typoKeep(v);if(t!==v){const a=nameIn.selectionStart,b=nameIn.selectionEnd;nameIn.value=t;if(document.activeElement===nameIn)nameIn.setSelectionRange(a,b)}
+  nameIn.style.height='auto';nameIn.style.height=nameIn.scrollHeight+'px'}
+nameIn.addEventListener('input',()=>{if(/\n/.test(nameIn.value))nameIn.value=nameIn.value.replace(/\s*\n+\s*/g,' ');nameTouched=true;paintSheet()});
+nameIn.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();nameIn.blur()}});
 /* пузырь перекрашивается на месте */
 function refreshItem(key){
   const i=set.indexOf(key),el=items[i];if(!el)return;
@@ -1578,7 +1603,7 @@ function refreshItem(key){
 }
 $('#save').addEventListener('click',()=>{
   if($('#save').disabled)return;musInit();
-  const v=nameIn.value.trim().slice(0,32),nm=(!nameTouched&&v===autoName(sel))?'':v;
+  const v=nameIn.value.replace(/\u00A0/g,' ').trim().slice(0,32),nm=(!nameTouched&&v===autoName(sel))?'':v;
   const data={name:nm,act:sel.act||null,mood:sel.mood||null,words:sel.words||null,char:sel.char||null,genres:[...sel.genres]};
   let key;
   if(editKey){const w=waveOf(editKey);Object.assign(w,data);key=editKey}
