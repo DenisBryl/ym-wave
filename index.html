@@ -109,7 +109,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .ai .txt{position:absolute;left:66px;right:58px;top:1px;text-align:center;font:400 14.6px/17.7px var(--f-text);letter-spacing:-.25px;color:#F2F2F2}
 
 /* ---------- вспышка при лайке: лучи света из-за заголовка, как в приложении ---------- */
-.lflash{position:absolute;left:-210px;top:-190px;width:813px;height:813px;pointer-events:none;opacity:0;will-change:transform,opacity;filter:blur(3px)}
+.lflash{position:absolute;left:-210px;top:-190px;width:813px;height:813px;pointer-events:none;opacity:0;will-change:transform,opacity;filter:blur(10px)}
 .lflash i{position:absolute;inset:0;border-radius:50%;-webkit-mask:radial-gradient(closest-side,#000 6%,rgba(0,0,0,.8) 42%,transparent 100%);mask:radial-gradient(closest-side,#000 6%,rgba(0,0,0,.8) 42%,transparent 100%)}
 .lflash b{position:absolute;inset:0;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.95) 0,rgba(255,255,255,.7) 9%,rgba(var(--lf),.32) 24%,rgba(var(--lf),.08) 40%,rgba(var(--lf),0) 56%)}
 #screen>.lflash{z-index:5}
@@ -226,30 +226,30 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .sheet .sglow{position:absolute;left:-60px;right:-60px;top:-120px;height:420px;background:radial-gradient(46% 50% at 50% 50%,var(--acc),rgba(0,0,0,0));opacity:.38;pointer-events:none;transition:background .5s cubic-bezier(.3,0,.2,1)}
 .sbody{position:absolute;left:0;right:0;top:0;bottom:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;padding:0 0 128px}
 .sbody::-webkit-scrollbar{display:none}
-.shead{position:relative;height:286px;touch-action:none}
+.shead{position:relative;height:262px;touch-action:none}
 .handle{position:absolute;left:50%;top:9px;width:35px;height:4.5px;margin-left:-17.5px;border-radius:3px;background:var(--c-handle)}
 .s-ttl{position:absolute;left:0;right:0;top:24px;text-align:center;font:500 15px/20px var(--f-text);color:rgba(255,255,255,.62)}
 .s-close{position:absolute;right:10px;top:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center}
-.prev{position:absolute;left:50%;top:178px;width:0;height:0;transform:scale(1.08);transform-origin:0 0}
+.prev{position:absolute;left:50%;top:150px;width:0;height:0;transform:scale(1);transform-origin:0 0}
 .prev .pv{position:absolute;left:0;top:0;width:0;height:0;will-change:transform,opacity}
-.prev .bd{position:absolute;left:-95px;top:-93.1px}
+.prev .bd{position:absolute;left:-95px;top:-93.1px;-webkit-mask:radial-gradient(50% 50% at 50% 42%,#000 62%,transparent 100%);mask:radial-gradient(50% 50% at 50% 42%,#000 62%,transparent 100%)}
 .prev .ic{position:absolute;left:-1px;top:-75.7px;will-change:transform}
-.nmw{position:absolute;left:24px;right:24px;top:196px;text-align:center}
+.nmw{position:absolute;left:24px;right:24px;top:168px;text-align:center}
 .nm{display:block;width:100%;height:40px;padding:0;border:0;background:none;text-align:center;color:#fff;font:900 27px/40px var(--f-display);letter-spacing:-.02em;font-feature-settings:var(--f-display-feat);caret-color:var(--c-yellow);outline:none;-webkit-user-select:text;user-select:text}
 .nm::placeholder{color:rgba(255,255,255,.5)}
 .nmcap{margin:4px auto 0;max-width:330px;max-height:36px;font:400 14px/18px var(--f-text);color:rgba(255,255,255,.55);text-wrap:balance;overflow:hidden;min-height:18px}
 .grp{position:relative;margin:22px 16px 0}
 .grp h4{font:600 17px/22px var(--f-text);letter-spacing:-.3px;color:#fff;margin:0 0 12px 2px;display:flex;align-items:baseline;gap:8px}
 .grp h4 span{font:400 14px/18px var(--f-text);color:var(--c-text-3)}
-.moods{display:flex;gap:0;overflow-x:auto;touch-action:pan-x;margin:0 -16px;padding:4px 10px 6px;scrollbar-width:none}
+.moods{display:flex;gap:0;overflow-x:auto;touch-action:pan-x;margin:-6px -16px 0;padding:10px 10px 8px;scrollbar-width:none}
 .moods::-webkit-scrollbar{display:none}
 .md{flex:none;min-width:66px;padding:0 6px;display:flex;flex-direction:column;align-items:center;gap:7px;font:500 13px/16px var(--f-text);color:rgba(255,255,255,.66);letter-spacing:-.15px;white-space:nowrap;transition:color .2s cubic-bezier(.3,0,.2,1)}
 .md .dot{position:relative;width:54px;height:54px;border-radius:50%;transition:transform .32s cubic-bezier(.2,1.4,.4,1),box-shadow .25s cubic-bezier(.3,0,.2,1)}
-.md .dot svg{position:absolute}
+.md .dot .mi{position:absolute;left:27px;top:27px}
 .md.on{color:#fff}
-.md.on .dot{transform:scale(1.1);box-shadow:0 0 0 2.5px var(--c-sheet),0 0 0 4.5px #fff}
-.md .dot .sp{transform-origin:27px 27px;transition:transform .9s cubic-bezier(.2,0,0,1)}
-.md.on .dot .sp{transform:rotate(38deg) scale(1.06)}
+.md.on .dot{transform:scale(1.06);box-shadow:0 0 0 2.5px var(--c-sheet),0 0 0 4.5px #fff}
+.md .dot .mi{transition:transform .5s cubic-bezier(.2,1.3,.4,1)}
+.md.on .dot .mi{transform:scale(1.12) rotate(-8deg)}
 .md:active .dot{transform:scale(.92)}
 .chips{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;touch-action:pan-x;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none}
 .chips.wrap{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
@@ -327,7 +327,6 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
 
 
     <div class="player" id="player" aria-label="Плеер">
-      <div class="lflash" id="lfPl"><i></i><b></b></div>
       <div class="pl-view" id="plView"><div class="pl-sc" id="plSc">
         <div class="pl-glow"></div>
         <div class="pl-track" id="plTrack"></div>
@@ -749,7 +748,7 @@ const isOwn=k=>typeof k==='string'&&k.startsWith('own:');
 const waveOf=k=>waves.find(w=>'own:'+w.id===k);
 /* режим: null — обычная «Моя волна», 'shake' — встряхнутая, иначе ключ пресета или своей волны */
 let mode=null,playing=false,busy=false,cur=TRACKS.mp_one;
-function makeSet(){const act=mode!=null,h=Math.ceil(drumSel.length/2);return [...drumSel.slice(0,h),'create',...waves.map(w=>'own:'+w.id),...(act?['back']:[]),...(act&&isOwn(mode)?['tune']:[]),'shake',...drumSel.slice(h)]}
+function makeSet(){const act=mode!=null,used=new Set(waves.map(ownIcon)),ds=drumSel.filter(k=>!used.has(PRESETS[k].icon)),h=Math.ceil(ds.length/2);return [...ds.slice(0,h),'create',...waves.map(w=>'own:'+w.id),...(act?['back']:[]),...(act&&isOwn(mode)?['tune']:[]),'shake',...ds.slice(h)]}
 let set=[],items=[],pos=0,anim=null;
 
 function colorsOf(key){if(key==='create')return NAT.slate;if(isOwn(key))return NAT[MOOD_COL[moodOf(waveOf(key))]];return NAT[PRESETS[key].col]}
@@ -761,22 +760,13 @@ function lblHTML(key){
 }
 /* своя волна получает собственную вспышку — по брендбуку она у каждого своя.
    Форма зависит от настроек: бодрое и вечеринка — больше острых лучей, спокойное и сон — меньше и мягче */
-function genFlash(w){
-  const m=moodOf(w),seed=hstr(JSON.stringify([w.act,w.mood,w.words,w.char,(w.genres||[]).join(','),w.name||'']));const r=rng(seed);
-  let n=6+({energy:2,fun:1,calm:-1,sad:-1,dream:0,romantic:0,none:0}[m]||0)+((w.genres||[]).length>1?1:0);n=clamp(n,4,9);
-  const sharp={energy:.44,fun:.48,calm:.62,sad:.6,dream:.56,romantic:.58,none:.55}[m]||.55;
-  const R=29,pts=[],rot=r()*Math.PI*2;
-  for(let i=0;i<n;i++){const a=rot+i*2*Math.PI/n,a2=a+Math.PI/n*(0.85+r()*.3);const ro=R*(.82+r()*.18),ri=R*(sharp+r()*.08);
-    pts.push([Math.cos(a-.11)*ro,Math.sin(a-.11)*ro],[Math.cos(a+.11)*ro,Math.sin(a+.11)*ro],[Math.cos(a2)*ri,Math.sin(a2)*ri])}
-  const N=pts.length;let d=`M${(pts[0][0]+R).toFixed(2)} ${(pts[0][1]+R).toFixed(2)}`;
-  for(let i=0;i<N;i++){const p0=pts[(i-1+N)%N],p1=pts[i],p2=pts[(i+1)%N],p3=pts[(i+2)%N],t=.2;
-    d+=`C${(p1[0]+(p2[0]-p0[0])*t+R).toFixed(2)} ${(p1[1]+(p2[1]-p0[1])*t+R).toFixed(2)} ${(p2[0]-(p3[0]-p1[0])*t+R).toFixed(2)} ${(p2[1]-(p3[1]-p1[1])*t+R).toFixed(2)} ${(p2[0]+R).toFixed(2)} ${(p2[1]+R).toFixed(2)}`}
-  d+='Z';
-  const sa=rot+Math.PI/n,c=Math.cos(sa),s_=Math.sin(sa),q=(u,v)=>[(c*u-s_*v+R).toFixed(2),(s_*u+c*v+R).toFixed(2)],hw=1.15;
-  const a1=q(R*.16,-hw),a2=q(R*sharp*.86,-hw),a3=q(R*sharp*.86,hw),a4=q(R*.16,hw);
-  d+=`M${a1[0]} ${a1[1]}L${a2[0]} ${a2[1]}L${a3[0]} ${a3[1]}L${a4[0]} ${a4[1]}Z`;
-  return {d,w:2*R,h:2*R,sc:1};
-}
+/* иконка своей волны — смысловая, по главному фильтру: занятие → жанр → настроение → характер → язык.
+   Та же иконка стоит у кружка настроения в шторке, поэтому цвет и знак пузыря читаются из настроек */
+const ACT_IC={wake:'sun',workout:'bolt',run:'rocket',road:'car',rest:'cloud',party:'disco',sleep:'moon',work:'cup'};
+const GEN_IC={rock:'pick',electronic:'saturn',hiphop:'mic',jazz:'cassette',classical:'keys',indie:'guitar',folk:'balalaika',latin:'maracas',lofi:'cup',ambient:'lotus'};
+const MOOD_IC={energy:'bolt',fun:'sparkle',calm:'wave',dream:'cloud',sad:'drops',romantic:'heart'};
+const CHAR_IC={unknown:'mountain',fav:'heart',popular:'sparkle'},WORD_IC={none:'lotus',ru:'balalaika',foreign:'saturn'};
+function ownIcon(w){return ACT_IC[w.act]||GEN_IC[(w.genres||[])[0]]||MOOD_IC[w.mood]||CHAR_IC[w.char]||WORD_IC[w.words]||'sparkle'}
 /* ===== растр пузырей: SVG с фильтрами рисуется один раз в bitmap; барабан двигает готовые картинки — без перерисовки фильтров в каждом кадре ===== */
 const RDPR=SHOT?2:Math.min(2.5,Math.max(1.5,devicePixelRatio||1));
 const RAST=new Map(),RDONE=new Map();
@@ -803,7 +793,7 @@ function hydrate(root){
 const GHOST_RK='ghost';let GHOST_INNER=null;
 function colParts(key){
   const C=colorsOf(key);let ic,ik;
-  if(key==='create'){ic='plus';ik='plus'}else if(isOwn(key)){ic=genFlash(waveOf(key));ik='g'+hstr(ic.d)}else{ic=PRESETS[key].icon;ik=ic}
+  if(key==='create'){ic='plus';ik='plus'}else if(isOwn(key)){ic=ownIcon(waveOf(key));ik=ic}else{ic=PRESETS[key].icon;ik=ic}
   const body=bodySVG(C),icon=iconSVG(ic,C.ic,C.icr);
   return {rk:C.c1+C.ic+ik,svg:`${body}<div class="ic" style="left:-1px;top:-75.7px">${icon}</div>`,inner:nestBody(body)+nestIcon(icon,-1,-75.7)};
 }
@@ -886,11 +876,11 @@ function tapItem(i){
   pressPop(el);musInit();
   const go=()=>{
     if(key==='create')openSheet(null);
-    else if(isOwn(key)){if(mode===key)openSheet(key);else activate(key)}
+    else if(isOwn(key)){if(mode===key){if(playing)pauseNow();else resume()}else activate(key)}
     else if(key==='back')backToHabit();
     else if(key==='tune'){wiggle(el);openSheet(mode)}
     else if(key==='shake'){wiggle(el);shakeWave(el)}
-    else if(mode===key&&playing)return;
+    else if(mode===key){if(playing)pauseNow();else resume()}
     else activate(key);
   };
   if(Math.abs(wrapD(i))>.02){goTo(i);at(key==='create'||key==='tune'||key==='shake'?140:260,go)}else go();
@@ -1360,16 +1350,16 @@ const liked=new Set();
 function syncLike(){const on=liked.has(cur.id);[$('#plLike'),$('#plMiniLk'),$('#like')].forEach(b=>{const p=b.querySelector('path');p.setAttribute('fill',on?'#fff':'none');if(b.id==='plLike')p.setAttribute('stroke',on?'#fff':'rgba(255,255,255,.8)')})}
 /* лучи: случайный веер узких и широких полос; цвет — светлый тон текущего фона */
 function rays(){const r=rng((Math.random()*1e9)|0),st=[];let a=0;
-  while(a<360){const g=5+r()*20,w=1.4+r()*(r()<.3?7:3.2),al=(.45+r()*.5).toFixed(2);
-    st.push(`transparent ${a.toFixed(1)}deg`,`transparent ${(a+g).toFixed(1)}deg`,`rgba(255,255,255,${al}) ${(a+g+w/2).toFixed(1)}deg`,`transparent ${(a+g+w).toFixed(1)}deg`);a+=g+w}
+  while(a<360){const g=14+r()*28,w=5+r()*(r()<.35?13:6),al=(.32+r()*.4).toFixed(2);
+    st.push(`rgba(255,255,255,0) ${a.toFixed(1)}deg`,`rgba(255,255,255,0) ${(a+g).toFixed(1)}deg`,`rgba(255,255,255,${al}) ${(a+g+w/2).toFixed(1)}deg`,`rgba(255,255,255,0) ${(a+g+w).toFixed(1)}deg`);a+=g+w}
   return `conic-gradient(from ${Math.round(r()*360)}deg,${st.join(',')})`}
 function likeFlash(inPlayer){
   const el=inPlayer?$('#lfPl'):$('#lfHome');const c=mix([255,255,255],hex(cur.field&&cur.field.D||'#FFFFFF'),.3).map(Math.round).join(',');
   el.style.setProperty('--lf',c);el.querySelector('i').style.background=rays().replace(/rgba\(255,255,255,/g,`rgba(${c},`);
   el.getAnimations().forEach(a=>a.cancel());
-  el.animate([{opacity:0,transform:'scale(.5) rotate(-10deg)',easing:'cubic-bezier(.2,.8,.3,1)'},{opacity:1,transform:'scale(1) rotate(0deg)',offset:.16,easing:'linear'},{opacity:.85,transform:'scale(1.05) rotate(3deg)',offset:.42,easing:'cubic-bezier(.4,0,.6,1)'},{opacity:0,transform:'scale(1.14) rotate(7deg)'}],{duration:1300});
+  el.animate([{opacity:0,transform:'scale(.7) rotate(-4deg)',easing:'cubic-bezier(.25,.6,.3,1)'},{opacity:1,transform:'scale(1) rotate(0deg)',offset:.22,easing:'cubic-bezier(.45,0,.55,1)'},{opacity:0,transform:'scale(1.1) rotate(3deg)'}],{duration:1500});
 }
-[$('#plLike'),$('#plMiniLk')].forEach(b=>b.addEventListener('click',()=>{const on=!liked.has(cur.id);on?liked.add(cur.id):liked.delete(cur.id);syncLike();likeAnim(b,on);if(on)likeFlash(true)}));
+[$('#plLike'),$('#plMiniLk')].forEach(b=>b.addEventListener('click',()=>{const on=!liked.has(cur.id);on?liked.add(cur.id):liked.delete(cur.id);syncLike();likeAnim(b,on)}));
 $('#plArtFl').addEventListener('click',e=>{const b=e.currentTarget,p=b.querySelector('path'),on=p.getAttribute('fill')!=='#fff';likeAnim(b,on)});
 /* мини-плеер: тап — вернуться к обложке */
 plMini.addEventListener('click',e=>{if(e.target.closest('button'))return;syTo(0)});
@@ -1462,16 +1452,13 @@ function setSheet(y){sheetY=y;sheet.style.transform=`translateY(${(y*sheetH()).t
 setSheet(1.1);
 /* капли настроения — в цветах будущего пузыря */
 /* настроение — маленькая вспышка в цветах будущего пузыря: мягкие пятна с рваным краем, без глянца */
-function moodSVG(col,seed){const C=NAT[col],id='md'+(UID++),r=rng(seed),j=()=>(r()-.5);
-  return `<svg viewBox="-9 -9 72 72" width="72" height="72" style="position:absolute;left:-9px;top:-9px;overflow:visible"><defs>
-<filter id="${id}f" x="-40%" y="-40%" width="180%" height="180%"><feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="2" seed="${seed%97}" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="11" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation="1.8"/></filter>
-<filter id="${id}g" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4.5"/></filter>
-<filter id="${id}h" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="9"/></filter></defs>
-<circle cx="27" cy="29" r="20" fill="${C.c1}" opacity=".45" filter="url(#${id}h)"/>
-<g class="sp"><g filter="url(#${id}f)"><circle cx="${27+j()*3}" cy="${27+j()*3}" r="22" fill="${C.c1}"/><ellipse cx="${23+j()*5}" cy="${22+j()*5}" rx="14" ry="10.5" fill="${C.ic}" transform="rotate(${Math.round(r()*180)} 23 22)"/></g>
-<ellipse cx="${30+j()*6}" cy="${19+j()*5}" rx="8" ry="6" fill="${C.icr}" opacity=".8" filter="url(#${id}g)"/></g></svg>`}
+function moodDot(m){const col=MOOD_COL[m],C=NAT[col],id='md'+(UID++),dk=rgb(hex(C.c1).map(v=>v*.3));
+  return `<svg viewBox="0 0 54 54" width="54" height="54" style="position:absolute;left:0;top:0"><defs>
+<radialGradient id="${id}g" cx=".72" cy=".2" r="1"><stop offset="0" stop-color="${C.c1}"/><stop offset=".55" stop-color="${rgb(hex(C.c1).map(v=>v*.62))}"/><stop offset="1" stop-color="${dk}"/></radialGradient>
+<linearGradient id="${id}r" x1="1" y1="0" x2=".2" y2=".8"><stop offset="0" stop-color="${C.rim}" stop-opacity=".9"/><stop offset=".6" stop-color="${C.rim}" stop-opacity="0"/></linearGradient></defs>
+<circle cx="27" cy="27" r="27" fill="url(#${id}g)"/><circle cx="27" cy="27" r="26.1" fill="none" stroke="url(#${id}r)" stroke-width="1.6"/></svg><i class="mi">${iconSVG(MOOD_IC[m],C.ic,C.icr,.56)}</i>`}
 
-document.querySelectorAll('.md').forEach(b=>{const col=MOOD_COL[b.dataset.v];b.querySelector('.dot').innerHTML=moodSVG(col,hstr(b.dataset.v));b.style.setProperty('--dc',NAT[col].c1+'88')});
+document.querySelectorAll('.md').forEach(b=>{const col=MOOD_COL[b.dataset.v];b.querySelector('.dot').innerHTML=moodDot(b.dataset.v);b.style.setProperty('--dc',NAT[col].c1+'88')});
 function openSheet(key){
   if(busy)return;
   editKey=key&&isOwn(key)?key:null;const w=editKey&&waveOf(editKey);
@@ -1499,11 +1486,11 @@ function paintSheet(first){
   const col=any?MOOD_COL[moodOf(sel)]:'slate',C=NAT[col];
   sheet.style.setProperty('--acc',C.c1);
   $('#sglow').style.background=`radial-gradient(46% 50% at 50% 50%,${C.c1},rgba(0,0,0,0))`;
-  const key=JSON.stringify([col,sel.act,sel.mood,sel.words,sel.char,sel.genres.join(','),nameTouched?nameIn.value:'']);
+  const key=JSON.stringify([col,any?ownIcon(sel):'plus']);
   if(key!==pvKey){
     pvKey=key;const prev=$('#prev'),old=[...prev.children];
     const v=document.createElement('div');v.className='pv';
-    v.innerHTML=bodySVG(C)+`<div class="ic">${iconSVG(any?genFlash({...sel,name:nameTouched?nameIn.value:''}):'plus',C.ic,C.icr)}</div>`;
+    v.innerHTML=bodySVG(C)+`<div class="ic">${iconSVG(any?ownIcon(sel):'plus',C.ic,C.icr)}</div>`;
     prev.appendChild(v);
     if(!first){v.style.opacity=0;tw(v,{opacity:1},{dur:300});old.forEach(o=>{tw(o,{opacity:0},{dur:300});setTimeout(()=>o.remove(),320)});
       const ic=v.querySelector('.ic');ic.animate([{transform:'scale(.82) rotate(-14deg)'},{transform:'scale(1.08) rotate(4deg)',offset:.6},{transform:'scale(1) rotate(0)'}],{duration:560,easing:EASE.std})}
