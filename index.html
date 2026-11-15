@@ -242,12 +242,14 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .moods{display:flex;gap:0;overflow-x:auto;touch-action:pan-x;margin:-6px -16px 0;padding:10px 10px 8px;scrollbar-width:none}
 .moods::-webkit-scrollbar{display:none}
 .md{flex:none;min-width:66px;padding:0 6px;display:flex;flex-direction:column;align-items:center;gap:7px;font:500 13px/16px var(--f-text);color:rgba(255,255,255,.66);letter-spacing:-.15px;white-space:nowrap;transition:color .2s cubic-bezier(.3,0,.2,1)}
-.md .dot{position:relative;width:54px;height:54px;border-radius:50%;transition:transform .32s cubic-bezier(.2,1.4,.4,1),box-shadow .25s cubic-bezier(.3,0,.2,1)}
-.md .dot .mi{position:absolute;left:27px;top:27px}
+.md .dot{position:relative;width:54px;height:54px;transition:transform .32s cubic-bezier(.2,1.4,.4,1)}
+.md .dot .gl{position:absolute;left:-12px;top:-12px;width:78px;height:78px;opacity:0;transform:scale(.6);transition:opacity .3s cubic-bezier(.3,0,.2,1),transform .45s cubic-bezier(.2,1,.3,1)}
+.md.on .dot .gl{opacity:.75;transform:scale(1)}
+.md .dot .mi{position:absolute;left:27px;top:27px;opacity:.55;transition:opacity .25s cubic-bezier(.3,0,.2,1)}
+.md.on .dot .mi{opacity:1}
 .md.on{color:#fff}
-.md.on .dot{transform:scale(1.06);box-shadow:0 0 0 2.5px var(--c-sheet),0 0 0 4.5px #fff}
-.md .dot .mi{transition:transform .5s cubic-bezier(.2,1.3,.4,1)}
-.md.on .dot .mi{transform:scale(1.12) rotate(-8deg)}
+.md .dot .mi{transition:transform .5s cubic-bezier(.2,1.3,.4,1),opacity .25s cubic-bezier(.3,0,.2,1)}
+.md.on .dot .mi{transform:scale(1.16)}
 .md:active .dot{transform:scale(.92)}
 .chips{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;touch-action:pan-x;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none}
 .chips.wrap{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
@@ -453,7 +455,7 @@ void main(){
     float lum=dot(o,vec3(.3,.5,.2));
     float L=(exp(-rr*1.5)*.68+.3)*(.5+.65*cloud)*(.9+.4*lum);
     vec3 lc=mix(mix(uB,uD,.5),vec3(1.),smoothstep(.5,.95,L)*.6);
-    o=1.-(1.-o)*(1.-clamp(lc*L*uFl,0.,1.));
+    o=1.-(1.-o)*(1.-clamp(lc*L*uFl*.6,0.,1.));
   }
   o+=(fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453)-.5)/255.;
   gl_FragColor=vec4(o,1.);
@@ -597,23 +599,29 @@ try{if(!SHOT){waves=JSON.parse(localStorage.getItem(LS)||'[]');const old=JSON.pa
 waves.forEach(w=>{if(!Array.isArray(w.genres))w.genres=[]});
 function persist(){try{localStorage.setItem(LS,JSON.stringify(waves))}catch(e){}}
 function moodOf(w){return w.mood||ACT_MOOD[w.act]||'none'}
-function autoName(w){
+/* название волны — один фильтр, самый точный из выбранных: жанр → занятие → настроение → язык → характер.
+   Более точный фильтр вытесняет менее точный; остальные — в подписи. У каждого фильтра свои слова, без повторов */
+function titleOf(w){
   const G=(w.genres||[]).filter(g=>GEN[g]);
-  if(w.act)return ACT[w.act];
-  if(G.length>2)return w.mood?adj(w.mood,'f').replace(/^./,c=>c.toUpperCase())+' музыка':'Разные жанры';
-  if(G.length===2)return cap1(G.map(g=>GEN[g][0]).join(' и '));
-  if(G.length===1)return cap1((w.mood?adj(w.mood,GEN[G[0]][1])+' ':'')+GEN[G[0]][0]);
-  if(w.mood)return adj(w.mood,'f').replace(/^./,c=>c.toUpperCase())+' музыка'+(w.words?' '+WORDN[w.words]:'');
-  if(w.words)return 'Музыка '+WORDN[w.words];
-  if(w.char)return CHARN[w.char];
-  return 'Своя волна';
+  if(G.length===1)return ['g',cap1(GEN[G[0]][0])];
+  if(G.length===2)return ['g',cap1(G.map(g=>GEN[g][0]).join(' и '))];
+  if(w.act)return ['act',ACT[w.act]];
+  if(w.mood)return ['mood',MOODN[w.mood]];
+  if(w.words)return ['words',cap1(WORDN[w.words])];
+  if(w.char)return ['char',CHARN[w.char]];
+  if(G.length)return ['g',G.length===Object.keys(GEN).length?'Все жанры':'Разные жанры'];
+  return [null,'Своя волна'];
 }
+function autoName(w){return titleOf(w)[1]}
 function waveName(w){return (w.name&&w.name.trim())||autoName(w)}
 const plural=(n,a,b,c)=>n%10===1&&n%100!==11?a:n%10>=2&&n%10<=4&&(n%100<10||n%100>=20)?b:c;
 function genParts(w){const G=(w.genres||[]).filter(g=>GEN[g]);return G.length===Object.keys(GEN).length?['все жанры']:G.length>2?[`${G.length} ${plural(G.length,'жанр','жанра','жанров')}`]:G.map(g=>GEN[g][0])}
-function parts(w){return [w.act&&ACTW[w.act],w.mood&&MOODN[w.mood].toLowerCase(),...genParts(w),w.char&&CHARN[w.char].toLowerCase(),w.words&&WORDN[w.words]].filter(Boolean)}
+function kparts(w){return [['act',w.act&&ACTW[w.act]],['mood',w.mood&&MOODN[w.mood].toLowerCase()],...genParts(w).map(x=>['g',x]),['char',w.char&&CHARN[w.char].toLowerCase()],['words',w.words&&WORDN[w.words]]].filter(x=>x[1])}
+function parts(w){return kparts(w).map(x=>x[1])}
+/* подпись: всё, что не попало в название; если имя своё — все фильтры */
+function capParts(w,custom){const k=custom?null:titleOf(w)[0];return kparts(w).filter(x=>x[0]!==k).map(x=>x[1])}
 function capOf(w){
-  const nm=waveName(w).toLowerCase(),p=parts(w).filter(x=>!nm.includes(x.slice(0,Math.max(4,x.length-3)))&&!(w.act&&x===ACTW[w.act]&&!w.name));
+  const p=capParts(w,!!(w.name&&w.name.trim()));
   return p.length?cap1(p.join(', ')):'Своя волна';
 }
 /* подбор трека под свою волну: настроение, занятие, жанры, язык */
@@ -1481,11 +1489,8 @@ function setSheet(y){sheetY=y;sheet.style.transform=`translateY(${(y*sheetH()).t
 setSheet(1.1);
 /* капли настроения — в цветах будущего пузыря */
 /* настроение — маленькая вспышка в цветах будущего пузыря: мягкие пятна с рваным краем, без глянца */
-function moodDot(m){const col=MOOD_COL[m],C=NAT[col],id='md'+(UID++),dk=rgb(hex(C.c1).map(v=>v*.3));
-  return `<svg viewBox="0 0 54 54" width="54" height="54" style="position:absolute;left:0;top:0"><defs>
-<radialGradient id="${id}g" cx=".72" cy=".2" r="1"><stop offset="0" stop-color="${C.c1}"/><stop offset=".55" stop-color="${rgb(hex(C.c1).map(v=>v*.62))}"/><stop offset="1" stop-color="${dk}"/></radialGradient>
-<linearGradient id="${id}r" x1="1" y1="0" x2=".2" y2=".8"><stop offset="0" stop-color="${C.rim}" stop-opacity=".9"/><stop offset=".6" stop-color="${C.rim}" stop-opacity="0"/></linearGradient></defs>
-<circle cx="27" cy="27" r="27" fill="url(#${id}g)"/><circle cx="27" cy="27" r="26.1" fill="none" stroke="url(#${id}r)" stroke-width="1.6"/></svg><i class="mi">${iconSVG(MOOD_IC[m],C.ic,C.icr,.5,1.4)}</i>`}
+function moodDot(m){const C=NAT[MOOD_COL[m]];
+  return `<b class="gl" style="background:radial-gradient(closest-side,${C.c1}AA,${C.c1}00)"></b><i class="mi">${iconSVG(MOOD_IC[m],C.ic,C.icr,.74,1.6)}</i>`}
 
 document.querySelectorAll('.md').forEach(b=>{const col=MOOD_COL[b.dataset.v];b.querySelector('.dot').innerHTML=moodDot(b.dataset.v);b.style.setProperty('--dc',NAT[col].c1+'88')});
 function openSheet(key){
@@ -1512,7 +1517,7 @@ function paintSheet(first){
   const any=['act','mood','words','char'].some(k=>sel[k])||sel.genres.length>0;$('#save').disabled=!any;
   if(!nameTouched)nameIn.value=any?autoName(sel):'';
   nameIn.placeholder=any?autoName(sel):'Назовите волну';
-  const nl=(nameIn.value||nameIn.placeholder).toLowerCase(),p=parts(sel).filter(x=>!nl.includes(x.slice(0,Math.max(4,x.length-3))));$('#nmcap').textContent=p.join(', ');
+  const nv=nameIn.value.trim(),p=capParts(sel,!!nv&&nv!==autoName(sel));$('#nmcap').textContent=p.join(', ');
   const col=any?MOOD_COL[moodOf(sel)]:'slate',C=NAT[col];
   sheet.style.setProperty('--acc',C.c1);
   $('#sglow').style.background=`radial-gradient(46% 50% at 50% 50%,${C.c1},rgba(0,0,0,0))`;
