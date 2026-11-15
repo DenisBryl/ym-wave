@@ -28,16 +28,18 @@
   --c-text:#FFFFFF;
   --c-text-2:#8E8D90;
   --c-text-3:#605F62;
-  --c-pill:#131313;
-  --c-pill-progress:#242424;
   --c-sheet:#19181B;
   --c-sheet-control:#28272A;
   --c-handle:#5E5B5F;
   --c-chip-dark:rgba(0,0,0,.3);
-  --c-glass:rgba(255,255,255,.08);
-  --c-glass-rim:rgba(255,255,255,.12);
-  --c-glass-hi:rgba(255,255,255,.42);
   --c-overlay:rgba(0,0,0,.6);
+  /* UI kit. Заливки кнопок и плашек — одна полупрозрачная светлая, без обводки, фаски и градиента */
+  --fill:rgba(255,255,255,.08);        /* кнопки, плашки, чипсы на любом фоне */
+  --fill-press:rgba(255,255,255,.16);  /* нажатие любой заливки */
+  --fill-media:rgba(255,255,255,.16);  /* кнопка поверх фото */
+  /* значки: основной — белый; второстепенный и «выключенное» состояние — белый 60 %; «включено» — белый с заливкой */
+  --ic-1:#FFFFFF;
+  --ic-2:rgba(255,255,255,.6);
   /* Шрифт: Yandex Music Sans / YS Text закрыты — ближайшие открытые замены.
      Заголовки — Geologica (OFL) с курсивными формами: однокомнатная «а», прямой хвост «у»;
      кегль и трекинг подогнаны по кадрам приложения (ширина и высота строки «Моя волна»). */
@@ -95,12 +97,13 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .cover{position:absolute;left:149px;top:311px;width:96px;height:96px;border-radius:6px;overflow:hidden;opacity:0;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .cover svg{display:block}
 .play{position:absolute;left:148.5px;top:308.4px;width:var(--play);height:var(--play);border-radius:50%;background:var(--c-yellow);display:grid;place-items:center}
-.play:active{transform:scale(.96)}
+.play:active,.pl-ctrl .pp:active,.save:not(:disabled):active{filter:brightness(.86)}
 .row{position:absolute;left:32px;top:417px;width:329px;height:var(--row-h)}
 .pill{position:absolute;top:0;bottom:0;left:0;right:0;border-radius:var(--r-pill);overflow:hidden}
-.pill .pbase{position:absolute;inset:0;background:var(--c-pill)}
-.pill .prog{position:absolute;left:0;top:0;bottom:0;width:3%;background:var(--c-pill-progress);transition:width .4s cubic-bezier(.3,0,.2,1)}
-.glassy{background:var(--c-glass);-webkit-backdrop-filter:blur(22px) saturate(1.25);backdrop-filter:blur(22px) saturate(1.25);box-shadow:inset 0 .75px 0 var(--c-glass-hi),inset 0 0 0 1px var(--c-glass-rim)}
+.pill .pbase{position:absolute;inset:0;background:var(--fill)}
+.pill .prog{position:absolute;left:0;top:0;bottom:0;width:3%;background:rgba(255,255,255,.07);transition:width .4s cubic-bezier(.3,0,.2,1)}
+.glassy{background:var(--fill);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+#pause:active,#like:active{background:var(--fill-press)}
 .pill .glass{position:absolute;inset:0;border-radius:inherit;opacity:0}
 .pill .t{position:absolute;left:52px;right:52px;top:50%;transform:translateY(-50%);text-align:center;font:800 16px/20px var(--f-display);letter-spacing:-.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pill .t2{position:absolute;left:12px;right:12px;top:50%;transform:translateY(-50%);text-align:center;font:800 16px/20px var(--f-display);letter-spacing:-.03em;opacity:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -109,11 +112,11 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pill .heart{position:absolute;left:300.7px;top:50%;width:32px;height:32px;margin:-16px 0 0 -16px;display:grid;place-items:center}
 .rb{position:absolute;top:0;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;opacity:0;transform:scale(.8);pointer-events:none}
 .rb.l{left:0}.rb.r{right:0}
-.hero .rb{pointer-events:none}
+.hero .rb{pointer-events:none}/* скрытые круглые кнопки не перехватывают нажатия (у .hero button выше специфичность) */
 /* Десктопный Chrome растрирует слой с ≥6 «сложными» контурами через MSAA 4× — у краёв значков остаётся 3 уровня
    сглаживания (лесенка). Каждый значок — в своём маленьком слое: там контуров мало, и сглаживание честное */
 :not(svg)>svg{will-change:opacity}
-.drum svg{will-change:auto}/* скрытые круглые кнопки не перехватывают нажатия (у .hero button выше специфичность) */
+.drum svg{will-change:auto}
 .rb svg{opacity:0}
 .ai{position:absolute;left:0;right:0;top:500px;height:60px}
 .ai .spr{position:absolute;left:13.3px;top:10.6px;width:51.8px;pointer-events:none;transition:opacity .2s}
@@ -137,7 +140,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .item .ttl2{display:block;margin-top:4.2px;font:600 15px/18px var(--f-text);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .item.bare .lbl{color:var(--c-yellow)}
 .item .bimg{position:absolute}
-.item .rc{position:absolute;left:-95px;top:-120px;width:190px;height:330px}
+.item .rc{position:absolute;left:-115px;top:-150px;width:230px;height:370px}
 
 /* ---------- таббар ---------- */
 .tabs{position:absolute;left:0;right:0;top:760px;height:92px;z-index:14;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,0),#000 26px)}
@@ -179,17 +182,14 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-ctrl{position:absolute;left:0;right:0;top:612px;height:64px}
 .pl-ctrl button{position:absolute;top:0;height:64px;width:56px;margin-left:-28px;display:grid;place-items:center}
 .pl-ctrl .pp{width:64px;margin-left:-32px;border-radius:50%;background:var(--c-yellow)}
-.pl-ctrl .pp:active{transform:scale(.94)}
-.pl-ctrl button:not(.pp):not(.nop):active svg{transform:scale(.88)}
-.pl-ctrl svg{transition:transform .12s cubic-bezier(.3,0,.2,1)}
+.pl-ctrl button:not(.pp) svg{transition:opacity .2s}.pl-ctrl button:not(.pp):active svg{opacity:.45;transition:none}
 .pl-row{position:absolute;left:24px;right:24px;top:716px;height:49px}
-.pl-row button{position:absolute;top:0;width:74px;height:49px;margin-left:-37px;border-radius:25px;background:rgba(255,255,255,.045);display:grid;place-items:center;transition:background-color .2s}
-.pl-row button:active{background:rgba(255,255,255,.13);transition:none}
+.pl-row button{position:absolute;top:0;width:74px;height:49px;margin-left:-37px;border-radius:25px;background:var(--fill);display:grid;place-items:center;transition:background-color .2s}
+.pl-row button:active{background:var(--fill-press);transition:none}
 .nop svg{transition:opacity .2s}.nop:active svg{opacity:.45;transition:none}
 /* карточка «Моя волна по треку» */
-.pl-card{position:absolute;left:24px;top:799px;width:345px;height:64px;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.07);text-align:center;transition:transform .2s cubic-bezier(.3,0,.2,1)}
-.pl-card:active{transform:scale(.98)}
-.pl-card svg.wv{position:absolute;inset:0}
+.pl-card{position:absolute;left:24px;top:799px;width:345px;height:64px;border-radius:14px;overflow:hidden;background:var(--fill);text-align:center;transition:background-color .2s}
+.pl-card:active{background:var(--fill-press);transition:none}
 .pl-card .k{position:relative;margin-top:10px;font:500 14px/17px var(--f-text);letter-spacing:-.15px;color:var(--pl-acc,#F59AE8)}
 .pl-card .n{position:relative;margin-top:3px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0 24px;font:700 18px/22px var(--f-text);letter-spacing:-.3px;white-space:nowrap}
 .pl-card .n b{font-weight:700;overflow:hidden;text-overflow:ellipsis}
@@ -202,7 +202,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-art .an{position:absolute;left:18px;right:72px;top:290px;font:900 27px/32px var(--f-display);letter-spacing:-.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl-art .ln{position:absolute;left:18px;right:18px;top:326px;display:flex;align-items:center;gap:6px;font:500 14px/18px var(--f-text);color:rgba(255,255,255,.88)}
 .pl-art .ds{position:absolute;left:18px;right:18px;top:352px;font:400 15.5px/19px var(--f-text);letter-spacing:-.15px;color:rgba(255,255,255,.92);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.pl-art .fl{position:absolute;right:16px;top:284px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center}
+.pl-art .fl{position:absolute;right:16px;top:284px;width:44px;height:44px;border-radius:50%;background:var(--fill-media);display:grid;place-items:center}
+.pl-art .fl:active{background:rgba(255,255,255,.26)}
 /* похожие треки */
 .pl-h{position:absolute;left:24px;top:1346px;font:900 22px/28px var(--f-display);letter-spacing:-.02em;display:flex;align-items:center;gap:6px}
 .pl-sim{position:absolute;left:0;right:0;top:1390px}
@@ -215,7 +216,7 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-it .mo{flex:none;width:28px;display:grid;place-items:center}
 .pl-it.now .t1{color:var(--pl-acc,#fff)}
 /* мини-плеер, когда кнопки ушли под шапку */
-.pl-mini{position:absolute;left:16px;right:16px;top:752px;height:56px;border-radius:12px;z-index:4;background:rgba(255,255,255,.09);-webkit-backdrop-filter:blur(24px) saturate(1.3);backdrop-filter:blur(24px) saturate(1.3);box-shadow:inset 0 .5px 0 rgba(255,255,255,.12);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .22s cubic-bezier(.3,0,.2,1),transform .28s cubic-bezier(.2,0,0,1)}
+.pl-mini{position:absolute;left:16px;right:16px;top:752px;height:56px;border-radius:12px;z-index:4;background:var(--fill);-webkit-backdrop-filter:blur(24px);backdrop-filter:blur(24px);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .22s cubic-bezier(.3,0,.2,1),transform .28s cubic-bezier(.2,0,0,1)}
 .pl-mini.on{opacity:1;transform:none;pointer-events:auto}
 .pl-mini .cv{position:absolute;left:7px;top:6px;width:44px;height:44px;border-radius:6px;overflow:hidden}
 .pl-mini .cv img,.pl-mini .cv svg{display:block;width:44px;height:44px;object-fit:cover}
@@ -229,16 +230,16 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 /* ---------- шторка ---------- */
 .overlay{position:absolute;inset:0;z-index:70;background:#000;opacity:0;pointer-events:none}
 .sheet{position:absolute;left:0;right:0;bottom:0;z-index:80;height:796px;background:var(--c-sheet);border-radius:var(--r-sheet) var(--r-sheet) 0 0;transform:translateY(110%);will-change:transform;overflow:hidden;--acc:#395B8C;--acc2:#6F8BC8}
-.sheet .sglow{position:absolute;left:-60px;right:-60px;top:-120px;height:420px;background:radial-gradient(46% 50% at 50% 50%,var(--acc),rgba(0,0,0,0));opacity:.38;pointer-events:none;transition:background .5s cubic-bezier(.3,0,.2,1)}
 .sbody{position:absolute;left:0;right:0;top:0;bottom:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none;padding:0 0 128px}
 .sbody::-webkit-scrollbar{display:none}
 .shead{position:relative;height:262px;touch-action:none}
 .handle{position:absolute;left:50%;top:9px;width:35px;height:4.5px;margin-left:-17.5px;border-radius:3px;background:var(--c-handle)}
 .s-ttl{position:absolute;left:0;right:0;top:24px;text-align:center;font:500 15px/20px var(--f-text);color:rgba(255,255,255,.62)}
-.s-close{position:absolute;right:10px;top:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center}
+.s-close{position:absolute;right:10px;top:16px;width:36px;height:36px;border-radius:50%;background:var(--fill);display:grid;place-items:center}
+.s-close:active{background:var(--fill-press)}
 .prev{position:absolute;left:50%;top:150px;width:0;height:0;transform:scale(1);transform-origin:0 0}
 .prev .pv{position:absolute;left:0;top:0;width:0;height:0;will-change:transform,opacity}
-.prev .bd{position:absolute;left:-95px;top:-93.1px;-webkit-mask:radial-gradient(50% 50% at 50% 42%,#000 62%,transparent 100%);mask:radial-gradient(50% 50% at 50% 42%,#000 62%,transparent 100%)}
+.prev .bd{position:absolute;left:-95px;top:-93.1px}
 .prev .ic{position:absolute;left:-1px;top:-75.7px;will-change:transform}
 .nmw{position:absolute;left:24px;right:24px;top:168px;text-align:center}
 .nm{display:block;width:100%;height:40px;padding:0;border:0;background:none;text-align:center;color:#fff;font:900 27px/40px var(--f-display);letter-spacing:-.02em;font-feature-settings:var(--f-display-feat);caret-color:var(--c-yellow);outline:none;-webkit-user-select:text;user-select:text}
@@ -247,29 +248,21 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .grp{position:relative;margin:22px 16px 0}
 .grp h4{font:600 17px/22px var(--f-text);letter-spacing:-.3px;color:#fff;margin:0 0 12px 2px;display:flex;align-items:baseline;gap:8px}
 .grp h4 span{font:400 14px/18px var(--f-text);color:var(--c-text-3)}
-.moods{display:flex;gap:0;overflow-x:auto;touch-action:pan-x;margin:-6px -16px 0;padding:10px 10px 8px;scrollbar-width:none}
-.moods::-webkit-scrollbar{display:none}
-.md{flex:none;min-width:66px;padding:0 6px;display:flex;flex-direction:column;align-items:center;gap:7px;font:500 13px/16px var(--f-text);color:rgba(255,255,255,.66);letter-spacing:-.15px;white-space:nowrap;transition:color .2s cubic-bezier(.3,0,.2,1)}
-.md .dot{position:relative;width:54px;height:54px;transition:transform .32s cubic-bezier(.2,1.4,.4,1)}
-.md .dot .gl{position:absolute;left:-12px;top:-12px;width:78px;height:78px;opacity:0;transform:scale(.6);transition:opacity .3s cubic-bezier(.3,0,.2,1),transform .45s cubic-bezier(.2,1,.3,1)}
-.md.on .dot .gl{opacity:.75;transform:scale(1)}
-.md .dot .mi{position:absolute;left:27px;top:27px;opacity:.55;transition:opacity .25s cubic-bezier(.3,0,.2,1)}
-.md.on .dot .mi{opacity:1}
-.md.on{color:#fff}
-.md .dot .mi{transition:transform .5s cubic-bezier(.2,1.3,.4,1),opacity .25s cubic-bezier(.3,0,.2,1)}
-.md.on .dot .mi{transform:scale(1.16)}
-.md:active .dot{transform:scale(.92)}
 .chips{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;touch-action:pan-x;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none}
 .chips.wrap{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
 .chips::-webkit-scrollbar{display:none}
 .c{flex:none;height:40px;padding:0 16px;border-radius:var(--r-pill);background:var(--c-sheet-control);font:500 15px/40px var(--f-text);letter-spacing:-.15px;color:#fff;display:flex;align-items:center;gap:7px;transition:background-color .22s cubic-bezier(.3,0,.2,1),color .22s cubic-bezier(.3,0,.2,1),transform .22s cubic-bezier(.3,0,.2,1)}
-.c svg{flex:none;opacity:.8}
-.c:active{transform:scale(.95);transition-duration:.08s}
-.c.on{background:var(--acc);color:#fff}
-/* настроение не выбрано — выбранные фильтры нейтральные, без цвета */
-.sheet.nomood .c.on{background:#F2F2F2;color:#111}
-.sheet.nomood .sglow{opacity:0}
-.c.on svg{opacity:1}
+.c svg{flex:none}
+.c:active{background:#3A393C;transition-duration:0s}.c.on:active{background:#D6D6D6}
+.c.on{background:#F2F2F2;color:#111}
+.v-text .c svg{display:none}
+/* креатив: плашка настроения отсылает к пузырю барабана — его знак и цвет */
+.v-color [data-g=mood] .c{padding-left:8px;gap:6px}
+.v-color [data-g=mood] .c>svg{display:none}
+.v-color [data-g=mood] .c .mi{position:relative;flex:none;width:26px;height:26px}
+.v-color [data-g=mood] .c.on{background:linear-gradient(155deg,var(--mc),var(--mc2));color:#fff}
+.v-color [data-g=mood] .c.on:active{filter:brightness(.88)}
+.v-color [data-g=mood] .c.on .mi{filter:brightness(1.7) saturate(.5)}
 .seg{position:relative;display:flex;height:42px;padding:3px;border-radius:var(--r-pill);background:var(--c-sheet-control)}
 .seg .th{position:absolute;top:3px;bottom:3px;left:0;width:0;border-radius:var(--r-pill);background:#4A494D;box-shadow:0 2px 8px rgba(0,0,0,.25);opacity:0;transition:transform .34s cubic-bezier(.2,.9,.25,1),width .34s cubic-bezier(.2,.9,.25,1),opacity .2s}
 .seg button{position:relative;flex:1;font:500 14.5px/36px var(--f-text);letter-spacing:-.15px;color:rgba(255,255,255,.62);transition:color .2s}
@@ -277,7 +270,6 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .sfoot{position:absolute;left:0;right:0;bottom:0;padding:24px 16px 30px;background:linear-gradient(rgba(25,24,27,0),var(--c-sheet) 26px)}
 .save{display:block;width:100%;height:56px;border-radius:var(--r-pill);background:var(--c-yellow);color:#000;font:700 17px/56px var(--f-text);letter-spacing:-.3px;transition:background-color .2s cubic-bezier(.3,0,.2,1),color .2s cubic-bezier(.3,0,.2,1),transform .22s cubic-bezier(.3,0,.2,1)}
 .save:disabled{background:var(--c-sheet-control);color:var(--c-text-3);cursor:default}
-.save:not(:disabled):active{transform:scale(.97);transition-duration:.08s}
 .del{position:absolute;left:12px;top:16px;height:36px;padding:0 12px;border-radius:18px;font:500 14px/36px var(--f-text);color:#FF6A5C;background:rgba(255,106,92,.1)}
 .del:active{opacity:.6}
 
@@ -307,7 +299,7 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
       <div class="big" id="big">Моя волна</div>
       <div class="artist" id="artist"></div>
       <div class="cover" id="cover"></div>
-      <button class="play" id="play" aria-label="Слушать"><svg width="32" height="32" viewBox="-16 -16 32 32"><path d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4C-5.18 -14.05 -4.07 -13.10 -3.10 -12.30C-2.13 -11.50 -0.83 -10.38 0.20 -9.60C1.23 -8.82 2.10 -8.27 3.10 -7.60C4.10 -6.93 5.27 -6.16 6.20 -5.60C7.13 -5.04 7.83 -4.70 8.70 -4.25C9.57 -3.80 10.68 -3.24 11.40 -2.90C12.12 -2.56 12.47 -2.43 13.00 -2.20C13.53 -1.97 14.15 -1.71 14.60 -1.50C15.05 -1.29 15.52 -1.04 15.70 -0.95Q16.05 0 15.7 0.95C15.52 1.04 15.05 1.29 14.60 1.50C14.15 1.71 13.53 1.97 13.00 2.20C12.47 2.43 12.12 2.56 11.40 2.90C10.68 3.24 9.57 3.80 8.70 4.25C7.83 4.70 7.13 5.04 6.20 5.60C5.27 6.16 4.10 6.93 3.10 7.60C2.10 8.27 1.23 8.82 0.20 9.60C-0.83 10.38 -2.13 11.50 -3.10 12.30C-4.07 13.10 -5.18 14.05 -5.60 14.40Q-7.7 14.4 -7.7 12.6Z" fill="#0A0A0A"/></svg></button>
+      <button class="play" id="play" aria-label="Слушать"><svg width="32" height="32" viewBox="-16 -16 32 32"><path d="M-7.7 -9.78A2.6 2.6 0 0 1 -3.75 -12.01L12.38 -2.22A2.6 2.6 0 0 1 12.38 2.22L-3.75 12.01A2.6 2.6 0 0 1 -7.7 9.78Z" fill="#0A0A0A"/></svg></button>
       <div class="row" id="row">
         <div class="pill" id="pill"><div class="glass glassy" id="pglass"></div><div class="pbase" id="pbase"><div class="prog"></div></div>
           <div class="t" id="track"></div>
@@ -315,7 +307,7 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
           <div class="skel" id="skel"></div>
           <svg class="info" id="info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.6" fill="none" stroke="#8B8B8D" stroke-width="1.7"/><rect x="7.1" y="4.2" width="1.8" height="5" rx=".9" fill="#8B8B8D"/><circle cx="8" cy="11.4" r="1.05" fill="#8B8B8D"/></svg>
           <div class="heart" id="heart"><svg width="22" height="20" viewBox="0 0 22 20"><image width="22" height="20" href="data:image/png;base64,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"/></svg></div></div>
-        <button class="rb l glassy" id="pause" aria-label="Пауза"><svg id="pauseIc" width="20" height="22" viewBox="0 0 20 22"><g id="pauseBars"><rect x="2" y="1" width="5.6" height="20" rx="1.5" fill="#fff"/><rect x="12.4" y="1" width="5.6" height="20" rx="1.5" fill="#fff"/></g><path id="playTri" d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4C-5.18 -14.05 -4.07 -13.10 -3.10 -12.30C-2.13 -11.50 -0.83 -10.38 0.20 -9.60C1.23 -8.82 2.10 -8.27 3.10 -7.60C4.10 -6.93 5.27 -6.16 6.20 -5.60C7.13 -5.04 7.83 -4.70 8.70 -4.25C9.57 -3.80 10.68 -3.24 11.40 -2.90C12.12 -2.56 12.47 -2.43 13.00 -2.20C13.53 -1.97 14.15 -1.71 14.60 -1.50C15.05 -1.29 15.52 -1.04 15.70 -0.95Q16.05 0 15.7 0.95C15.52 1.04 15.05 1.29 14.60 1.50C14.15 1.71 13.53 1.97 13.00 2.20C12.47 2.43 12.12 2.56 11.40 2.90C10.68 3.24 9.57 3.80 8.70 4.25C7.83 4.70 7.13 5.04 6.20 5.60C5.27 6.16 4.10 6.93 3.10 7.60C2.10 8.27 1.23 8.82 0.20 9.60C-0.83 10.38 -2.13 11.50 -3.10 12.30C-4.07 13.10 -5.18 14.05 -5.60 14.40Q-7.7 14.4 -7.7 12.6Z" transform="translate(9.2 11) scale(.68)" fill="#fff" opacity="0"/></svg></button>
+        <button class="rb l glassy" id="pause" aria-label="Пауза"><svg id="pauseIc" width="20" height="22" viewBox="0 0 20 22"><g id="pauseBars"><rect x="2" y="1" width="5.6" height="20" rx="1.5" fill="#fff"/><rect x="12.4" y="1" width="5.6" height="20" rx="1.5" fill="#fff"/></g><path id="playTri" d="M-7.7 -9.78A2.6 2.6 0 0 1 -3.75 -12.01L12.38 -2.22A2.6 2.6 0 0 1 12.38 2.22L-3.75 12.01A2.6 2.6 0 0 1 -7.7 9.78Z" transform="translate(9.2 11) scale(.68)" fill="#fff" opacity="0"/></svg></button>
         <button class="rb r glassy" id="like" aria-label="Нравится"><svg width="22" height="20" viewBox="0 0 22 20"><image width="22" height="20" href="data:image/png;base64,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"/></svg></button>
       </div>
       <div class="ai" id="ai"><button class="aitap nop" aria-label="AI"></button><img class="spr" src="data:image/png;base64,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" alt=""><div class="txt" id="aitxt"></div></div>
@@ -337,20 +329,20 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
         <div class="pl-glow"></div>
         <div class="pl-track" id="plTrack"></div>
         <div class="pl-meta"><div class="pl-title" id="plTitle"></div><div class="pl-artist" id="plArtist"></div>
-        <button class="pl-share nop" aria-label="Поделиться"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 14V2.5M5.5 7 10 2.5 14.5 7M3 11v7.5A1.5 1.5 0 0 0 4.5 20h11a1.5 1.5 0 0 0 1.5-1.5V11" fill="none" stroke="rgba(255,255,255,.62)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="pl-more nop" aria-label="Ещё"><svg width="22" height="6" viewBox="0 0 22 6"><circle cx="3" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/><circle cx="11" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/><circle cx="19" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/></svg></button></div>
+        <button class="pl-share nop" aria-label="Поделиться"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 14V2.5M5.5 7 10 2.5 14.5 7M3 11v7.5A1.5 1.5 0 0 0 4.5 20h11a1.5 1.5 0 0 0 1.5-1.5V11" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="pl-more nop" aria-label="Ещё"><svg width="22" height="6" viewBox="0 0 22 6"><circle cx="3" cy="3" r="2.3" fill="rgba(255,255,255,.6)"/><circle cx="11" cy="3" r="2.3" fill="rgba(255,255,255,.6)"/><circle cx="19" cy="3" r="2.3" fill="rgba(255,255,255,.6)"/></svg></button></div>
         <div class="pl-prog" id="plProg"><div class="ln"><div class="fill" id="plFill"></div></div><div class="knob" id="plKnob"></div><span class="tm" id="plCur">0:00</span><span class="tm r" id="plDur">0:50</span></div>
         <div class="pl-ctrl">
-        <button class="nop" style="left:36px" id="plDis" aria-label="Не нравится"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M13 21.5 5.3 14a4.8 4.8 0 0 1 7.7-5.6 4.8 4.8 0 0 1 7.7 5.6Z" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linejoin="round"/><path d="M4 4l18 18" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"/></svg></button>
-        <button style="left:120px" id="plPrev" aria-label="Предыдущий"><svg width="26" height="26" viewBox="0 0 26 26"><rect x="4" y="4" width="3.4" height="18" rx="1.2" fill="#fff"/><path d="M22 5.2v15.6a1.4 1.4 0 0 1-2.2 1.1L9.4 14.1a1.4 1.4 0 0 1 0-2.2L19.8 4.1A1.4 1.4 0 0 1 22 5.2Z" fill="#fff"/></svg></button>
-        <button class="pp" style="left:196.5px" id="plPP" aria-label="Пауза"><svg width="26" height="28" viewBox="0 0 26 28"><g id="plBars"><rect x="5" y="3" width="5.6" height="22" rx="1.6" fill="#111"/><rect x="15.4" y="3" width="5.6" height="22" rx="1.6" fill="#111"/></g><path id="plTri" d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4C-5.18 -14.05 -4.07 -13.10 -3.10 -12.30C-2.13 -11.50 -0.83 -10.38 0.20 -9.60C1.23 -8.82 2.10 -8.27 3.10 -7.60C4.10 -6.93 5.27 -6.16 6.20 -5.60C7.13 -5.04 7.83 -4.70 8.70 -4.25C9.57 -3.80 10.68 -3.24 11.40 -2.90C12.12 -2.56 12.47 -2.43 13.00 -2.20C13.53 -1.97 14.15 -1.71 14.60 -1.50C15.05 -1.29 15.52 -1.04 15.70 -0.95Q16.05 0 15.7 0.95C15.52 1.04 15.05 1.29 14.60 1.50C14.15 1.71 13.53 1.97 13.00 2.20C12.47 2.43 12.12 2.56 11.40 2.90C10.68 3.24 9.57 3.80 8.70 4.25C7.83 4.70 7.13 5.04 6.20 5.60C5.27 6.16 4.10 6.93 3.10 7.60C2.10 8.27 1.23 8.82 0.20 9.60C-0.83 10.38 -2.13 11.50 -3.10 12.30C-4.07 13.10 -5.18 14.05 -5.60 14.40Q-7.7 14.4 -7.7 12.6Z" transform="translate(11.6 14) scale(.78)" fill="#0A0A0A" opacity="0"/></svg></button>
-        <button style="left:273.5px" id="plNext" aria-label="Следующий"><svg width="26" height="26" viewBox="0 0 26 26"><rect x="18.6" y="4" width="3.4" height="18" rx="1.2" fill="#fff"/><path d="M4 5.2v15.6a1.4 1.4 0 0 0 2.2 1.1l10.4-7.8a1.4 1.4 0 0 0 0-2.2L6.2 4.1A1.4 1.4 0 0 0 4 5.2Z" fill="#fff"/></svg></button>
-        <button style="left:357px" id="plLike" aria-label="Нравится"><svg width="26" height="24" viewBox="0 0 26 24"><path d="M13 21.5 4.3 13a5.3 5.3 0 0 1 8.7-6.1 5.3 5.3 0 0 1 8.7 6.1Z" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linejoin="round"/></svg></button>
+        <button class="nop" style="left:36px" id="plDis" aria-label="Не нравится"><svg width="26" height="24" viewBox="-2 -2 26 24"><defs><mask id="disM" maskUnits="userSpaceOnUse" x="-2" y="-2" width="26" height="24"><rect x="-2" y="-2" width="26" height="24" fill="#fff"/><path d="M1.5 .5 20.5 19.5" stroke="#000" stroke-width="5.6" stroke-linecap="round"/></mask></defs><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2.1" stroke-linejoin="round" mask="url(#disM)"/><path d="M1.5 .5 20.5 19.5" stroke="rgba(255,255,255,.6)" stroke-width="2.1" stroke-linecap="round"/></svg></button>
+        <button style="left:120px" id="plPrev" aria-label="Предыдущий"><svg width="26" height="26" viewBox="0 0 26 26" fill="#fff"><g transform="translate(26 0) scale(-1 1)"><path d="M-7.7 -9.78A2.6 2.6 0 0 1 -3.75 -12.01L12.38 -2.22A2.6 2.6 0 0 1 12.38 2.22L-3.75 12.01A2.6 2.6 0 0 1 -7.7 9.78Z" transform="translate(8.62 13) scale(0.6)"/><rect x="19.45" y="4.36" width="3.2" height="17.28" rx=".9"/></g></svg></button>
+        <button class="pp" style="left:196.5px" id="plPP" aria-label="Пауза"><svg width="26" height="28" viewBox="0 0 26 28"><g id="plBars"><rect x="5" y="3" width="5.6" height="22" rx="1.6" fill="#111"/><rect x="15.4" y="3" width="5.6" height="22" rx="1.6" fill="#111"/></g><path id="plTri" d="M-7.7 -9.78A2.6 2.6 0 0 1 -3.75 -12.01L12.38 -2.22A2.6 2.6 0 0 1 12.38 2.22L-3.75 12.01A2.6 2.6 0 0 1 -7.7 9.78Z" transform="translate(11.6 14) scale(.78)" fill="#0A0A0A" opacity="0"/></svg></button>
+        <button style="left:273.5px" id="plNext" aria-label="Следующий"><svg width="26" height="26" viewBox="0 0 26 26" fill="#fff"><path d="M-7.7 -9.78A2.6 2.6 0 0 1 -3.75 -12.01L12.38 -2.22A2.6 2.6 0 0 1 12.38 2.22L-3.75 12.01A2.6 2.6 0 0 1 -7.7 9.78Z" transform="translate(8.62 13) scale(0.6)"/><rect x="19.45" y="4.36" width="3.2" height="17.28" rx=".9"/></svg></button>
+        <button style="left:357px" id="plLike" data-off="rgba(255,255,255,.6)" aria-label="Нравится"><svg width="26" height="24" viewBox="-2 -2 26 24"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
       </div>
-        <div class="pl-row"><button class="nop" style="left:37px" aria-label="Повтор"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M4 9V7.5A3.5 3.5 0 0 1 7.5 4H17m0 0-3-3m3 3-3 3M18 11v1.5A3.5 3.5 0 0 1 14.5 16H5m0 0 3 3m-3-3 3-3" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="nop" style="left:172.5px" aria-label="Текст"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M3 3h9M7.5 3v14M14 9h6M14 13h6M14 17h6" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.9" stroke-linecap="round"/></svg></button>
-        <button class="nop" style="left:308px" aria-label="Скачать"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 2v13m-5-5 5 5 5-5M3 20h14" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
-        <button class="pl-card" id="plCardBtn"><svg class="wv" viewBox="0 0 345 64" preserveAspectRatio="none"><path d="M0 40C58 22 110 56 178 38S292 14 345 30V64H0Z" fill="rgba(255,255,255,.06)"/><path d="M0 50C66 36 128 66 196 48S300 32 345 46V64H0Z" fill="rgba(255,255,255,.06)"/></svg><div class="k">Моя волна по треку</div><div class="n" id="plCard"></div></button>
+        <div class="pl-row"><button class="nop" style="left:37px" aria-label="Повтор"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M4 9V7.5A3.5 3.5 0 0 1 7.5 4H17m0 0-3-3m3 3-3 3M18 11v1.5A3.5 3.5 0 0 1 14.5 16H5m0 0 3 3m-3-3 3-3" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="nop" style="left:172.5px" aria-label="Текст"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M3 3h9M7.5 3v14M14 9h6M14 13h6M14 17h6" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.9" stroke-linecap="round"/></svg></button>
+        <button class="nop" style="left:308px" aria-label="Скачать"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 2v13m-5-5 5 5 5-5M3 20h14" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
+        <button class="pl-card" id="plCardBtn"><div class="k">Моя волна по треку</div><div class="n" id="plCard"></div></button>
         <div class="pl-art" id="plArt"><div class="ph" id="plArtPh"></div><div class="gr"></div><div class="an" id="plArtNm"></div>
           <button class="fl" id="plArtFl" aria-label="Нравится"><svg width="20" height="18" viewBox="0 0 22 20"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
           <div class="ln"><svg width="15" height="14" viewBox="0 0 15 14"><path d="M1.5 9.5V7.5a6 6 0 0 1 12 0v2" fill="none" stroke="rgba(255,255,255,.88)" stroke-width="1.6"/><rect x=".8" y="8" width="3.6" height="5.2" rx="1.2" fill="rgba(255,255,255,.88)"/><rect x="10.6" y="8" width="3.6" height="5.2" rx="1.2" fill="rgba(255,255,255,.88)"/></svg><span id="plArtLn"></span></div>
@@ -358,23 +350,22 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
         <div class="pl-h">Похожие треки<svg width="9" height="15" viewBox="0 0 9 15"><path d="M1.5 1.5 7.5 7.5 1.5 13.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
         <div class="pl-sim" id="plSim"></div>
       </div></div>
-      <div class="pl-hdr"><button class="pl-down" id="plDown" aria-label="Свернуть"><svg width="20" height="12" viewBox="0 0 20 12"><path d="M2 2l8 8 8-8" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="pl-hdr"><button class="pl-down" id="plDown" aria-label="Свернуть"><svg width="20" height="12" viewBox="0 0 20 12"><path d="M2 2l8 8 8-8" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="pl-ttl" id="plTtl"><span class="one" id="plTtl1">Моя волна</span><span class="k" id="plTtlK">Моя волна по треку</span><span class="q" id="plTtlQ"></span></div>
-        <button class="pl-dev nop" aria-label="Устройства"><svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="rgba(255,255,255,.82)" stroke-width="1.9" stroke-linejoin="round"><path d="M12 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h13A2.5 2.5 0 0 1 20 4.5V8"/><rect x="15" y="9.5" width="9" height="11" rx="2.4"/><circle cx="19.5" cy="16.4" r="1.6"/></svg></button>
-        <button class="pl-q nop" aria-label="Очередь"><svg width="24" height="20" viewBox="0 0 24 20" fill="none" stroke="rgba(255,255,255,.82)" stroke-width="1.9" stroke-linecap="round"><path d="M9 3.5h13M9 10h13M9 16.5h13"/><circle cx="3.2" cy="3.5" r="1.2" fill="rgba(255,255,255,.82)"/><circle cx="3.2" cy="10" r="1.2" fill="rgba(255,255,255,.82)"/><circle cx="3.2" cy="16.5" r="1.2" fill="rgba(255,255,255,.82)"/></svg></button></div>
+        <button class="pl-dev nop" aria-label="Устройства"><svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="#fff" stroke-width="1.9" stroke-linejoin="round"><path d="M12 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h13A2.5 2.5 0 0 1 20 4.5V8"/><rect x="15" y="9.5" width="9" height="11" rx="2.4"/><circle cx="19.5" cy="16.4" r="1.6"/></svg></button>
+        <button class="pl-q nop" aria-label="Очередь"><svg width="24" height="20" viewBox="0 0 24 20" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round"><path d="M9 3.5h13M9 10h13M9 16.5h13"/><circle cx="3.2" cy="3.5" r="1.2" fill="#fff"/><circle cx="3.2" cy="10" r="1.2" fill="#fff"/><circle cx="3.2" cy="16.5" r="1.2" fill="#fff"/></svg></button></div>
       <div class="pl-mini" id="plMini"><div class="cv" id="plMiniCv"></div><div class="t1" id="plMiniT"></div><div class="t2" id="plMiniA"></div>
-        <button class="lk" id="plMiniLk" aria-label="Нравится"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
-        <button class="pp" id="plMiniPP" aria-label="Пауза"><svg width="18" height="20" viewBox="0 0 18 20"><g id="plMiniBars"><rect x="2.5" y="1" width="4.6" height="18" rx="1.3" fill="#fff"/><rect x="10.9" y="1" width="4.6" height="18" rx="1.3" fill="#fff"/></g><path id="plMiniTri" d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4L15.7 -0.95Q16.05 0 15.7 0.95L-5.6 14.4Q-7.7 14.4 -7.7 12.6Z" transform="translate(7 10) scale(.62)" fill="#fff" opacity="0"/></svg></button></div>
+        <button class="lk" id="plMiniLk" data-off="rgba(255,255,255,.6)" aria-label="Нравится"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
+        <button class="pp" id="plMiniPP" aria-label="Пауза"><svg width="18" height="20" viewBox="0 0 18 20"><g id="plMiniBars"><rect x="2.5" y="1" width="4.6" height="18" rx="1.3" fill="#fff"/><rect x="10.9" y="1" width="4.6" height="18" rx="1.3" fill="#fff"/></g><path id="plMiniTri" d="M-7.7 -9.78A2.6 2.6 0 0 1 -3.75 -12.01L12.38 -2.22A2.6 2.6 0 0 1 12.38 2.22L-3.75 12.01A2.6 2.6 0 0 1 -7.7 9.78Z" transform="translate(7 10) scale(.62)" fill="#fff" opacity="0"/></svg></button></div>
     </div>
     <div class="overlay" id="overlay"></div>
     <div class="sheet" id="sheet" role="dialog" aria-label="Своя волна">
-      <div class="sglow" id="sglow"></div>
       <div class="sbody" id="sbody">
         <div class="shead" id="shead"><div class="handle"></div><div class="s-ttl" id="sTtl">Новая волна</div><button class="del" id="del">Удалить</button>
-          <button class="s-close" id="sClose" aria-label="Закрыть"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="rgba(255,255,255,.7)" stroke-width="1.9" stroke-linecap="round"/></svg></button>
+          <button class="s-close" id="sClose" aria-label="Закрыть"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M1.5 1.5l9 9M10.5 1.5l-9 9" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/></svg></button>
           <div class="prev" id="prev"></div>
           <div class="nmw"><input class="nm" id="wname" type="text" maxlength="32" autocomplete="off" enterkeyhint="done" spellcheck="false" placeholder="Назовите волну"><div class="nmcap" id="nmcap"></div></div></div>
-        <div class="grp"><h4>Настроение</h4><div class="moods" data-g="mood"><button class="md" data-v="energy"><span class="dot" id="dot_energy"></span><span>Бодрое</span></button><button class="md" data-v="fun"><span class="dot" id="dot_fun"></span><span>Весёлое</span></button><button class="md" data-v="calm"><span class="dot" id="dot_calm"></span><span>Спокойное</span></button><button class="md" data-v="dream"><span class="dot" id="dot_dream"></span><span>Мечтательное</span></button><button class="md" data-v="sad"><span class="dot" id="dot_sad"></span><span>Грустное</span></button><button class="md" data-v="romantic"><span class="dot" id="dot_romantic"></span><span>Романтичное</span></button></div></div>
+        <div class="grp"><h4>Настроение</h4><div class="chips" data-g="mood"><button class="c" data-v="energy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2.5 4.5 13.5h7l-1 8 8.5-11h-7l1-8Z"/></svg>Бодрое</button><button class="c" data-v="fun"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.3 14.2a4.6 4.6 0 0 0 7.4 0M9 9.6v.4M15 9.6v.4"/></svg>Весёлое</button><button class="c" data-v="calm"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5c1.5-1.4 3-1.4 4.5 0s3 1.4 4.5 0 3-1.4 4.5 0 3 1.4 4.5 0M3 14.5c1.5-1.4 3-1.4 4.5 0s3 1.4 4.5 0 3-1.4 4.5 0 3 1.4 4.5 0"/></svg>Спокойное</button><button class="c" data-v="dream"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H8a6 6 0 1 1 5.8-7.5h1.2"/><path d="M17.5 19a4 4 0 0 0 0-8h-2.5"/></svg>Мечтательное</button><button class="c" data-v="sad"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2c-2.9 3.9-6 6.5-6 10.3a6 6 0 0 0 12 0c0-3.8-3.1-6.4-6-10.3Z"/></svg>Грустное</button><button class="c" data-v="romantic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.1 4 12.4A5 5 0 0 1 12 4.7a5 5 0 0 1 8 7.7Z"/></svg>Романтичное</button></div></div>
         <div class="grp"><h4>Чем заняты</h4><div class="chips" data-g="act"><button class="c" data-v="wake"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h1M20 17h1M5.6 10.6l.7.7M18.4 10.6l-.7.7M8 17a4 4 0 0 1 8 0M3 21h18M12 9V3M9 6l3-3 3 3"/></svg>Просыпаюсь</button><button class="c" data-v="work"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M3 19h18"/></svg>Работаю</button><button class="c" data-v="study"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 5 2 9l10 4 10-4v6"/><path d="M6 10.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.4"/></svg>Учусь</button><button class="c" data-v="workout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h1M21 12h1M9 12h6"/><rect x="6" y="6" width="3" height="12" rx="1"/><rect x="15" y="6" width="3" height="12" rx="1"/><path d="M6 8.5H4.5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1H6M18 8.5h1.5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H18"/></svg>Тренируюсь</button><button class="c" data-v="run"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="1.6"/><path d="M4 17l5 1 .75-1.5M15 21v-4l-4-3 1-6M7 12V9l5-1 3 3 3 1"/></svg>Бегаю</button><button class="c" data-v="road"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2M15 17H9M3 11h15M12 11V6"/></svg>В дороге</button><button class="c" data-v="cook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 3.9 3.15 4 4 0 0 1 2.1 7.72V21H6v-7.13a4 4 0 1 1 2.1-7.72A4 4 0 0 1 12 3Z"/><path d="M6.2 17H18"/></svg>Готовлю</button><button class="c" data-v="rest"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a2 2 0 0 1 2 2v1h12v-1a2 2 0 1 1 4 0v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-5a2 2 0 0 1 2-2Z"/><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3M12 5v9"/></svg>Отдыхаю</button><button class="c" data-v="party"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h2M5 4v2M11.5 4 11 6M18 5h2M19 4v2M15 9l-1 1M18 13l2-.5M18 19h2M19 18v2"/><path d="M14 16.5 7.5 10l-4.4 9.6a1 1 0 0 0 1.3 1.3Z"/></svg>Вечеринка</button><button class="c" data-v="sleep"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h.4a7.5 7.5 0 0 0 7.9 12.45A9 9 0 1 1 12 3Z"/><path d="M17 4a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2M19 11h2M20 10v2"/></svg>Засыпаю</button></div></div>
         <div class="grp"><h4>Жанры</h4><div class="chips wrap" data-g="genres" data-multi="99"><button class="c" data-v="indie">Инди</button><button class="c" data-v="rock">Рок</button><button class="c" data-v="electronic">Электроника</button><button class="c" data-v="hiphop">Хип-хоп</button><button class="c" data-v="jazz">Джаз</button><button class="c" data-v="lofi">Лоу-фай</button><button class="c" data-v="classical">Классика</button><button class="c" data-v="folk">Фолк</button><button class="c" data-v="latin">Латина</button><button class="c" data-v="ambient">Эмбиент</button><button class="c" data-v="blues">Блюз</button><button class="c" data-v="funk">Фанк</button></div></div>
         <div class="grp"><h4>Язык</h4><div class="seg" data-g="words"><i class="th"></i><button data-v="ru">На русском</button><button data-v="foreign">Иностранные</button><button data-v="none">Без слов</button></div></div>
@@ -504,14 +495,46 @@ function spring(get,set,target,{w=16,z=1,v=0,done}={}){
   id=requestAnimationFrame(step);return ()=>cancelAnimationFrame(id);
 }
 
+/* ================= типограф: предлог и союз — со следующим словом, тире не встаёт в начало или конец строки ================= */
+const NB=' ';
+const SHORTW='в|во|на|с|со|к|ко|у|о|об|обо|от|до|по|за|из|изо|под|над|при|про|для|без|через|перед|между|и|а|но|или|да|не|ни';
+const RX_SHORT=new RegExp(`(^|[\\s«„"(${NB}])(${SHORTW})\\s+(?=\\S)`,'giu');
+function typo(t){if(!t||!/\s/.test(t))return t;
+  let r=t.replace(/\s+—\s+/g,NB+'—'+NB);
+  for(let i=0;i<2;i++)r=r.replace(RX_SHORT,(m,a,w)=>a+w+NB);   /* дважды — для цепочек «и в», «не с» */
+  return r}
+function typoNode(n){
+  if(n.nodeType===3){const p=n.parentNode;if(!p||p.closest&&p.closest('svg,script,style,textarea'))return;const v=n.nodeValue,t=typo(v);if(t!==v)n.nodeValue=t;return}
+  if(n.nodeType===1&&!n.closest('svg')){const w=document.createTreeWalker(n,NodeFilter.SHOW_TEXT);let x;while(x=w.nextNode())typoNode(x)}
+}
+const typoObs=new MutationObserver(ms=>ms.forEach(m=>{if(m.type==='characterData')typoNode(m.target);else m.addedNodes.forEach(typoNode)}));
+typoObs.observe(document.getElementById('screen'),{subtree:true,childList:true,characterData:true});
+typoNode(document.getElementById('screen'));
+
 /* ================= фон: WebGL-шейдер ================= */
 const PAL={
-  idle:{A:'#F20FC4',B:'#FFF000',C:'#FF2A1A',D:'#FFB4F0',Base:'#000000',F:0,spd:1},
+  idle:{A:'#E00FB4',B:'#FF3D7F',C:'#FF2A1A',D:'#FF8FD8',Base:'#000000',F:0,spd:1},
   wave:{A:'#3B1FA8',B:'#8566FF',C:'#8566FF',D:'#E9E2FF',Base:'#05030C',F:1,spd:1}
 };
 const BG={cur:{...PAL.idle},from:null,to:null,t0:0,dur:1,time:SHOT?3:Math.random()*20,last:performance.now(),play:1,playT:1};
 const KEYS=['A','B','C','D','Base'];
-function palNum(p){const o={F:p.F,spd:p.spd};KEYS.forEach(k=>o[k]=typeof p[k]==='string'?hex(p[k]):p[k]);return o}
+/* потолок относительной яркости (Y) для слоёв фона: под белым заголовком контраст не ниже ~3,5:1 */
+const YMAX={A:.1,B:.18,C:.22,D:.38,Base:.05};
+const lin=v=>{v/=255;return v<=.04045?v/12.92:Math.pow((v+.055)/1.055,2.4)},gam=v=>255*(v<=.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-.055);
+function toLab(c){const [r,g,b]=c.map(lin);const l=Math.cbrt(.4122214708*r+.5363325363*g+.0514459929*b),m=Math.cbrt(.2119034982*r+.6806995451*g+.1073969566*b),s=Math.cbrt(.0883024619*r+.2817188376*g+.6299787005*b);
+  return [.2104542553*l+.793617785*m-.0040720468*s,1.9779984951*l-2.428592205*m+.4505937099*s,.0259040371*l+.7827717662*m-.808675766*s]}
+function fromLabLin([L,a,b]){const l=(L+.3963377774*a+.2158037573*b)**3,m=(L-.1055613458*a-.0638541728*b)**3,s=(L-.0894841775*a-1.291485548*b)**3;
+  return [4.0767416621*l-3.3077115913*m+.2309699292*s,-1.2684380046*l+2.6097574011*m-.3413193965*s,-.0041960863*l-.7034186147*m+1.707614701*s]}
+const relY=c=>.2126*c[0]+.7152*c[1]+.0722*c[2];
+function capY(c,ymax){
+  const [L0,a0,b0]=toLab(c);if(relY(c.map(lin))<=ymax)return c;
+  const C0=Math.hypot(a0,b0),h=Math.atan2(b0,a0);
+  /* при заданной светлоте берём наибольшую насыщенность, которая ещё в охвате sRGB */
+  const at=L=>{let lo=0,hi=C0;for(let i=0;i<18;i++){const C=(lo+hi)/2,q=fromLabLin([L,C*Math.cos(h),C*Math.sin(h)]);if(q.every(v=>v>=-1e-4&&v<=1+1e-4))lo=C;else hi=C}return fromLabLin([L,lo*Math.cos(h),lo*Math.sin(h)])};
+  let lo=0,hi=L0;for(let i=0;i<22;i++){const L=(lo+hi)/2;if(relY(at(L))>ymax)hi=L;else lo=L}
+  return at(lo).map(v=>clamp(gam(clamp(v,0,1)),0,255));
+}
+function palNum(p){const o={F:p.F,spd:p.spd};KEYS.forEach(k=>{const c=typeof p[k]==='string'?hex(p[k]):p[k];o[k]=p.raw?c:capY(c,YMAX[k])});return o}
 BG.cur=palNum(PAL.idle);
 function bgTo(p,dur=900,ease='inOut'){BG.from=JSON.parse(JSON.stringify(BG.cur));BG.to=palNum(p);BG.t0=performance.now();BG.dur=dur;BG.ease=ease;
   if(!gl){const q=BG.to;$('#bgfb').style.background=q.F?`linear-gradient(${rgb(q.B)},${rgb(q.A)} 55%,${rgb(q.Base)} 72%)`:`radial-gradient(48% 26% at 51% 30%,${rgb(q.B)},${rgb(q.C)} 45%,${rgb(q.A)} 70%,rgba(0,0,0,0))`}}
@@ -659,24 +682,15 @@ const BODY=(()=>{const P=BODY_PTS.map(p=>[p[0],+(p[1]*.99).toFixed(2)]),n=P.leng
     d+=`C${c1[0].toFixed(2)} ${c1[1].toFixed(2)} ${c2[0].toFixed(2)} ${c2[1].toFixed(2)} ${p2[0]} ${p2[1]}`}
   return d+'Z'})();
 const VB='-95 -18 190 300',VBR='x="-95" y="-18" width="190" height="300"';
+/* тело пузыря: один диагональный градиент (свет сверху справа → тёмный → прозрачный внизу слева) и тонкий кант справа.
+   Ничего не выходит за контур — соседние пузыри перекрываются чисто, без обрезанных ореолов */
 function bodySVG(c){
-  const id='b'+(UID++),c1=hex(c.c1),dk=rgb(c1.map(v=>v*.35));
+  const id='b'+(UID++),c1=hex(c.c1),dk=rgb(c1.map(v=>v*.38));
   return `<svg class="bd" width="190" height="300" viewBox="${VB}"><defs>
-<linearGradient id="${id}g" gradientUnits="userSpaceOnUse" x1="55.5" y1="21.2" x2="-32" y2="161.1"><stop offset="0" stop-color="${c.c1}"/><stop offset=".47" stop-color="${dk}"/><stop offset=".58" stop-color="${dk}" stop-opacity=".57"/><stop offset=".76" stop-color="${dk}" stop-opacity=".23"/><stop offset="1" stop-color="${dk}" stop-opacity="0"/></linearGradient>
-<radialGradient id="${id}sg" gradientUnits="userSpaceOnUse" cx="50" cy="14" r="64"><stop offset=".42" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
-<radialGradient id="${id}bg" gradientUnits="userSpaceOnUse" cx="50" cy="14" r="64"><stop offset=".34" stop-color="#000"/><stop offset=".78" stop-color="#fff"/></radialGradient>
-<linearGradient id="${id}hg" gradientUnits="userSpaceOnUse" x1="-34" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
-<linearGradient id="${id}vg" gradientUnits="userSpaceOnUse" x1="0" y1="44" x2="0" y2="80"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></linearGradient>
-<mask id="${id}S" maskUnits="userSpaceOnUse" ${VBR}><rect ${VBR} fill="url(#${id}sg)"/></mask>
-<mask id="${id}B" maskUnits="userSpaceOnUse" ${VBR}><rect ${VBR} fill="url(#${id}bg)"/></mask>
-<mask id="${id}H" maskUnits="userSpaceOnUse" ${VBR}><rect ${VBR} fill="url(#${id}hg)"/></mask>
-<mask id="${id}V" maskUnits="userSpaceOnUse" ${VBR}><rect ${VBR} fill="url(#${id}vg)"/></mask>
-<filter id="${id}f" filterUnits="userSpaceOnUse" ${VBR}><feGaussianBlur stdDeviation="7.5"/></filter>
-<filter id="${id}f2" filterUnits="userSpaceOnUse" ${VBR}><feGaussianBlur stdDeviation="3.2"/></filter>
-<clipPath id="${id}c"><path d="${BODY}"/></clipPath></defs>
-<g mask="url(#${id}B)"><path d="${BODY}" fill="url(#${id}g)" filter="url(#${id}f)"/></g>
-<g mask="url(#${id}S)"><path d="${BODY}" fill="url(#${id}g)"/></g>
-<g mask="url(#${id}V)"><g mask="url(#${id}H)" clip-path="url(#${id}c)"><path d="${BODY}" fill="none" stroke="${c.rim}" stroke-width="11" stroke-opacity=".22" filter="url(#${id}f2)"/><path d="${BODY}" fill="none" stroke="${c.rim}" stroke-width="2.5"/></g></g>
+<linearGradient id="${id}g" gradientUnits="userSpaceOnUse" x1="58" y1="14" x2="-38" y2="172"><stop offset="0" stop-color="${c.c1}"/><stop offset=".46" stop-color="${dk}"/><stop offset=".9" stop-color="${dk}" stop-opacity="0"/></linearGradient>
+<linearGradient id="${id}r" gradientUnits="userSpaceOnUse" x1="64" y1="20" x2="-6" y2="112"><stop offset="0" stop-color="${c.rim}" stop-opacity=".95"/><stop offset="1" stop-color="${c.rim}" stop-opacity="0"/></linearGradient></defs>
+<path d="${BODY}" fill="url(#${id}g)"/>
+<path d="${BODY}" fill="none" stroke="url(#${id}r)" stroke-width="1.6"/>
 </svg>`;
 }
 function ghostSVG(){
@@ -694,7 +708,7 @@ function ghostSVG(){
 }
 /* иконка: прогрессивное размытие (верх-лево мыло → низ-право резко) + светлый внутренний кант */
 function iconSVG(k,fill,rimc,size,blur=2.9){
-  const v=typeof k==='string'?ICONS[k]:k,id='i'+(UID++),pad=9,W=v.w+pad*2,H=v.h+pad*2,s=(size||1)*(v.sc||1);
+  const v=typeof k==='string'?ICONS[k]:k,id='i'+(UID++),pad=14,W=v.w+pad*2,H=v.h+pad*2,s=(size||1)*(v.sc||1);
   const R=`x="${-pad}" y="${-pad}" width="${W}" height="${H}"`;
   return `<svg class="isvg" width="${(W*s).toFixed(2)}" height="${(H*s).toFixed(2)}" viewBox="${-pad} ${-pad} ${W} ${H}" style="left:${(-W*s/2).toFixed(2)}px;top:${(-H*s/2).toFixed(2)}px;position:absolute;overflow:visible"><defs>
 <linearGradient id="${id}sg" gradientUnits="userSpaceOnUse" x1="${v.w*.1}" y1="${v.h*.1}" x2="${v.w*.6}" y2="${v.h*.6}"><stop offset="0" stop-color="#000"/><stop offset="1" stop-color="#fff"/></linearGradient>
@@ -723,7 +737,7 @@ const PRESETS={
   date:{col:'crimson',label:'Красивая музыка для свидания',icon:'date',track:'hz_jazz4'},
   lonely:{col:'purple',label:'Одинокий вечер, меланхоличный джаз',icon:'lonely',track:'hz_jazz1'},
   dreamindie:{col:'pink',label:'Мечтательная местная инди-музыка',icon:'dreamindie',track:'kt_vse'},
-  nowords:{col:'magenta',label:'Помечтать под музыку без слов',icon:'nowords',track:'js_landra'},
+  nowords:{col:'magenta',label:'Помечтать без слов',icon:'nowords',track:'js_landra'},
   english:{col:'indigo',label:'Только на английском',icon:'english',track:'tadz_focus'},
   indie:{col:'blue',label:'Хочется инди',icon:'indie',track:'mp_shy'},
   altpop:{col:'magenta',label:'Альт-поп-рок',icon:'altpop',track:'mp_echo'},
@@ -808,8 +822,8 @@ function nestBody(svg){return svg.replace('<svg class="bd" ','<svg x="-95" y="-9
 function nestIcon(svg,ox,oy){return svg.replace(/<svg class="isvg" ([^>]*?)style="left:([-\d.]+)px;top:([-\d.]+)px;position:absolute;overflow:visible"/,(m,a,l,t)=>`<svg ${a}x="${(ox+ +l).toFixed(2)}" y="${(oy+ +t).toFixed(2)}" overflow="visible"`)}
 function rasterize(rk,inner){
   if(RAST.has(rk))return RAST.get(rk);
-  const W=Math.round(190*RDPR),H=Math.round(330*RDPR);
-  const doc=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="-95 -120 190 330">${inner}</svg>`;
+  const W=Math.round(230*RDPR),H=Math.round(370*RDPR);
+  const doc=`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="-115 -150 230 370">${inner}</svg>`;
   const pr=new Promise((res,rej)=>{const im=new Image();im.decoding='async';
     im.onload=()=>{try{const c=document.createElement('canvas');c.width=W;c.height=H;c.getContext('2d').drawImage(im,0,0,W,H);RDONE.set(rk,c);res(c)}catch(e){rej(e)}};
     im.onerror=rej;im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(doc)});
@@ -1212,7 +1226,7 @@ function shakeWave(el){
   /* вспышка поднимается от кнопки и заливает экран жёлтым, как в приложении */
   b.animate([{transform:'translateY(0) scale(.1)',opacity:0},{transform:'translateY(-30px) scale(.6)',opacity:1,offset:.2},{transform:'translateY(-260px) scale(1.9)',opacity:.85,offset:.55},{transform:'translateY(-380px) scale(2.6)',opacity:0}],{duration:1500,easing:'cubic-bezier(.3,.1,.3,1)'});
   const F=BG.cur.F;
-  at(120,()=>bgTo({A:'#FF8A00',B:'#FFF200',C:'#FFB800',D:'#FFF9B0',Base:F>.5?'#3A2A00':'#000000',F,spd:2.4},520,'out'));
+  at(120,()=>bgTo({A:'#FF8A00',B:'#FFF200',C:'#FFB800',D:'#FFF9B0',Base:F>.5?'#3A2A00':'#000000',F,spd:2.4,raw:1},520,'out'));
   music.fade();
   at(950,()=>{
     bgTo(fieldPal(T),560,'inOut');music.play(T);
@@ -1321,7 +1335,7 @@ function similar(T,n,excl=[]){return Object.values(TRACKS).filter(x=>x.id!==T.id
 /* ---------- содержимое плеера ---------- */
 const PLAY_I='<svg width="12" height="14" viewBox="-8 -15 24 30"><path d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4L15.7 -0.95Q16.05 0 15.7 0.95L-5.6 14.4Q-7.7 14.4 -7.7 12.6Z" fill="#fff"/></svg>';
 const PAUSE_I='<svg width="12" height="14" viewBox="0 0 12 14"><rect x="1" y="0" width="3.6" height="14" rx="1" fill="#fff"/><rect x="7.4" y="0" width="3.6" height="14" rx="1" fill="#fff"/></svg>';
-const MORE_I='<svg width="20" height="5" viewBox="0 0 20 5"><circle cx="2.5" cy="2.5" r="2" fill="rgba(255,255,255,.55)"/><circle cx="10" cy="2.5" r="2" fill="rgba(255,255,255,.55)"/><circle cx="17.5" cy="2.5" r="2" fill="rgba(255,255,255,.55)"/></svg>';
+const MORE_I='<svg width="20" height="5" viewBox="0 0 20 5"><circle cx="2.5" cy="2.5" r="2" fill="rgba(255,255,255,.6)"/><circle cx="10" cy="2.5" r="2" fill="rgba(255,255,255,.6)"/><circle cx="17.5" cy="2.5" r="2" fill="rgba(255,255,255,.6)"/></svg>';
 function setCard(T,loading){$('#plCard').innerHTML=(loading?PAUSE_I:PLAY_I)+`<b>${esc(T.title)}</b>`}
 /* шапка плеера, как в приложении: «Моя волна по жанру / Фолк»; если заготовку не отнести к одной категории — «Моя волна / название» */
 const HD={unknown:['по характеру','Незнакомое'],calm:['по настроению','Спокойное'],energy:['по настроению','Бодрое'],dream:['по настроению','Мечтательное'],love:['по настроению','Романтичное'],
@@ -1395,10 +1409,11 @@ $('#plDown').addEventListener('click',()=>closePlayer());
 const togglePlay=()=>{musInit();if(playing)pauseNow();else resume()};
 $('#plPP').addEventListener('click',togglePlay);
 $('#plMiniPP').addEventListener('click',togglePlay);
-function likeAnim(btn,on){const pth=btn.querySelector('path');pth.setAttribute('fill',on?'#fff':'none');btn.querySelector('svg').animate([{transform:'scale(1)'},{transform:'scale(1.25)'},{transform:'scale(1)'}],{duration:320,easing:EASE.std})}
+function heartState(b,on){const p=b.querySelector('path');p.setAttribute('fill',on?'#fff':'none');p.setAttribute('stroke',on?'#fff':(b.dataset.off||'#fff'))}
+function likeAnim(btn,on){heartState(btn,on);btn.querySelector('svg').animate([{transform:'scale(1)'},{transform:'scale(1.25)'},{transform:'scale(1)'}],{duration:320,easing:EASE.std})}
 const liked=new Set();
 const HEART=['data:image/png;base64,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','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAABQCAYAAACdxrJZAAAFDElEQVR42u2dTWxUVRTHf2eoihGkBUwQjSJ+ICkLSEwgRAS0MdX4lYgLky5rMLGERGIwukCNCUaDLoiayEIXLly40LipMWrrRwQMxcRiUwK0CsYaa0ppa/lo+3fRWzJtp8N7M2+mnZnz2zTpvMyd9+vpnXvPPfc+cAqKFaMRSYuARcACoAo4C/SZ2UCR2l8ILA6fYQw4D/QDvWamkhIsaTmwGbgPWAvcFW4uEwNAB3AMaAWazezvPNtfBtSH9muB1cDCGS6/BHQBR4Gvga/MrHvO/RtIWiJpp6TDyo8xSYckbQ9RFzlCJT0b2h/L8zMck7RL0pK5IPYmSe9IGlTynJO0V9LiK/xh94Zrk2Yw3Nvy2RA7X9LLBRI7lf4QUfPS2q8Kv+svQvsDkl6SNL9YctdJ6lDxORLaXiepbRba/03S2oJ+yUl6DtgHXDNLvdL58HP+LLV/AXjezN5LVLAkA94CdvnIFoKL3VGGeBZR7gdAo3udxAFg+5UkpyK80T6Xm5FngpvcI1hSE7DfXWalyczejS1Y0kagBbjKHWblErDZzH6KLFjSdUA7sML9RaIbqDWz/6L2wa+53FisAF6NFMGS7ggJmCr3FosRYLWZnbhSBL/icnOiCtiTNYIl3Q4cjzh8c6YzBtxpZqdmiuBGl5sXqalzBkvPUAGngWXuKS/+Am4xs5GpEbzB5SbCjcD6TF1EvbtJjPpMgre6l8TYOqkPDhmzfmZeHHTicQ6oNjNNRPBtLjdRrp+YCafSpnpOstyaLrjGfSROTbrgavdRWMHmPgoyq7sseMh9JM5guuAB95E4A+mC/3AfifN7+kTj2tBNeF9MYmnLBWY2nAIws2HgpHtJjBPB6aRcRKt7SYzvMiV7WtxLYrRkSrjXAD3A1e6HfAsEl5nZ2UkRbGZ9QLP7yZvmCbmZ1uQ+dD958xFZVpVTjG9Iuds95UQHsMbMxjJGcHjhDfeUM3vT5c5U2ZMCDgH3uK9Y/AxsmCp4Wg1EuGBHmI040WduO6bKnbH4z8wOelcRu2s4FLc+uCrM7ja6v6z8CGyZKDSJW+F+A/AD49thnel0AveaWS+57NEws38YL6L4011O4wxQn01upE0wZtbF+ObuLnd6ma6wbaA7sY2Ikm5mfEd6pXcXx4EHzOwMURfmohDecHOY6VUq7SFyzxBn5TOG5B5gC/BLBcptC6OFHuIuLceU3AvcDxyuILkHQ7fwL7ms3ecguQ+oA76vALmtwIPpKciCCw6SB4CHwhdfufIl8HA+ZwvltR/DzIaAR4AvylDu58DjmTYXFk1wkHweeBL4tIzkfgI8ZWYXSKJ+KgHJl4CngY8pjxWJhnBPzLXTp1KSDqh0eT/kw+cukkzS/hKU+3bYSlEaSHqzhOS+XpKdmaQ9JSD3xZL+xpD0whyWu7ssxjySmhI48jBJxiTtLKtRu6RGSaNzQO6opPI85ElSg6SRWZQ7IqmhrDMnkrZJujgLci9K2lYRuT9Jj0kaLqLcYUmPVlT2WlKdpKEiyB2SVEclImlTgc7+TT+DeBOVjKT1kvoKILdP0nqcy2cS9yYot1fSOjc7WfIaST0JyO2RVOtGM0teJel0HnJPS1rlJrNLXinpVA5yT0pa6QYjVhFJ6owhtzNUHjlxHjgiqT2C3F/Dw0mcHCQvlXQ0i9w2SUvdVH6SayS1ZJD7raRqf1hUMpLnAU8wXrIF8A3wmZmNeghWOP8DAg5AUmqePMoAAAAASUVORK5CYII='];
-function syncLike(){const on=liked.has(cur.id);[$('#plLike'),$('#plMiniLk'),$('#like'),$('#heart')].forEach(b=>{const im=b.querySelector('image');if(im){im.setAttribute('href',HEART[+on]);return}const p=b.querySelector('path');p.setAttribute('fill',on?'#fff':'none');if(b.id==='plLike')p.setAttribute('stroke',on?'#fff':'rgba(255,255,255,.8)')})}
+function syncLike(){const on=liked.has(cur.id);[$('#plLike'),$('#plMiniLk'),$('#like'),$('#heart')].forEach(b=>{const im=b.querySelector('image');if(im){im.setAttribute('href',HEART[+on]);return}heartState(b,on)})}
 /* лучи: случайный веер узких и широких полос; цвет — светлый тон текущего фона */
 /* огибающая молнии: короткая вспышка, провал, вторая — ярче, затем мягкое затухание */
 let FL0=-1e9;
@@ -1500,10 +1515,14 @@ function setSheet(y){sheetY=y;sheet.style.transform=`translateY(${(y*sheetH()).t
 setSheet(1.1);
 /* капли настроения — в цветах будущего пузыря */
 /* настроение — маленькая вспышка в цветах будущего пузыря: мягкие пятна с рваным краем, без глянца */
-function moodDot(m){const C=NAT[MOOD_COL[m]];
-  return `<b class="gl" style="background:radial-gradient(closest-side,${C.c1}AA,${C.c1}00)"></b><i class="mi">${iconSVG(MOOD_IC[m],C.ic,C.icr,.74,1.6)}</i>`}
-
-document.querySelectorAll('.md').forEach(b=>{const col=MOOD_COL[b.dataset.v];b.querySelector('.dot').innerHTML=moodDot(b.dataset.v);b.style.setProperty('--dc',NAT[col].c1+'88')});
+/* варианты плашек для обсуждения: ?chips=text — без иконок; ?chips=color — плашки настроения в цветах барабана */
+const CHIPV=new URLSearchParams(location.search).get('chips');
+if(CHIPV==='text')sheet.classList.add('v-text');
+if(CHIPV==='color'){sheet.classList.add('v-color');
+  document.querySelectorAll('[data-g=mood] .c').forEach(b=>{const m=b.dataset.v,C=NAT[MOOD_COL[m]],c1=hex(C.c1);
+    b.style.setProperty('--mc',C.c1);b.style.setProperty('--mc2',rgb(c1.map(v=>v*.42)));
+    const w=document.createElement('i');w.className='mi';w.innerHTML=iconSVG(MOOD_IC[m],C.ic,C.icr,.36,1.2);
+    w.firstElementChild.style.left='50%';w.firstElementChild.style.top='50%';w.firstElementChild.style.transform='translate(-50%,-50%)';b.prepend(w)})}
 function openSheet(key){
   if(busy)return;
   editKey=key&&isOwn(key)?key:null;const w=editKey&&waveOf(editKey);
@@ -1530,8 +1549,6 @@ function paintSheet(first){
   nameIn.placeholder=any?autoName(sel):'Назовите волну';
   const nv=nameIn.value.trim(),p=capParts(sel,!!nv&&nv!==autoName(sel));$('#nmcap').textContent=p.join(', ');
   const col=any?MOOD_COL[moodOf(sel)]:'slate',C=NAT[col];
-  sheet.style.setProperty('--acc',C.c1);sheet.classList.toggle('nomood',!sel.mood);
-  $('#sglow').style.background=`radial-gradient(46% 50% at 50% 50%,${C.c1},rgba(0,0,0,0))`;
   const key=JSON.stringify([col,any?ownIcon(sel):'plus']);
   if(key!==pvKey){
     pvKey=key;const prev=$('#prev'),old=[...prev.children];
