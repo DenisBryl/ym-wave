@@ -108,6 +108,12 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .ai .spr{position:absolute;left:13.3px;top:10.6px;width:51.8px}
 .ai .txt{position:absolute;left:66px;right:58px;top:1px;text-align:center;font:400 14.6px/17.7px var(--f-text);letter-spacing:-.25px;color:#F2F2F2}
 
+/* ---------- вспышка при лайке: лучи света из-за заголовка, как в приложении ---------- */
+.lflash{position:absolute;left:-210px;top:-190px;width:813px;height:813px;pointer-events:none;opacity:0;will-change:transform,opacity;filter:blur(3px)}
+.lflash i{position:absolute;inset:0;border-radius:50%;-webkit-mask:radial-gradient(closest-side,#000 6%,rgba(0,0,0,.8) 42%,transparent 100%);mask:radial-gradient(closest-side,#000 6%,rgba(0,0,0,.8) 42%,transparent 100%)}
+.lflash b{position:absolute;inset:0;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.95) 0,rgba(255,255,255,.7) 9%,rgba(var(--lf),.32) 24%,rgba(var(--lf),.08) 40%,rgba(var(--lf),0) 56%)}
+#screen>.lflash{z-index:5}
+.player>.lflash{z-index:0;top:-118px}
 /* ---------- барабан ---------- */
 .drum{position:absolute;left:0;right:0;top:548px;height:210px;z-index:12;touch-action:pan-y;cursor:grab}
 .burst{position:absolute;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,242,0,.9),rgba(255,210,0,.55) 45%,rgba(255,170,0,0));pointer-events:none;opacity:0;z-index:13;will-change:transform,opacity}
@@ -143,8 +149,8 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-ttl{position:absolute;left:84px;right:84px;top:0;height:44px;text-align:center;color:rgba(255,255,255,.88)}
 .pl-ttl span{position:absolute;left:0;right:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s cubic-bezier(.3,0,.2,1),transform .3s cubic-bezier(.2,0,0,1)}
 .pl-ttl .one{top:0;font:500 15px/44px var(--f-text);letter-spacing:-.2px}
-.pl-ttl .k{top:4px;font:400 12.5px/16px var(--f-text);color:rgba(255,255,255,.62);opacity:0;transform:translateY(4px)}
-.pl-ttl .q{top:21px;font:600 13px/17px var(--f-text);opacity:0;transform:translateY(4px)}
+.pl-ttl .k{top:5px;font:400 13px/16px var(--f-text);letter-spacing:-.1px;color:rgba(255,255,255,.55);opacity:0;transform:translateY(4px)}
+.pl-ttl .q{top:21px;font:500 16px/20px var(--f-text);letter-spacing:-.25px;color:#fff;opacity:0;transform:translateY(4px)}
 .pl-ttl.two .one{opacity:0;transform:translateY(-4px)}
 .pl-ttl.two .k,.pl-ttl.two .q{opacity:1;transform:none}
 .pl-track{position:absolute;left:0;right:0;top:115px;height:345px}
@@ -158,11 +164,11 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-share,.pl-more{position:absolute;top:8px;width:36px;height:36px;display:grid;place-items:center}
 .pl-share{right:34px}.pl-more{right:-6px}
 .pl-prog{position:absolute;left:24px;right:24px;top:552px;height:44px;touch-action:none;cursor:pointer}
-.pl-prog .ln{position:absolute;left:0;right:0;top:12px;height:2.5px;border-radius:2px;background:rgba(255,255,255,.14)}
+.pl-prog .ln{position:absolute;left:0;right:0;top:15.8px;height:2.4px;border-radius:2px;background:rgba(255,255,255,.2)}
 .pl-prog .fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:2px;background:#fff}
-.pl-prog .knob{position:absolute;top:50%;left:0;width:9px;height:9px;margin:-4.5px 0 0 -4.5px;border-radius:50%;background:#fff;transition:transform .15s cubic-bezier(.3,0,.2,1)}
+.pl-prog .knob{position:absolute;top:17px;left:0;width:9.5px;height:9.5px;margin:-4.75px 0 0 -4.75px;border-radius:50%;background:#fff;transition:transform .15s cubic-bezier(.3,0,.2,1)}
 .pl-prog.drag .knob{transform:scale(1.6)}
-.pl-prog .tm{position:absolute;top:28px;font:500 12px/14px var(--f-text);color:rgba(255,255,255,.42);font-variant-numeric:tabular-nums}
+.pl-prog .tm{position:absolute;top:31px;font:400 13px/15px var(--f-text);letter-spacing:-.1px;color:rgba(255,255,255,.5);font-variant-numeric:tabular-nums}
 .pl-prog .tm.r{right:0}
 .pl-ctrl{position:absolute;left:0;right:0;top:612px;height:64px}
 .pl-ctrl button{position:absolute;top:0;height:64px;width:56px;margin-left:-28px;display:grid;place-items:center}
@@ -171,7 +177,9 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .pl-ctrl button:not(.pp):active svg{transform:scale(.88)}
 .pl-ctrl svg{transition:transform .12s cubic-bezier(.3,0,.2,1)}
 .pl-row{position:absolute;left:24px;right:24px;top:716px;height:49px}
-.pl-row span{position:absolute;top:0;width:74px;height:49px;margin-left:-37px;border-radius:25px;background:rgba(255,255,255,.045);display:grid;place-items:center}
+.pl-row button{position:absolute;top:0;width:74px;height:49px;margin-left:-37px;border-radius:25px;background:rgba(255,255,255,.045);display:grid;place-items:center;transition:transform .16s cubic-bezier(.3,0,.2,1),background-color .16s}
+.pl-row button:active{transform:scale(.93);background:rgba(255,255,255,.1)}
+.nop svg{transition:transform .14s cubic-bezier(.3,0,.2,1),opacity .14s}.nop:active svg{transform:scale(.86);opacity:.7}
 /* карточка «Моя волна по треку» */
 .pl-card{position:absolute;left:24px;top:799px;width:345px;height:64px;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.07);text-align:center;transition:transform .2s cubic-bezier(.3,0,.2,1)}
 .pl-card:active{transform:scale(.98)}
@@ -229,17 +237,19 @@ button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
 .nmw{position:absolute;left:24px;right:24px;top:196px;text-align:center}
 .nm{display:block;width:100%;height:40px;padding:0;border:0;background:none;text-align:center;color:#fff;font:900 27px/40px var(--f-display);letter-spacing:-.02em;font-feature-settings:var(--f-display-feat);caret-color:var(--c-yellow);outline:none;-webkit-user-select:text;user-select:text}
 .nm::placeholder{color:rgba(255,255,255,.5)}
-.nmcap{margin-top:4px;font:400 14px/18px var(--f-text);color:rgba(255,255,255,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-height:18px}
+.nmcap{margin:4px auto 0;max-width:330px;max-height:36px;font:400 14px/18px var(--f-text);color:rgba(255,255,255,.55);text-wrap:balance;overflow:hidden;min-height:18px}
 .grp{position:relative;margin:22px 16px 0}
 .grp h4{font:600 17px/22px var(--f-text);letter-spacing:-.3px;color:#fff;margin:0 0 12px 2px;display:flex;align-items:baseline;gap:8px}
 .grp h4 span{font:400 14px/18px var(--f-text);color:var(--c-text-3)}
 .moods{display:flex;gap:0;overflow-x:auto;touch-action:pan-x;margin:0 -16px;padding:4px 10px 6px;scrollbar-width:none}
 .moods::-webkit-scrollbar{display:none}
 .md{flex:none;min-width:66px;padding:0 6px;display:flex;flex-direction:column;align-items:center;gap:7px;font:500 13px/16px var(--f-text);color:rgba(255,255,255,.66);letter-spacing:-.15px;white-space:nowrap;transition:color .2s cubic-bezier(.3,0,.2,1)}
-.md .dot{position:relative;width:52px;height:52px;border-radius:50%;transition:transform .32s cubic-bezier(.2,1.4,.4,1),box-shadow .25s cubic-bezier(.3,0,.2,1)}
-.md .dot svg{position:absolute;inset:0}
+.md .dot{position:relative;width:54px;height:54px;border-radius:50%;transition:transform .32s cubic-bezier(.2,1.4,.4,1),box-shadow .25s cubic-bezier(.3,0,.2,1)}
+.md .dot svg{position:absolute}
 .md.on{color:#fff}
-.md.on .dot{transform:scale(1.12);box-shadow:0 0 0 2.5px var(--c-sheet),0 0 0 4.5px #fff,0 8px 22px var(--dc)}
+.md.on .dot{transform:scale(1.1);box-shadow:0 0 0 2.5px var(--c-sheet),0 0 0 4.5px #fff}
+.md .dot .sp{transform-origin:27px 27px;transition:transform .9s cubic-bezier(.2,0,0,1)}
+.md.on .dot .sp{transform:rotate(38deg) scale(1.06)}
 .md:active .dot{transform:scale(.92)}
 .chips{display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;touch-action:pan-x;margin:0 -16px;padding:0 16px 2px;scrollbar-width:none}
 .chips.wrap{flex-wrap:wrap;overflow:visible;margin:0;padding:0}
@@ -304,6 +314,7 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
       <div class="ai" id="ai"><img class="spr" src="data:image/png;base64,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" alt=""><div class="txt" id="aitxt"></div></div>
     </div>
 
+    <div class="lflash" id="lfHome"><i></i><b></b></div>
     <div class="drum" id="drum"></div>
     <div class="burst" id="burst"></div>
 
@@ -316,23 +327,24 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
 
 
     <div class="player" id="player" aria-label="Плеер">
+      <div class="lflash" id="lfPl"><i></i><b></b></div>
       <div class="pl-view" id="plView"><div class="pl-sc" id="plSc">
         <div class="pl-glow"></div>
         <div class="pl-track" id="plTrack"></div>
         <div class="pl-meta"><div class="pl-title" id="plTitle"></div><div class="pl-artist" id="plArtist"></div>
-        <button class="pl-share" aria-label="Поделиться"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 14V2.5M5.5 7 10 2.5 14.5 7M3 11v7.5A1.5 1.5 0 0 0 4.5 20h11a1.5 1.5 0 0 0 1.5-1.5V11" fill="none" stroke="rgba(255,255,255,.62)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <button class="pl-more" aria-label="Ещё"><svg width="22" height="6" viewBox="0 0 22 6"><circle cx="3" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/><circle cx="11" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/><circle cx="19" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/></svg></button></div>
+        <button class="pl-share nop" aria-label="Поделиться"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 14V2.5M5.5 7 10 2.5 14.5 7M3 11v7.5A1.5 1.5 0 0 0 4.5 20h11a1.5 1.5 0 0 0 1.5-1.5V11" fill="none" stroke="rgba(255,255,255,.62)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="pl-more nop" aria-label="Ещё"><svg width="22" height="6" viewBox="0 0 22 6"><circle cx="3" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/><circle cx="11" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/><circle cx="19" cy="3" r="2.3" fill="rgba(255,255,255,.62)"/></svg></button></div>
         <div class="pl-prog" id="plProg"><div class="ln"><div class="fill" id="plFill"></div></div><div class="knob" id="plKnob"></div><span class="tm" id="plCur">0:00</span><span class="tm r" id="plDur">0:50</span></div>
         <div class="pl-ctrl">
-        <button style="left:36px" id="plDis" aria-label="Не нравится"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M13 21.5 5.3 14a4.8 4.8 0 0 1 7.7-5.6 4.8 4.8 0 0 1 7.7 5.6Z" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linejoin="round"/><path d="M4 4l18 18" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="nop" style="left:36px" id="plDis" aria-label="Не нравится"><svg width="26" height="26" viewBox="0 0 26 26"><path d="M13 21.5 5.3 14a4.8 4.8 0 0 1 7.7-5.6 4.8 4.8 0 0 1 7.7 5.6Z" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linejoin="round"/><path d="M4 4l18 18" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"/></svg></button>
         <button style="left:120px" id="plPrev" aria-label="Предыдущий"><svg width="26" height="26" viewBox="0 0 26 26"><rect x="4" y="4" width="3.4" height="18" rx="1.2" fill="#fff"/><path d="M22 5.2v15.6a1.4 1.4 0 0 1-2.2 1.1L9.4 14.1a1.4 1.4 0 0 1 0-2.2L19.8 4.1A1.4 1.4 0 0 1 22 5.2Z" fill="#fff"/></svg></button>
         <button class="pp" style="left:196.5px" id="plPP" aria-label="Пауза"><svg width="26" height="28" viewBox="0 0 26 28"><g id="plBars"><rect x="5" y="3" width="5.6" height="22" rx="1.6" fill="#111"/><rect x="15.4" y="3" width="5.6" height="22" rx="1.6" fill="#111"/></g><path id="plTri" d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4C-5.18 -14.05 -4.07 -13.10 -3.10 -12.30C-2.13 -11.50 -0.83 -10.38 0.20 -9.60C1.23 -8.82 2.10 -8.27 3.10 -7.60C4.10 -6.93 5.27 -6.16 6.20 -5.60C7.13 -5.04 7.83 -4.70 8.70 -4.25C9.57 -3.80 10.68 -3.24 11.40 -2.90C12.12 -2.56 12.47 -2.43 13.00 -2.20C13.53 -1.97 14.15 -1.71 14.60 -1.50C15.05 -1.29 15.52 -1.04 15.70 -0.95Q16.05 0 15.7 0.95C15.52 1.04 15.05 1.29 14.60 1.50C14.15 1.71 13.53 1.97 13.00 2.20C12.47 2.43 12.12 2.56 11.40 2.90C10.68 3.24 9.57 3.80 8.70 4.25C7.83 4.70 7.13 5.04 6.20 5.60C5.27 6.16 4.10 6.93 3.10 7.60C2.10 8.27 1.23 8.82 0.20 9.60C-0.83 10.38 -2.13 11.50 -3.10 12.30C-4.07 13.10 -5.18 14.05 -5.60 14.40Q-7.7 14.4 -7.7 12.6Z" transform="translate(11.6 14) scale(.78)" fill="#0A0A0A" opacity="0"/></svg></button>
         <button style="left:273.5px" id="plNext" aria-label="Следующий"><svg width="26" height="26" viewBox="0 0 26 26"><rect x="18.6" y="4" width="3.4" height="18" rx="1.2" fill="#fff"/><path d="M4 5.2v15.6a1.4 1.4 0 0 0 2.2 1.1l10.4-7.8a1.4 1.4 0 0 0 0-2.2L6.2 4.1A1.4 1.4 0 0 0 4 5.2Z" fill="#fff"/></svg></button>
         <button style="left:357px" id="plLike" aria-label="Нравится"><svg width="26" height="24" viewBox="0 0 26 24"><path d="M13 21.5 4.3 13a5.3 5.3 0 0 1 8.7-6.1 5.3 5.3 0 0 1 8.7 6.1Z" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2" stroke-linejoin="round"/></svg></button>
       </div>
-        <div class="pl-row"><span style="left:37px"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M4 9V7.5A3.5 3.5 0 0 1 7.5 4H17m0 0-3-3m3 3-3 3M18 11v1.5A3.5 3.5 0 0 1 14.5 16H5m0 0 3 3m-3-3 3-3" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span style="left:172.5px"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M3 3h9M7.5 3v14M14 9h6M14 13h6M14 17h6" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.9" stroke-linecap="round"/></svg></span>
-        <span style="left:308px"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 2v13m-5-5 5 5 5-5M3 20h14" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+        <div class="pl-row"><button class="nop" style="left:37px" aria-label="Повтор"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M4 9V7.5A3.5 3.5 0 0 1 7.5 4H17m0 0-3-3m3 3-3 3M18 11v1.5A3.5 3.5 0 0 1 14.5 16H5m0 0 3 3m-3-3 3-3" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <button class="nop" style="left:172.5px" aria-label="Текст"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M3 3h9M7.5 3v14M14 9h6M14 13h6M14 17h6" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.9" stroke-linecap="round"/></svg></button>
+        <button class="nop" style="left:308px" aria-label="Скачать"><svg width="20" height="22" viewBox="0 0 20 22"><path d="M10 2v13m-5-5 5 5 5-5M3 20h14" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
         <button class="pl-card" id="plCardBtn"><svg class="wv" viewBox="0 0 345 64" preserveAspectRatio="none"><path d="M0 40C58 22 110 56 178 38S292 14 345 30V64H0Z" fill="rgba(255,255,255,.06)"/><path d="M0 50C66 36 128 66 196 48S300 32 345 46V64H0Z" fill="rgba(255,255,255,.06)"/></svg><div class="k">Моя волна по треку</div><div class="n" id="plCard"></div></button>
         <div class="pl-art" id="plArt"><div class="ph" id="plArtPh"></div><div class="gr"></div><div class="an" id="plArtNm"></div>
           <button class="fl" id="plArtFl" aria-label="Нравится"><svg width="20" height="18" viewBox="0 0 22 20"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
@@ -342,9 +354,9 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
         <div class="pl-sim" id="plSim"></div>
       </div></div>
       <div class="pl-hdr"><button class="pl-down" id="plDown" aria-label="Свернуть"><svg width="20" height="12" viewBox="0 0 20 12"><path d="M2 2l8 8 8-8" fill="none" stroke="rgba(255,255,255,.8)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="pl-ttl" id="plTtl"><span class="one" id="plTtl1">Моя волна</span><span class="k">Моя волна по треку</span><span class="q" id="plTtlQ"></span></div>
-        <button class="pl-dev" aria-label="Устройства"><svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="rgba(255,255,255,.82)" stroke-width="1.9" stroke-linejoin="round"><path d="M12 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h13A2.5 2.5 0 0 1 20 4.5V8"/><rect x="15" y="9.5" width="9" height="11" rx="2.4"/><circle cx="19.5" cy="16.4" r="1.6"/></svg></button>
-        <button class="pl-q" aria-label="Очередь"><svg width="24" height="20" viewBox="0 0 24 20" fill="none" stroke="rgba(255,255,255,.82)" stroke-width="1.9" stroke-linecap="round"><path d="M9 3.5h13M9 10h13M9 16.5h13"/><circle cx="3.2" cy="3.5" r="1.2" fill="rgba(255,255,255,.82)"/><circle cx="3.2" cy="10" r="1.2" fill="rgba(255,255,255,.82)"/><circle cx="3.2" cy="16.5" r="1.2" fill="rgba(255,255,255,.82)"/></svg></button></div>
+        <div class="pl-ttl" id="plTtl"><span class="one" id="plTtl1">Моя волна</span><span class="k" id="plTtlK">Моя волна по треку</span><span class="q" id="plTtlQ"></span></div>
+        <button class="pl-dev nop" aria-label="Устройства"><svg width="26" height="22" viewBox="0 0 26 22" fill="none" stroke="rgba(255,255,255,.82)" stroke-width="1.9" stroke-linejoin="round"><path d="M12 15H4.5A2.5 2.5 0 0 1 2 12.5v-8A2.5 2.5 0 0 1 4.5 2h13A2.5 2.5 0 0 1 20 4.5V8"/><rect x="15" y="9.5" width="9" height="11" rx="2.4"/><circle cx="19.5" cy="16.4" r="1.6"/></svg></button>
+        <button class="pl-q nop" aria-label="Очередь"><svg width="24" height="20" viewBox="0 0 24 20" fill="none" stroke="rgba(255,255,255,.82)" stroke-width="1.9" stroke-linecap="round"><path d="M9 3.5h13M9 10h13M9 16.5h13"/><circle cx="3.2" cy="3.5" r="1.2" fill="rgba(255,255,255,.82)"/><circle cx="3.2" cy="10" r="1.2" fill="rgba(255,255,255,.82)"/><circle cx="3.2" cy="16.5" r="1.2" fill="rgba(255,255,255,.82)"/></svg></button></div>
       <div class="pl-mini" id="plMini"><div class="cv" id="plMiniCv"></div><div class="t1" id="plMiniT"></div><div class="t2" id="plMiniA"></div>
         <button class="lk" id="plMiniLk" aria-label="Нравится"><svg width="22" height="20" viewBox="0 0 22 20"><path d="M11 18.6 3 10.9A5 5 0 0 1 11 3.2a5 5 0 0 1 8 7.7Z" fill="none" stroke="#fff" stroke-width="2.1" stroke-linejoin="round"/></svg></button>
         <button class="pp" id="plMiniPP" aria-label="Пауза"><svg width="18" height="20" viewBox="0 0 18 20"><g id="plMiniBars"><rect x="2.5" y="1" width="4.6" height="18" rx="1.3" fill="#fff"/><rect x="10.9" y="1" width="4.6" height="18" rx="1.3" fill="#fff"/></g><path id="plMiniTri" d="M-7.7 -12.6Q-7.7 -14.4 -5.6 -14.4L15.7 -0.95Q16.05 0 15.7 0.95L-5.6 14.4Q-7.7 14.4 -7.7 12.6Z" transform="translate(7 10) scale(.62)" fill="#fff" opacity="0"/></svg></button></div>
@@ -358,7 +370,7 @@ body.shot{display:block;background:#000}.shot .phone,.shot .island,.shot .reset{
           <div class="prev" id="prev"></div>
           <div class="nmw"><input class="nm" id="wname" type="text" maxlength="32" autocomplete="off" enterkeyhint="done" spellcheck="false" placeholder="Назовите волну"><div class="nmcap" id="nmcap"></div></div></div>
         <div class="grp"><h4>Настроение</h4><div class="moods" data-g="mood"><button class="md" data-v="energy"><span class="dot" id="dot_energy"></span><span>Бодрое</span></button><button class="md" data-v="fun"><span class="dot" id="dot_fun"></span><span>Весёлое</span></button><button class="md" data-v="calm"><span class="dot" id="dot_calm"></span><span>Спокойное</span></button><button class="md" data-v="dream"><span class="dot" id="dot_dream"></span><span>Мечтательное</span></button><button class="md" data-v="sad"><span class="dot" id="dot_sad"></span><span>Грустное</span></button><button class="md" data-v="romantic"><span class="dot" id="dot_romantic"></span><span>Романтичное</span></button></div></div>
-        <div class="grp"><h4>Чем заняты</h4><div class="chips" data-g="act"><button class="c" data-v="wake"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="10" r="3.2"/><path d="M8.5 2.5v1.8M2.5 10h1.6M13 10h1.6M4.3 5.6l1.2 1.2M12.7 5.6l-1.2 1.2M2.5 14h12"/></svg>Просыпаюсь</button><button class="c" data-v="work"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="13" height="8.5" rx="1.5"/><path d="M6 14.5h5M8.5 11.5v3"/></svg>Работаю</button><button class="c" data-v="study"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.2 8.5 3l6.5 3.2-6.5 3.2Z"/><path d="M4.8 7.6v3.6c1 1 2.3 1.5 3.7 1.5s2.7-.5 3.7-1.5V7.6"/></svg>Учусь</button><button class="c" data-v="workout"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5h13M4 5.5v6M13 5.5v6M2 7v3M15 7v3"/></svg>Тренируюсь</button><button class="c" data-v="run"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="3.2" r="1.6"/><path d="M5.5 15l2.4-4 2.6 1.6.6-4.4M5 7.4 8 5.6l3 .8 1.7 2.5M10.5 12.6 12 15"/></svg>Бегаю</button><button class="c" data-v="road"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5V9l1.6-3.6c.2-.5.7-.8 1.2-.8h5.4c.5 0 1 .3 1.2.8L14 9v2.5Z"/><circle cx="5.5" cy="12.5" r="1.3"/><circle cx="11.5" cy="12.5" r="1.3"/></svg>В дороге</button><button class="c" data-v="cook"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h11v3a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3ZM14 9.5h1.5M6 5.5c0-1 1-1 1-2M9.5 5.5c0-1 1-1 1-2"/></svg>Готовлю</button><button class="c" data-v="rest"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h13M3.5 12V8.5h10V12M5 8.5V6.5a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 12 6.5v2"/></svg>Отдыхаю</button><button class="c" data-v="party"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.5" cy="9.5" r="5"/><path d="M8.5 1.5v3M3.5 9.5h10M8.5 4.5c-1.5 1.5-1.5 8.5 0 10M8.5 4.5c1.5 1.5 1.5 8.5 0 10"/></svg>Вечеринка</button><button class="c" data-v="sleep"><svg width="17" height="17" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 10.8A5.6 5.6 0 0 1 6.2 3.5a5.6 5.6 0 1 0 7.3 7.3Z"/></svg>Засыпаю</button></div></div>
+        <div class="grp"><h4>Чем заняты</h4><div class="chips" data-g="act"><button class="c" data-v="wake"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h1M20 17h1M5.6 10.6l.7.7M18.4 10.6l-.7.7M8 17a4 4 0 0 1 8 0M3 21h18M12 9V3M9 6l3-3 3 3"/></svg>Просыпаюсь</button><button class="c" data-v="work"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.5"/><path d="M3 19h18"/></svg>Работаю</button><button class="c" data-v="study"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 9 12 5 2 9l10 4 10-4v6"/><path d="M6 10.6V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-5.4"/></svg>Учусь</button><button class="c" data-v="workout"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h1M21 12h1M9 12h6"/><rect x="6" y="6" width="3" height="12" rx="1"/><rect x="15" y="6" width="3" height="12" rx="1"/><path d="M6 8.5H4.5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1H6M18 8.5h1.5a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H18"/></svg>Тренируюсь</button><button class="c" data-v="run"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="1.6"/><path d="M4 17l5 1 .75-1.5M15 21v-4l-4-3 1-6M7 12V9l5-1 3 3 3 1"/></svg>Бегаю</button><button class="c" data-v="road"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2M15 17H9M3 11h15M12 11V6"/></svg>В дороге</button><button class="c" data-v="cook"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 0 1 3.9 3.15 4 4 0 0 1 2.1 7.72V21H6v-7.13a4 4 0 1 1 2.1-7.72A4 4 0 0 1 12 3Z"/><path d="M6.2 17H18"/></svg>Готовлю</button><button class="c" data-v="rest"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a2 2 0 0 1 2 2v1h12v-1a2 2 0 1 1 4 0v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-5a2 2 0 0 1 2-2Z"/><path d="M4 11V8a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v3M12 5v9"/></svg>Отдыхаю</button><button class="c" data-v="party"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h2M5 4v2M11.5 4 11 6M18 5h2M19 4v2M15 9l-1 1M18 13l2-.5M18 19h2M19 18v2"/><path d="M14 16.5 7.5 10l-4.4 9.6a1 1 0 0 0 1.3 1.3Z"/></svg>Вечеринка</button><button class="c" data-v="sleep"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h.4a7.5 7.5 0 0 0 7.9 12.45A9 9 0 1 1 12 3Z"/><path d="M17 4a2 2 0 0 0 2 2 2 2 0 0 0-2 2 2 2 0 0 0-2-2 2 2 0 0 0 2-2M19 11h2M20 10v2"/></svg>Засыпаю</button></div></div>
         <div class="grp"><h4>Жанры<span>до трёх</span></h4><div class="chips wrap" data-g="genres" data-multi="3"><button class="c" data-v="indie">Инди</button><button class="c" data-v="rock">Рок</button><button class="c" data-v="electronic">Электроника</button><button class="c" data-v="hiphop">Хип-хоп</button><button class="c" data-v="jazz">Джаз</button><button class="c" data-v="lofi">Лоу-фай</button><button class="c" data-v="classical">Классика</button><button class="c" data-v="folk">Фолк</button><button class="c" data-v="latin">Латина</button><button class="c" data-v="ambient">Эмбиент</button></div></div>
         <div class="grp"><h4>Язык</h4><div class="seg" data-g="words"><i class="th"></i><button data-v="ru">На русском</button><button data-v="foreign">Иностранные</button><button data-v="none">Без слов</button></div></div>
         <div class="grp"><h4>Характер</h4><div class="seg" data-g="char"><i class="th"></i><button data-v="fav">Любимое</button><button data-v="unknown">Незнакомое</button><button data-v="popular">Популярное</button></div></div>
@@ -1045,7 +1057,7 @@ function aiFor(T,key){
 function info(key){
   if(isTrackMode(key)){const S=seedOf(key);return {col:null,label:S.title,T:similar(S,1)[0]}}
   if(isOwn(key)){const w=waveOf(key);return {col:MOOD_COL[moodOf(w)],label:waveName(w),T:ownTrack(w)}}
-  const P=PRESETS[key];return {col:P.col,label:P.label,T:TRACKS[P.track]};
+  const P=PRESETS[key];return {col:P.col,label:HD[key]?HD[key][1]:P.label,T:TRACKS[P.track]};
 }
 function withAI(T,key){T.ai=aiFor(T,key);return T}
 const fieldPal=T=>({...T.field,C:T.field.B,Base:'#03070A',F:1,spd:1});
@@ -1195,7 +1207,7 @@ function refill(keys,center){
 $('#chip').addEventListener('click',e=>{const x=e.target.closest('i');if(!x&&isOwn(mode))openSheet(mode);else if(!x&&isTrackMode(mode))openPlayer();else backToHabit()});
 $('#play').addEventListener('click',()=>{musInit();resume()});
 $('#pause').addEventListener('click',()=>{if(playing)pauseNow()});
-$('#like').addEventListener('click',()=>{const on=!liked.has(cur.id);on?liked.add(cur.id):liked.delete(cur.id);syncLike();$('#like svg').animate([{transform:'scale(1)'},{transform:'scale(1.22)'},{transform:'scale(1)'}],{duration:320,easing:EASE.std})});
+$('#like').addEventListener('click',()=>{const on=!liked.has(cur.id);on?liked.add(cur.id):liked.delete(cur.id);syncLike();if(on)likeFlash(false);$('#like svg').animate([{transform:'scale(1)'},{transform:'scale(1.22)'},{transform:'scale(1)'}],{duration:320,easing:EASE.std})});
 
 
 /* ================= очередь треков волны ================= */
@@ -1272,10 +1284,20 @@ const PLAY_I='<svg width="12" height="14" viewBox="-8 -15 24 30"><path d="M-7.7 
 const PAUSE_I='<svg width="12" height="14" viewBox="0 0 12 14"><rect x="1" y="0" width="3.6" height="14" rx="1" fill="#fff"/><rect x="7.4" y="0" width="3.6" height="14" rx="1" fill="#fff"/></svg>';
 const MORE_I='<svg width="20" height="5" viewBox="0 0 20 5"><circle cx="2.5" cy="2.5" r="2" fill="rgba(255,255,255,.55)"/><circle cx="10" cy="2.5" r="2" fill="rgba(255,255,255,.55)"/><circle cx="17.5" cy="2.5" r="2" fill="rgba(255,255,255,.55)"/></svg>';
 function setCard(T,loading){$('#plCard').innerHTML=(loading?PAUSE_I:PLAY_I)+`<b>${esc(T.title)}</b>`}
+/* шапка плеера, как в приложении: «Моя волна по жанру / Фолк»; если заготовку не отнести к одной категории — «Моя волна / название» */
+const HD={unknown:['по характеру','Незнакомое'],calm:['по настроению','Спокойное'],energy:['по настроению','Бодрое'],dream:['по настроению','Мечтательное'],love:['по настроению','Романтичное'],
+  folk:['по жанру','Фолк'],indie:['по жанру','Инди'],altpop:['по жанру','Альт-поп-рок'],yorap:['по жанру','Рэп и хип-хоп'],garage:['по жанру','Гаражный рок'],classic:['по жанру','Классика'],space:['по жанру','Эмбиент'],latin:['по жанру','Латина'],lofi:['по жанру','Лоу-фай'],
+  work:['по занятию','Работаю'],run:['по занятию','Бегаю'],morning:['по занятию','Просыпаюсь'],lullaby:['по занятию','Засыпаю'],trip:['по занятию','В дороге'],dance:['по занятию','Вечеринка'],
+  english:['по языку','На английском']};
+function waveTitle(m){
+  if(!m||m==='shake')return null;
+  if(isTrackMode(m))return ['Моя волна по треку',`«${seedOf(m).title}»`];
+  if(isOwn(m))return ['Моя волна',waveName(waveOf(m))];
+  const h=HD[m];return h?['Моя волна '+h[0],h[1]]:['Моя волна',PRESETS[m].label];
+}
 function plHeader(){
-  const two=isTrackMode(mode);$('#plTtl').classList.toggle('two',two);
-  if(two)$('#plTtlQ').textContent=`«${seedOf(mode).title}»`;
-  else $('#plTtl1').textContent=hasChip()?info(mode).label:'Моя волна';
+  const t=waveTitle(mode);$('#plTtl').classList.toggle('two',!!t);
+  if(t){$('#plTtlK').textContent=t[0];$('#plTtlQ').textContent=t[1]}else $('#plTtl1').textContent='Моя волна';
 }
 const byArtist=a=>Object.values(TRACKS).filter(x=>x.artist===a);
 function fillArtist(T){
@@ -1336,7 +1358,18 @@ $('#plMiniPP').addEventListener('click',togglePlay);
 function likeAnim(btn,on){const pth=btn.querySelector('path');pth.setAttribute('fill',on?'#fff':'none');btn.querySelector('svg').animate([{transform:'scale(1)'},{transform:'scale(1.25)'},{transform:'scale(1)'}],{duration:320,easing:EASE.std})}
 const liked=new Set();
 function syncLike(){const on=liked.has(cur.id);[$('#plLike'),$('#plMiniLk'),$('#like')].forEach(b=>{const p=b.querySelector('path');p.setAttribute('fill',on?'#fff':'none');if(b.id==='plLike')p.setAttribute('stroke',on?'#fff':'rgba(255,255,255,.8)')})}
-[$('#plLike'),$('#plMiniLk')].forEach(b=>b.addEventListener('click',()=>{const on=!liked.has(cur.id);on?liked.add(cur.id):liked.delete(cur.id);syncLike();likeAnim(b,on)}));
+/* лучи: случайный веер узких и широких полос; цвет — светлый тон текущего фона */
+function rays(){const r=rng((Math.random()*1e9)|0),st=[];let a=0;
+  while(a<360){const g=5+r()*20,w=1.4+r()*(r()<.3?7:3.2),al=(.45+r()*.5).toFixed(2);
+    st.push(`transparent ${a.toFixed(1)}deg`,`transparent ${(a+g).toFixed(1)}deg`,`rgba(255,255,255,${al}) ${(a+g+w/2).toFixed(1)}deg`,`transparent ${(a+g+w).toFixed(1)}deg`);a+=g+w}
+  return `conic-gradient(from ${Math.round(r()*360)}deg,${st.join(',')})`}
+function likeFlash(inPlayer){
+  const el=inPlayer?$('#lfPl'):$('#lfHome');const c=mix([255,255,255],hex(cur.field&&cur.field.D||'#FFFFFF'),.3).map(Math.round).join(',');
+  el.style.setProperty('--lf',c);el.querySelector('i').style.background=rays().replace(/rgba\(255,255,255,/g,`rgba(${c},`);
+  el.getAnimations().forEach(a=>a.cancel());
+  el.animate([{opacity:0,transform:'scale(.5) rotate(-10deg)',easing:'cubic-bezier(.2,.8,.3,1)'},{opacity:1,transform:'scale(1) rotate(0deg)',offset:.16,easing:'linear'},{opacity:.85,transform:'scale(1.05) rotate(3deg)',offset:.42,easing:'cubic-bezier(.4,0,.6,1)'},{opacity:0,transform:'scale(1.14) rotate(7deg)'}],{duration:1300});
+}
+[$('#plLike'),$('#plMiniLk')].forEach(b=>b.addEventListener('click',()=>{const on=!liked.has(cur.id);on?liked.add(cur.id):liked.delete(cur.id);syncLike();likeAnim(b,on);if(on)likeFlash(true)}));
 $('#plArtFl').addEventListener('click',e=>{const b=e.currentTarget,p=b.querySelector('path'),on=p.getAttribute('fill')!=='#fff';likeAnim(b,on)});
 /* мини-плеер: тап — вернуться к обложке */
 plMini.addEventListener('click',e=>{if(e.target.closest('button'))return;syTo(0)});
@@ -1351,7 +1384,6 @@ function plGo(dir,v){
 }
 $('#plNext').addEventListener('click',()=>plGo(1));
 $('#plPrev').addEventListener('click',()=>plGo(-1));
-$('#plDis').addEventListener('click',()=>plGo(1));
 /* похожий трек: сыграть сейчас — экран возвращается к обложке, трек встаёт следующим в очередь */
 function playNow(id){
   if(busy)return;const i=queue.indexOf(id,qi+1);if(i>0)queue.splice(i,1);queue.splice(qi+1,0,id);
@@ -1429,9 +1461,17 @@ function sheetH(){return sheet.offsetHeight||796}
 function setSheet(y){sheetY=y;sheet.style.transform=`translateY(${(y*sheetH()).toFixed(1)}px)`;overlay.style.opacity=(.62*(1-clamp(y,0,1))).toFixed(3)}
 setSheet(1.1);
 /* капли настроения — в цветах будущего пузыря */
-function dropSVG(col){const C=NAT[col],id='dr'+(UID++),dk=rgb(hex(C.c1).map(v=>v*.32));
-  return `<svg viewBox="0 0 52 52"><defs><radialGradient id="${id}" cx=".72" cy=".24" r=".95"><stop offset="0" stop-color="${C.ic}"/><stop offset=".42" stop-color="${C.c1}"/><stop offset="1" stop-color="${dk}"/></radialGradient></defs><circle cx="26" cy="26" r="26" fill="url(#${id})"/><path d="M30 4.6a22 22 0 0 1 17.4 17.6" fill="none" stroke="${C.rim}" stroke-width="2" stroke-linecap="round" opacity=".8"/></svg>`}
-document.querySelectorAll('.md').forEach(b=>{const col=MOOD_COL[b.dataset.v];b.querySelector('.dot').innerHTML=dropSVG(col);b.style.setProperty('--dc',NAT[col].c1+'88')});
+/* настроение — маленькая вспышка в цветах будущего пузыря: мягкие пятна с рваным краем, без глянца */
+function moodSVG(col,seed){const C=NAT[col],id='md'+(UID++),r=rng(seed),j=()=>(r()-.5);
+  return `<svg viewBox="-9 -9 72 72" width="72" height="72" style="position:absolute;left:-9px;top:-9px;overflow:visible"><defs>
+<filter id="${id}f" x="-40%" y="-40%" width="180%" height="180%"><feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="2" seed="${seed%97}" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="11" xChannelSelector="R" yChannelSelector="G"/><feGaussianBlur stdDeviation="1.8"/></filter>
+<filter id="${id}g" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4.5"/></filter>
+<filter id="${id}h" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+<circle cx="27" cy="29" r="20" fill="${C.c1}" opacity=".45" filter="url(#${id}h)"/>
+<g class="sp"><g filter="url(#${id}f)"><circle cx="${27+j()*3}" cy="${27+j()*3}" r="22" fill="${C.c1}"/><ellipse cx="${23+j()*5}" cy="${22+j()*5}" rx="14" ry="10.5" fill="${C.ic}" transform="rotate(${Math.round(r()*180)} 23 22)"/></g>
+<ellipse cx="${30+j()*6}" cy="${19+j()*5}" rx="8" ry="6" fill="${C.icr}" opacity=".8" filter="url(#${id}g)"/></g></svg>`}
+
+document.querySelectorAll('.md').forEach(b=>{const col=MOOD_COL[b.dataset.v];b.querySelector('.dot').innerHTML=moodSVG(col,hstr(b.dataset.v));b.style.setProperty('--dc',NAT[col].c1+'88')});
 function openSheet(key){
   if(busy)return;
   editKey=key&&isOwn(key)?key:null;const w=editKey&&waveOf(editKey);
@@ -1455,7 +1495,7 @@ function paintSheet(first){
   document.querySelectorAll('.seg').forEach(g=>{const th=g.querySelector('.th'),on=g.querySelector('button.on');if(on){th.style.width=on.offsetWidth+'px';th.style.transform=`translateX(${on.offsetLeft}px)`;th.style.opacity=1}else th.style.opacity=0});
   const any=['act','mood','words','char'].some(k=>sel[k])||sel.genres.length>0;$('#save').disabled=!any;
   if(!nameTouched)nameIn.value=any?autoName(sel):'';
-  const nl=nameIn.value.toLowerCase(),p=parts(sel).filter(x=>!nl.includes(x.slice(0,Math.max(4,x.length-3))));$('#nmcap').textContent=p.join(' · ');
+  const nl=nameIn.value.toLowerCase(),p=parts(sel).filter(x=>!nl.includes(x.slice(0,Math.max(4,x.length-3))));$('#nmcap').textContent=p.join(', ');
   const col=any?MOOD_COL[moodOf(sel)]:'slate',C=NAT[col];
   sheet.style.setProperty('--acc',C.c1);
   $('#sglow').style.background=`radial-gradient(46% 50% at 50% 50%,${C.c1},rgba(0,0,0,0))`;
