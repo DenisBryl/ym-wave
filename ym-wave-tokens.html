@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Своя волна — Дизайн-токены и UI Kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #121114;
+            --sheet: #19181B;
+            --control: #28272A;
+            --yellow: #FEFE00;
+            --text-1: #FFFFFF;
+            --text-2: #8E8D90;
+            --text-3: #605F62;
+            --fill: rgba(255, 255, 255, .08);
+            --fill-press: rgba(255, 255, 255, .16);
+            --red: #E83032;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg);
+            color: var(--text-1);
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-family: 'Geologica', sans-serif;
+            font-weight: 900;
+            font-size: 32px;
+            margin-bottom: 8px;
+            color: var(--yellow);
+        }
+        .subtitle {
+            color: var(--text-2);
+            font-size: 16px;
+            margin-bottom: 40px;
+        }
+        section {
+            background: var(--sheet);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        h2 {
+            font-family: 'Geologica', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+        p.desc {
+            color: var(--text-2);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+        .grid-colors {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+        }
+        .color-card {
+            background: var(--control);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .color-info .name {
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .color-info .hex {
+            color: var(--text-2);
+            font-size: 12px;
+            font-family: monospace;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            color: var(--text-2);
+            font-weight: 600;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+        td code {
+            background: var(--control);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--yellow);
+        }
+        .component-row {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .chip {
+            background: var(--control);
+            color: var(--text-1);
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .chip.active {
+            background: #F2F2F2;
+            color: #121114;
+        }
+        .btn-sample {
+            background: var(--fill);
+            color: var(--text-1);
+            padding: 12px 24px;
+            border-radius: 28px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-sample:active {
+            background: var(--fill-press);
+        }
+        .btn-yellow {
+            background: var(--yellow);
+            color: #121114;
+            width: 100%;
+            text-align: center;
+            padding: 16px;
+            border-radius: 28px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Своя волна — Дизайн-токены</h1>
+        <div class="subtitle">Спецификация дизайн-системы для разработчиков и дизайнеров (Яндекс Музыка / прототип)</div>
+
+        <!-- Цвета -->
+        <section>
+            <h2>1. Цветовая палитра (Colors)</h2>
+            <p class="desc">Основные продуктовые токены и заливки интерфейса.</p>
+            <div class="grid-colors">
+                <div class="color-card">
+                    <div class="color-preview" style="background: #FEFE00;"></div>
+                    <div class="color-info">
+                        <div class="name">Акцент / Play</div>
+                        <div class="hex">#FEFE00</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: #19181B;"></div>
+                    <div class="color-info">
+                        <div class="name">Фон шторки</div>
+                        <div class="hex">#19181B</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: #28272A;"></div>
+                    <div class="color-info">
+                        <div class="name">Контролы / Плашки</div>
+                        <div class="hex">#28272A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: #E83032;"></div>
+                    <div class="color-info">
+                        <div class="name">Лайк (активный)</div>
+                        <div class="hex">#E83032</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Типографика -->
+        <section>
+            <h2>2. Типографика (Typography)</h2>
+            <p class="desc">Шрифтовые пары и правила интерлиньяжа.</p>
+            <table>
+                <tr>
+                    <th>Элемент</th>
+                    <th>Шрифт</th>
+                    <th>Размер / Высота</th>
+                    <th>Примечания</th>
+                </tr>
+                <tr>
+                    <td>Заголовки / Название волны</td>
+                    <td><code>Geologica</code></td>
+                    <td>900 / 700 bold</td>
+                    <td>Кастомный подбор под бренд-стиль</td>
+                </tr>
+                <tr>
+                    <td>Основной текст / Плашки</td>
+                    <td><code>Inter</code></td>
+                    <td>500 / 400 regular</td>
+                    <td>Интерфейсный текст, подписи фильтров</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Отступы и геометрия -->
+        <section>
+            <h2>3. Сетка отступов и радиусы (Spacing & Radii)</h2>
+            <p class="desc">Базовая сетка кратна 4 pt. Вертикальные пары текстов рассчитываются по правилу «по чернилам» (коэффициент 0.6 от кегля крупной строки).</p>
+            <table>
+                <tr>
+                    <th>Токен / Параметр</th>
+                    <th>Значение</th>
+                    <th>Описание</th>
+                </tr>
+                <tr>
+                    <td><code>--r-sheet</code></td>
+                    <td>20 px</td>
+                    <td>Скругление верхних углов модальной шторки</td>
+                </tr>
+                <tr>
+                    <td>Высота плашки фильтра</td>
+                    <td>40 px</td>
+                    <td>Чипсы групп «Настроение», «Чем заняты», «Жанры»</td>
+                </tr>
+                <tr>
+                    <td>Главная кнопка Play</td>
+                    <td>96 px</td>
+                    <td>Диаметр центральной кнопки запуска на главной</td>
+                </tr>
+                <tr>
+                    <td>Высота плашки трека</td>
+                    <td>56 px</td>
+                    <td>Стандартный плеер-бар на главном экране</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- Компоненты UI Kit -->
+        <section>
+            <h2>4. Состояния компонентов (UI Kit Samples)</h2>
+            <p class="desc>Визуальные примеры интерактивных элементов фичи.</p>
+            
+            <div style="margin-bottom: 16px;">
+                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Плашки фильтров (Default / Selected):</div>
+                <div class="component-row">
+                    <div class="chip">Спокойное</div>
+                    <div class="chip active">Бодрое (Active)</div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 16px;">
+                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Кнопка действия в шторке (Создать волну):</div>
+                <div class="btn-yellow">Создать волну</div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
