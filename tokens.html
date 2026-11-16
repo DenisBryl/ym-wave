@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Своя волна — Дизайн-токены и UI Kit</title>
+    <title>Своя волна — дизайн-система</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -149,13 +149,13 @@
 </head>
 <body>
     <div class="container">
-        <h1>Своя волна — Дизайн-токены</h1>
-        <div class="subtitle">Спецификация дизайн-системы для разработчиков и дизайнеров</div>
+        <h1>Своя волна — дизайн-система</h1>
+        <div class="subtitle">Паргайд и токены для сборки макетов и верстки фичи</div>
 
         <!-- Цвета -->
         <section>
-            <h2>1. Базовые продуктовые цвета (Colors)</h2>
-            <p class="desc">Основные UI-токены и системные заливки интерфейса.</p>
+            <h2>1. Базовые цвета интерфейса</h2>
+            <p class="desc">Главные цветовые константы плеера и шторки.</p>
             <div class="grid-colors">
                 <div class="color-card">
                     <div class="color-preview" style="background: #FEFE00;"></div>
@@ -174,7 +174,7 @@
                 <div class="color-card">
                     <div class="color-preview" style="background: #28272A;"></div>
                     <div class="color-info">
-                        <div class="name">Контролы / Плашки</div>
+                        <div class="name">Контролы и плашки</div>
                         <div class="hex">#28272A</div>
                     </div>
                 </div>
@@ -183,42 +183,42 @@
 
         <!-- Цвета настроений -->
         <section>
-            <h2>2. Палитра настроений волны (Mood Gradients & Bubbles)</h2>
-            <p class="desc">Динамические цвета градиентов и иконок для пользовательских волн в зависимости от выбранного настроения.</p>
+            <h2>2. Градиенты настроений для пузырей</h2>
+            <p class="desc">Цветовые переходы, которые меняются на экране в зависимости от выбранного вайба.</p>
             <div class="grid-colors">
                 <div class="color-card">
                     <div class="color-preview" style="background: linear-gradient(135deg, #2A75FF, #0043CE);"></div>
                     <div class="color-info">
                         <div class="name">Спокойное / Грустное</div>
-                        <div class="hex">Синий спектр</div>
+                        <div class="hex">Синяя гамма</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: linear-gradient(135deg, #FF7300, #C2410C);"></div>
                     <div class="color-info">
                         <div class="name">Бодрое</div>
-                        <div class="hex">Оранжевый спектр</div>
+                        <div class="hex">Оранжевая гамма</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: linear-gradient(135deg, #EC4899, #BE185D);"></div>
                     <div class="color-info">
                         <div class="name">Весёлое / Романтичное</div>
-                        <div class="hex">Розовый / Пул</div>
+                        <div class="hex">Розовая гамма</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: linear-gradient(135deg, #10B981, #047857);"></div>
                     <div class="color-info">
                         <div class="name">Свежее / Энергичное</div>
-                        <div class="hex">Зелёный спектр</div>
+                        <div class="hex">Зелёная гамма</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: linear-gradient(135deg, #A855F7, #6B21A8);"></div>
                     <div class="color-info">
                         <div class="name">Мечтательное</div>
-                        <div class="hex">Фиолетовый спектр</div>
+                        <div class="hex">Фиолетовая гамма</div>
                     </div>
                 </div>
             </div>
@@ -226,78 +226,78 @@
 
         <!-- Типографика -->
         <section>
-            <h2>3. Типографика (Typography)</h2>
-            <p class="desc">Шрифтовые пары и правила интерлиньяжа.</p>
+            <h2>3. Шрифты</h2>
+            <p class="desc">Используем стандартную пару под бренд.</p>
             <table>
                 <tr>
-                    <th>Элемент</th>
+                    <th>Где используется</th>
                     <th>Шрифт</th>
-                    <th>Размер / Высота</th>
-                    <th>Примечания</th>
+                    <th>Начертание</th>
+                    <th>Зачем нужно</th>
                 </tr>
                 <tr>
-                    <td>Заголовки / Название волны</td>
+                    <td>Заголовки и названия волн</td>
                     <td><code>Geologica</code></td>
                     <td>900 / 700 bold</td>
-                    <td>Кастомный подбор под бренд-стиль</td>
+                    <td>Брендовый характер для крупных надписей</td>
                 </tr>
                 <tr>
-                    <td>Основной текст / Плашки</td>
+                    <td>Весь текст и кнопки</td>
                     <td><code>Inter</code></td>
-                    <td>500 / 400 regular</td>
-                    <td>Интерфейсный текст, подписи фильтров</td>
+                    <td>Regular / Medium</td>
+                    <td>Максимальная читаемость в интерфейсе</td>
                 </tr>
             </table>
         </section>
 
         <!-- Отступы и геометрия -->
         <section>
-            <h2>4. Сетка отступов и радиусы (Spacing & Radii)</h2>
-            <p class="desc">Базовая сетка кратна 4 pt. Вертикальные пары текстов рассчитываются по правилу «по чернилам» (коэффициент 0.6 от кегля крупной строки).</p>
+            <h2>4. Размеры и сетка</h2>
+            <p class="desc">Вся сетка строится на кратных 4 пикселях.</p>
             <table>
                 <tr>
-                    <th>Токен / Параметр</th>
-                    <th>Значение</th>
-                    <th>Описание</th>
+                    <th>Элемент</th>
+                    <th>Размер</th>
+                    <th>Комментарий</th>
                 </tr>
                 <tr>
-                    <td><code>--r-sheet</code></td>
+                    <td>Скругление шторки</td>
                     <td>20 px</td>
-                    <td>Скругление верхних углов модальной шторки</td>
+                    <td>Мягкие верхние углы модалки</td>
                 </tr>
                 <tr>
-                    <td>Высота плашки фильтра</td>
+                    <td>Высота чипсов-фильтров</td>
                     <td>40 px</td>
-                    <td>Чипсы групп «Настроение», «Чем заняты», «Жанры»</td>
+                    <td>Удобно для тапа пальцем на мобилке</td>
                 </tr>
                 <tr>
-                    <td>Главная кнопка Play</td>
+                    <td>Центральная кнопка Play</td>
                     <td>96 px</td>
-                    <td>Диаметр центральной кнопки запуска на главной</td>
+                    <td>Главный фокусный элемент экрана</td>
                 </tr>
                 <tr>
-                    <td>Высота плашки трека</td>
+                    <td>Строка трека в плеере</td>
                     <td>56 px</td>
-                    <td>Стандартный плеер-бар на главном экране</td>
+                    <td>Стандартный плеер-бар</td>
                 </tr>
             </table>
         </section>
 
         <!-- Компоненты UI Kit -->
         <section>
-            <h2>5. Состояния компонентов (UI Kit Samples)</h2>
-            <p class="desc">Визуальные примеры интерактивных элементов фичи.</p>
+            <h2>5. Примеры компонентов</h2>
+            <p class="desc">Как выглядят базовые интерактивные элементы вживую.</p>
             
             <div style="margin-bottom: 16px;">
-                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Плашки фильтров (Default / Selected):</div>
+                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Фильтры (обычный / выбранный):</div>
                 <div class="component-row">
                     <div class="chip">Спокойное</div>
-                    <div class="chip active">Бодрое (Active)</div>
+                    <div class="chip active">Бодрое (выбрано)</div>
                 </div>
             </div>
 
             <div style="margin-bottom: 16px;">
-                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Кнопка действия в шторке (Создать волну):</div>
+                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Кнопка создания волны:</div>
                 <div class="btn-yellow">Создать волну</div>
             </div>
         </section>
