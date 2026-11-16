@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Своя волна — дизайн-система</title>
+    <title>Своя волна: дизайн-система</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -156,22 +156,22 @@
         .btn-yellow.disabled { background: #28272A; color: #605F62; }
         .pal { background: var(--control); border-radius: 10px; padding: 12px; }
         .pal .nm { font-weight: 600; font-size: 13px; margin-bottom: 8px; }
-        .pal .sw { display: flex; gap: 6px; }
-        .pal .sw div { flex: 1; }
-        .pal .sw i { display: block; height: 28px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); }
-        .pal .sw span { display: block; font-size: 10px; color: var(--text-2); font-family: monospace; margin-top: 4px; }
-        .pal .sw b { display: block; font-size: 10px; font-weight: 500; color: var(--text-3); }
+        .pal .sw { display: flex; flex-direction: column; gap: 6px; }
+        .pal .sw div { display: flex; align-items: center; gap: 8px; }
+        .pal .sw i { display: block; width: 28px; height: 18px; flex: none; border-radius: 5px; border: 1px solid rgba(255,255,255,0.2); }
+        .pal .sw span { font-size: 11px; color: var(--text-2); }
+        .pal .sw code { font-family: monospace; color: var(--text-1); }
         .note { color: var(--text-2); font-size: 13px; margin-top: 12px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Своя волна — дизайн-система</h1>
-        <div class="subtitle">Гайд и токены для сборки макетов и вёрстки фичи. Источник значений — CSS прототипа (index.html), рядом с названием токена указано имя переменной из кода</div>
+        <h1>Своя волна: дизайн-система</h1>
+        <div class="subtitle">Гайд и токены для сборки макетов и вёрстки фичи. Источник значений: CSS прототипа (index.html), рядом с названием токена указано имя переменной из кода</div>
 
         <section>
             <h2>1. Цвета и заливки интерфейса</h2>
-            <p class="desc">Константы шторки, плеера и главного экрана. Значки основного тона — <code>--ic-1</code> #FFFFFF.</p>
+            <p class="desc">Константы шторки, плеера и главного экрана. Значки основного тона: <code>--ic-1</code> #FFFFFF.</p>
             <div class="grid-colors">
                 <div class="color-card">
                     <div class="color-preview" style="background: #000000;"></div>
@@ -264,19 +264,19 @@
             <h2>2. Палитры пузырей барабана</h2>
             <p class="desc">13 палитр <code>NAT</code>, снятых с нативного барабана Яндекс Музыки. У каждой четыре цвета: тело пузыря, ободок, иконка и кант иконки.</p>
             <div class="grid-colors">
-                <div class="pal"><div class="nm">NAT.cyan</div><div class="sw"><div><i style="background:#009EB9"></i><b>тело c1</b><span>#009EB9</span></div><div><i style="background:#86EFFF"></i><b>ободок rim</b><span>#86EFFF</span></div><div><i style="background:#05A8C6"></i><b>иконка ic</b><span>#05A8C6</span></div><div><i style="background:#7FE3F2"></i><b>кант icr</b><span>#7FE3F2</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.pink</div><div class="sw"><div><i style="background:#DD006A"></i><b>тело c1</b><span>#DD006A</span></div><div><i style="background:#FF84DE"></i><b>ободок rim</b><span>#FF84DE</span></div><div><i style="background:#E22C84"></i><b>иконка ic</b><span>#E22C84</span></div><div><i style="background:#FF9AD0"></i><b>кант icr</b><span>#FF9AD0</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.red</div><div class="sw"><div><i style="background:#FA0401"></i><b>тело c1</b><span>#FA0401</span></div><div><i style="background:#FF8C7A"></i><b>ободок rim</b><span>#FF8C7A</span></div><div><i style="background:#FD832D"></i><b>иконка ic</b><span>#FD832D</span></div><div><i style="background:#FFB585"></i><b>кант icr</b><span>#FFB585</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.orange</div><div class="sw"><div><i style="background:#F65100"></i><b>тело c1</b><span>#F65100</span></div><div><i style="background:#FFBB79"></i><b>ободок rim</b><span>#FFBB79</span></div><div><i style="background:#FC8937"></i><b>иконка ic</b><span>#FC8937</span></div><div><i style="background:#FFC08A"></i><b>кант icr</b><span>#FFC08A</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.green</div><div class="sw"><div><i style="background:#00B670"></i><b>тело c1</b><span>#00B670</span></div><div><i style="background:#7DF5BE"></i><b>ободок rim</b><span>#7DF5BE</span></div><div><i style="background:#2FD08D"></i><b>иконка ic</b><span>#2FD08D</span></div><div><i style="background:#9DF5CC"></i><b>кант icr</b><span>#9DF5CC</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.blue</div><div class="sw"><div><i style="background:#0035DC"></i><b>тело c1</b><span>#0035DC</span></div><div><i style="background:#8FA5FF"></i><b>ободок rim</b><span>#8FA5FF</span></div><div><i style="background:#3A63F2"></i><b>иконка ic</b><span>#3A63F2</span></div><div><i style="background:#A3B6FF"></i><b>кант icr</b><span>#A3B6FF</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.slate</div><div class="sw"><div><i style="background:#395B8C"></i><b>тело c1</b><span>#395B8C</span></div><div><i style="background:#9DB4DA"></i><b>ободок rim</b><span>#9DB4DA</span></div><div><i style="background:#6F8BC8"></i><b>иконка ic</b><span>#6F8BC8</span></div><div><i style="background:#B5C6E8"></i><b>кант icr</b><span>#B5C6E8</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.slate2</div><div class="sw"><div><i style="background:#395B8C"></i><b>тело c1</b><span>#395B8C</span></div><div><i style="background:#9DB4DA"></i><b>ободок rim</b><span>#9DB4DA</span></div><div><i style="background:#5A74A6"></i><b>иконка ic</b><span>#5A74A6</span></div><div><i style="background:#B5C6E8"></i><b>кант icr</b><span>#B5C6E8</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.crimson</div><div class="sw"><div><i style="background:#FA001A"></i><b>тело c1</b><span>#FA001A</span></div><div><i style="background:#FF8A9A"></i><b>ободок rim</b><span>#FF8A9A</span></div><div><i style="background:#ED2C4D"></i><b>иконка ic</b><span>#ED2C4D</span></div><div><i style="background:#FF9AAE"></i><b>кант icr</b><span>#FF9AAE</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.teal</div><div class="sw"><div><i style="background:#05BC99"></i><b>тело c1</b><span>#05BC99</span></div><div><i style="background:#7DF5D8"></i><b>ободок rim</b><span>#7DF5D8</span></div><div><i style="background:#14C6A4"></i><b>иконка ic</b><span>#14C6A4</span></div><div><i style="background:#8FF5DC"></i><b>кант icr</b><span>#8FF5DC</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.purple</div><div class="sw"><div><i style="background:#A400DE"></i><b>тело c1</b><span>#A400DE</span></div><div><i style="background:#E59BFF"></i><b>ободок rim</b><span>#E59BFF</span></div><div><i style="background:#C746E2"></i><b>иконка ic</b><span>#C746E2</span></div><div><i style="background:#EBA8FF"></i><b>кант icr</b><span>#EBA8FF</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.indigo</div><div class="sw"><div><i style="background:#1408E0"></i><b>тело c1</b><span>#1408E0</span></div><div><i style="background:#A3A0FF"></i><b>ободок rim</b><span>#A3A0FF</span></div><div><i style="background:#4B4CF2"></i><b>иконка ic</b><span>#4B4CF2</span></div><div><i style="background:#AFAEFF"></i><b>кант icr</b><span>#AFAEFF</span></div></div></div>
-                <div class="pal"><div class="nm">NAT.magenta</div><div class="sw"><div><i style="background:#D9006E"></i><b>тело c1</b><span>#D9006E</span></div><div><i style="background:#FF8AD0"></i><b>ободок rim</b><span>#FF8AD0</span></div><div><i style="background:#E4398C"></i><b>иконка ic</b><span>#E4398C</span></div><div><i style="background:#FFA8D6"></i><b>кант icr</b><span>#FFA8D6</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.cyan</div><div class="sw"><div><i style="background:#009EB9"></i><span>Тело (<code>c1</code>): <code>#009EB9</code></span></div><div><i style="background:#86EFFF"></i><span>Ободок (<code>rim</code>): <code>#86EFFF</code></span></div><div><i style="background:#05A8C6"></i><span>Иконка (<code>ic</code>): <code>#05A8C6</code></span></div><div><i style="background:#7FE3F2"></i><span>Кант иконки (<code>icr</code>): <code>#7FE3F2</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.pink</div><div class="sw"><div><i style="background:#DD006A"></i><span>Тело (<code>c1</code>): <code>#DD006A</code></span></div><div><i style="background:#FF84DE"></i><span>Ободок (<code>rim</code>): <code>#FF84DE</code></span></div><div><i style="background:#E22C84"></i><span>Иконка (<code>ic</code>): <code>#E22C84</code></span></div><div><i style="background:#FF9AD0"></i><span>Кант иконки (<code>icr</code>): <code>#FF9AD0</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.red</div><div class="sw"><div><i style="background:#FA0401"></i><span>Тело (<code>c1</code>): <code>#FA0401</code></span></div><div><i style="background:#FF8C7A"></i><span>Ободок (<code>rim</code>): <code>#FF8C7A</code></span></div><div><i style="background:#FD832D"></i><span>Иконка (<code>ic</code>): <code>#FD832D</code></span></div><div><i style="background:#FFB585"></i><span>Кант иконки (<code>icr</code>): <code>#FFB585</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.orange</div><div class="sw"><div><i style="background:#F65100"></i><span>Тело (<code>c1</code>): <code>#F65100</code></span></div><div><i style="background:#FFBB79"></i><span>Ободок (<code>rim</code>): <code>#FFBB79</code></span></div><div><i style="background:#FC8937"></i><span>Иконка (<code>ic</code>): <code>#FC8937</code></span></div><div><i style="background:#FFC08A"></i><span>Кант иконки (<code>icr</code>): <code>#FFC08A</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.green</div><div class="sw"><div><i style="background:#00B670"></i><span>Тело (<code>c1</code>): <code>#00B670</code></span></div><div><i style="background:#7DF5BE"></i><span>Ободок (<code>rim</code>): <code>#7DF5BE</code></span></div><div><i style="background:#2FD08D"></i><span>Иконка (<code>ic</code>): <code>#2FD08D</code></span></div><div><i style="background:#9DF5CC"></i><span>Кант иконки (<code>icr</code>): <code>#9DF5CC</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.blue</div><div class="sw"><div><i style="background:#0035DC"></i><span>Тело (<code>c1</code>): <code>#0035DC</code></span></div><div><i style="background:#8FA5FF"></i><span>Ободок (<code>rim</code>): <code>#8FA5FF</code></span></div><div><i style="background:#3A63F2"></i><span>Иконка (<code>ic</code>): <code>#3A63F2</code></span></div><div><i style="background:#A3B6FF"></i><span>Кант иконки (<code>icr</code>): <code>#A3B6FF</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.slate</div><div class="sw"><div><i style="background:#395B8C"></i><span>Тело (<code>c1</code>): <code>#395B8C</code></span></div><div><i style="background:#9DB4DA"></i><span>Ободок (<code>rim</code>): <code>#9DB4DA</code></span></div><div><i style="background:#6F8BC8"></i><span>Иконка (<code>ic</code>): <code>#6F8BC8</code></span></div><div><i style="background:#B5C6E8"></i><span>Кант иконки (<code>icr</code>): <code>#B5C6E8</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.slate2</div><div class="sw"><div><i style="background:#395B8C"></i><span>Тело (<code>c1</code>): <code>#395B8C</code></span></div><div><i style="background:#9DB4DA"></i><span>Ободок (<code>rim</code>): <code>#9DB4DA</code></span></div><div><i style="background:#5A74A6"></i><span>Иконка (<code>ic</code>): <code>#5A74A6</code></span></div><div><i style="background:#B5C6E8"></i><span>Кант иконки (<code>icr</code>): <code>#B5C6E8</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.crimson</div><div class="sw"><div><i style="background:#FA001A"></i><span>Тело (<code>c1</code>): <code>#FA001A</code></span></div><div><i style="background:#FF8A9A"></i><span>Ободок (<code>rim</code>): <code>#FF8A9A</code></span></div><div><i style="background:#ED2C4D"></i><span>Иконка (<code>ic</code>): <code>#ED2C4D</code></span></div><div><i style="background:#FF9AAE"></i><span>Кант иконки (<code>icr</code>): <code>#FF9AAE</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.teal</div><div class="sw"><div><i style="background:#05BC99"></i><span>Тело (<code>c1</code>): <code>#05BC99</code></span></div><div><i style="background:#7DF5D8"></i><span>Ободок (<code>rim</code>): <code>#7DF5D8</code></span></div><div><i style="background:#14C6A4"></i><span>Иконка (<code>ic</code>): <code>#14C6A4</code></span></div><div><i style="background:#8FF5DC"></i><span>Кант иконки (<code>icr</code>): <code>#8FF5DC</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.purple</div><div class="sw"><div><i style="background:#A400DE"></i><span>Тело (<code>c1</code>): <code>#A400DE</code></span></div><div><i style="background:#E59BFF"></i><span>Ободок (<code>rim</code>): <code>#E59BFF</code></span></div><div><i style="background:#C746E2"></i><span>Иконка (<code>ic</code>): <code>#C746E2</code></span></div><div><i style="background:#EBA8FF"></i><span>Кант иконки (<code>icr</code>): <code>#EBA8FF</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.indigo</div><div class="sw"><div><i style="background:#1408E0"></i><span>Тело (<code>c1</code>): <code>#1408E0</code></span></div><div><i style="background:#A3A0FF"></i><span>Ободок (<code>rim</code>): <code>#A3A0FF</code></span></div><div><i style="background:#4B4CF2"></i><span>Иконка (<code>ic</code>): <code>#4B4CF2</code></span></div><div><i style="background:#AFAEFF"></i><span>Кант иконки (<code>icr</code>): <code>#AFAEFF</code></span></div></div></div>
+                <div class="pal"><div class="nm">NAT.magenta</div><div class="sw"><div><i style="background:#D9006E"></i><span>Тело (<code>c1</code>): <code>#D9006E</code></span></div><div><i style="background:#FF8AD0"></i><span>Ободок (<code>rim</code>): <code>#FF8AD0</code></span></div><div><i style="background:#E4398C"></i><span>Иконка (<code>ic</code>): <code>#E4398C</code></span></div><div><i style="background:#FFA8D6"></i><span>Кант иконки (<code>icr</code>): <code>#FFA8D6</code></span></div></div></div>
             </div>
             <p class="note">Яркость фона-пятна ограничена в коде отдельно (лимиты <code>YMAX</code> по слоям), чтобы заголовки читались поверх него.</p>
         </section>
@@ -292,7 +292,7 @@
 
         <section>
             <h2>4. Шрифты</h2>
-            <p class="desc">Шрифты Яндекс Музыки закрыты, поэтому использованы ближайшие открытые замены. Оба шрифта встроены в прототип.</p>
+            <p class="desc">Шрифты Яндекс Музыки закрыты, поэтому использованы ближайшие открытые замены. Оба шрифта подключены в прототипе.</p>
             <table>
                 <tr><th>Где используется</th><th>Шрифт</th><th>Начертание</th><th>Параметры из CSS</th></tr>
                 <tr><td>Крупные заголовки и названия волн</td><td><code>--f-display</code> Geologica</td><td>900</td><td>«Моя волна» крупно 64 / 0.92, трекинг −0,027em; имя исполнителя крупно 86 / 0.903; «Моя волна» в шапке 20 / 1</td></tr>
@@ -304,7 +304,7 @@
 
         <section>
             <h2>5. Отступы и размеры</h2>
-            <p class="desc">Шкала отступов фичи: <b>4 · 8 · 12 · 16 · 24 · 32 · 40</b>. Строгой сетки 4 px нет: зазоры между текстами меряются по «чернилам» (от базовой линии верхней строки до верха прописных нижней), а элементы самого приложения сохраняют родные размеры.</p>
+            <p class="desc">Базовая шкала отступов фичи: 4 · 8 · 12 · 16 · 24 · 32 · 40 px. Дополнительно используются оптические корректировки для отдельных текстовых блоков, поэтому некоторые значения CSS не кратны 4. Зазоры между текстами меряются по «чернилам» (от базовой линии верхней строки до верха прописных нижней). Элементы самого приложения сохраняют родные размеры.</p>
             <table>
                 <tr><th>Элемент</th><th>Значение</th><th>Переменная · комментарий</th></tr>
                 <tr><td>Скругление шторки</td><td>20 px</td><td><code>--r-sheet</code> · верхние углы</td></tr>
