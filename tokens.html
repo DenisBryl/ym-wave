@@ -167,7 +167,7 @@
 <body>
     <div class="container">
         <h1>Своя волна: дизайн-система</h1>
-        <div class="subtitle">Гайд и токены для сборки макетов и вёрстки фичи. Источник значений: CSS прототипа (index.html), рядом с названием токена указано имя переменной из кода</div>
+        <div class="subtitle">Токены и компоненты фичи для макетов и вёрстки. Источник значений: CSS прототипа (index.html). Рядом с каждым токеном указана переменная из кода.</div>
 
         <section>
             <h2>1. Цвета и заливки интерфейса</h2>
@@ -177,84 +177,84 @@
                     <div class="color-preview" style="background: #000000;"></div>
                     <div class="color-info">
                         <div class="name">Фон приложения</div>
-                        <div class="hex">--c-bg · #000000</div>
+                        <div class="hex">--c-bg: #000000</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #FEFE00;"></div>
                     <div class="color-info">
                         <div class="name">Акцент / Play / кнопка</div>
-                        <div class="hex">--c-yellow · #FEFE00</div>
+                        <div class="hex">--c-yellow: #FEFE00</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #FFFFFF;"></div>
                     <div class="color-info">
                         <div class="name">Текст основной</div>
-                        <div class="hex">--c-text · #FFFFFF</div>
+                        <div class="hex">--c-text: #FFFFFF</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #8E8D90;"></div>
                     <div class="color-info">
                         <div class="name">Текст вторичный</div>
-                        <div class="hex">--c-text-2 · #8E8D90</div>
+                        <div class="hex">--c-text-2: #8E8D90</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #605F62;"></div>
                     <div class="color-info">
                         <div class="name">Текст третичный / неактивный</div>
-                        <div class="hex">--c-text-3 · #605F62</div>
+                        <div class="hex">--c-text-3: #605F62</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #19181B;"></div>
                     <div class="color-info">
                         <div class="name">Фон шторки</div>
-                        <div class="hex">--c-sheet · #19181B</div>
+                        <div class="hex">--c-sheet: #19181B</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #28272A;"></div>
                     <div class="color-info">
                         <div class="name">Контролы и плашки в шторке</div>
-                        <div class="hex">--c-sheet-control · #28272A</div>
+                        <div class="hex">--c-sheet-control: #28272A</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #5E5B5F;"></div>
                     <div class="color-info">
                         <div class="name">Ручка шторки</div>
-                        <div class="hex">--c-handle · #5E5B5F</div>
+                        <div class="hex">--c-handle: #5E5B5F</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: rgba(0,0,0,.3);"></div>
                     <div class="color-info">
                         <div class="name">Тёмная плашка на фоне</div>
-                        <div class="hex">--c-chip-dark · rgba(0,0,0,.3)</div>
+                        <div class="hex">--c-chip-dark: rgba(0,0,0,.3)</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: rgba(255,255,255,.08);"></div>
                     <div class="color-info">
                         <div class="name">Заливка кнопок и плашек</div>
-                        <div class="hex">--fill · rgba(255,255,255,.08)</div>
+                        <div class="hex">--fill: rgba(255,255,255,.08)</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: rgba(255,255,255,.16);"></div>
                     <div class="color-info">
                         <div class="name">Заливка при нажатии</div>
-                        <div class="hex">--fill-press · rgba(255,255,255,.16)</div>
+                        <div class="hex">--fill-press: rgba(255,255,255,.16)</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: rgba(255,255,255,.16);"></div>
                     <div class="color-info">
                         <div class="name">Заливка кнопки поверх фото</div>
-                        <div class="hex">--fill-media · rgba(255,255,255,.16)</div>
+                        <div class="hex">--fill-media: rgba(255,255,255,.16)</div>
                     </div>
                 </div>
             </div>
@@ -282,7 +282,7 @@
         </section>
 
         <section>
-            <h2>3. Настроение → палитра</h2>
+            <h2>3. Палитры настроений</h2>
             <p class="desc">Соответствие по объекту <code>MOOD_COL</code>. Цвет пузыря и плашки настроения берётся из палитры выбранного настроения.</p>
             <table>
                 <tr><th>Настроение</th><th>Ключ</th><th>Палитра</th><th>Цвет тела</th></tr>
@@ -294,31 +294,31 @@
             <h2>4. Шрифты</h2>
             <p class="desc">Шрифты Яндекс Музыки закрыты, поэтому использованы ближайшие открытые замены. Оба шрифта подключены в прототипе.</p>
             <table>
-                <tr><th>Где используется</th><th>Шрифт</th><th>Начертание</th><th>Параметры из CSS</th></tr>
-                <tr><td>Крупные заголовки и названия волн</td><td><code>--f-display</code> Geologica</td><td>900</td><td>«Моя волна» крупно 64 / 0.92, трекинг −0,027em; имя исполнителя крупно 86 / 0.903; «Моя волна» в шапке 20 / 1</td></tr>
+                <tr><th>Где используется</th><th>Шрифт</th><th>Начертание</th><th>Параметры из CSS (размер / межстрочный интервал)</th></tr>
+                <tr><td>Крупные заголовки и названия волн</td><td><code>--f-display</code> Geologica</td><td>900</td><td>«Моя волна» крупно 64 / 0,92, трекинг −0,027em; имя исполнителя крупно 86 / 0,903; «Моя волна» в шапке 20 / 1</td></tr>
                 <tr><td>Названия в плашках пузырей</td><td><code>--f-display</code> Geologica</td><td>800</td><td>16 / 20, трекинг −0,03em</td></tr>
-                <tr><td>Весь остальной текст и кнопки</td><td><code>--f-text</code> Inter</td><td>400 · 500 · 600 · 700</td><td>Чипсы 500 / 15, кнопка 700 / 17, статус-бар 600 / 17</td></tr>
-                <tr><td>Плеер (размеры подогнаны по приложению)</td><td><code>--f-text</code> Inter</td><td>600 · 500 · 400</td><td>Название трека 600 / 21 / 27, трекинг −0,8px; исполнитель 500 / 16,5 / 21; время 400 / 11,5 / 14, цифры одной ширины</td></tr>
+                <tr><td>Весь остальной текст и кнопки</td><td><code>--f-text</code> Inter</td><td>400, 500, 600, 700</td><td>Чипсы 500 / 15, кнопка 700 / 17, статус-бар 600 / 17</td></tr>
+                <tr><td>Плеер (размеры подогнаны по приложению)</td><td><code>--f-text</code> Inter</td><td>600, 500, 400</td><td>Название трека 600 / 21 / 27, трекинг −0,8px; исполнитель 500 / 16,5 / 21; время 400 / 11,5 / 14, цифры одной ширины</td></tr>
             </table>
         </section>
 
         <section>
             <h2>5. Отступы и размеры</h2>
-            <p class="desc">Базовая шкала отступов фичи: 4 · 8 · 12 · 16 · 24 · 32 · 40 px. Дополнительно используются оптические корректировки для отдельных текстовых блоков, поэтому некоторые значения CSS не кратны 4. Зазоры между текстами меряются по «чернилам» (от базовой линии верхней строки до верха прописных нижней). Элементы самого приложения сохраняют родные размеры.</p>
+            <p class="desc">Базовая шкала отступов фичи: 4, 8, 12, 16, 24, 32, 40 px. Дополнительно используются оптические корректировки для отдельных текстовых блоков, поэтому некоторые значения CSS не кратны 4. Зазоры между текстами указаны по «чернилам»: от базовой линии верхней строки до верха прописных нижней. Элементы самого приложения сохраняют родные размеры.</p>
             <table>
-                <tr><th>Элемент</th><th>Значение</th><th>Переменная · комментарий</th></tr>
-                <tr><td>Скругление шторки</td><td>20 px</td><td><code>--r-sheet</code> · верхние углы</td></tr>
+                <tr><th>Элемент</th><th>Значение</th><th>Переменная и комментарий</th></tr>
+                <tr><td>Скругление шторки</td><td>20 px</td><td><code>--r-sheet</code>, верхние углы</td></tr>
                 <tr><td>Пилюля / плашки</td><td>999 px</td><td><code>--r-pill</code></td></tr>
-                <tr><td>Высота чипса</td><td>40 px</td><td>отступы <code>0 16</code>, зазор значок–текст 7, зазор между чипсами 8</td></tr>
+                <tr><td>Высота чипса</td><td>40 px</td><td>отступы <code>0 16</code>, зазор между значком и текстом 7, между чипсами 8</td></tr>
                 <tr><td>Кнопка «Создать волну»</td><td>56 px</td><td>на всю ширину, форма пилюли</td></tr>
                 <tr><td>Play на главном экране</td><td>96 px</td><td><code>--play</code></td></tr>
                 <tr><td>Строка текущего трека на главном экране</td><td>56 px</td><td><code>--row-h</code></td></tr>
                 <tr><td>Play в раскрытом плеере</td><td>65 px</td><td>размер как в приложении, не токен</td></tr>
-                <tr><td>Название → подпись (шапка фичи)</td><td>5,7 px</td><td><code>--sp-name-cap</code> · «чернильный» зазор 16,2</td></tr>
-                <tr><td>Подпись → «Настроение»</td><td>32,5 px</td><td><code>--sp-hero-section</code> · зазор 40</td></tr>
-                <tr><td>Плашки → заголовок следующей секции</td><td>28 px</td><td><code>--sp-section</code> · зазор 32</td></tr>
-                <tr><td>Заголовок секции → плашки</td><td>7 px</td><td><code>--sp-head-content</code> · зазор 12</td></tr>
-                <tr><td>Пара в подписи барабана</td><td>2,5 px</td><td><code>--sp-drum-pair</code> · зазор 9</td></tr>
+                <tr><td>Зазор между названием и подписью (шапка фичи)</td><td>5,7 px</td><td><code>--sp-name-cap</code>, по «чернилам» 16,2</td></tr>
+                <tr><td>Зазор между подписью и «Настроением»</td><td>32,5 px</td><td><code>--sp-hero-section</code>, по «чернилам» 40</td></tr>
+                <tr><td>Зазор между плашками и заголовком следующей секции</td><td>28 px</td><td><code>--sp-section</code>, по «чернилам» 32</td></tr>
+                <tr><td>Зазор между заголовком секции и плашками</td><td>7 px</td><td><code>--sp-head-content</code>, по «чернилам» 12</td></tr>
+                <tr><td>Зазор в паре подписи барабана</td><td>2,5 px</td><td><code>--sp-drum-pair</code>, по «чернилам» 9</td></tr>
             </table>
         </section>
 
@@ -327,7 +327,7 @@
             <p class="desc">Значения состояний взяты из CSS прототипа.</p>
 
             <div style="margin-bottom: 16px;">
-                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Чипс: обычный · нажатие (#3A393C) · выбранный (#F2F2F2, текст #111) · выбранный при нажатии (#D6D6D6):</div>
+                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Чипс: обычный, нажатие (#3A393C), выбранный (#F2F2F2, текст #111), выбранный при нажатии (#D6D6D6).</div>
                 <div class="component-row">
                     <div class="chip">Спокойное</div>
                     <div class="chip pressed">Спокойное</div>
@@ -337,7 +337,7 @@
             </div>
 
             <div style="margin-bottom: 16px;">
-                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Кнопка «Создать волну»: обычная · нажатие (яркость 86 %) · неактивная (#28272A, текст #605F62):</div>
+                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Кнопка «Создать волну»: обычная, нажатие (яркость 86 %), неактивная (#28272A, текст #605F62).</div>
                 <div class="btn-yellow" style="margin-bottom: 8px;">Создать волну</div>
                 <div class="btn-yellow pressed" style="margin-bottom: 8px;">Создать волну</div>
                 <div class="btn-yellow disabled">Создать волну</div>
@@ -346,7 +346,7 @@
             <table>
                 <tr><th>Значки</th><th>Значение в коде</th><th>Комментарий</th></tr>
                 <tr><td>Основной значок</td><td><code>--ic-1</code> #FFFFFF</td><td>токен объявлен, в разметке значения заданы напрямую</td></tr>
-                <tr><td>Второстепенный значок</td><td><code>--ic-2</code> rgba(255,255,255,.5)</td><td>токен объявлен, но не используется через <code>var()</code>; в разметке встречаются значения .5 (7 раз), .55 (23 раза, в основном значки плеера) и .6 (1 раз). Единое значение не закреплено, это известное расхождение прототипа</td></tr>
+                <tr><td>Второстепенный значок</td><td><code>--ic-2</code> rgba(255,255,255,.5)</td><td>токен объявлен, но не используется через <code>var()</code>. В разметке встречаются значения .5 (7 раз), .55 (23 раза, в основном значки плеера) и .6 (1 раз). Единое значение не закреплено, это известное расхождение прототипа</td></tr>
             </table>
         </section>
     </div>
