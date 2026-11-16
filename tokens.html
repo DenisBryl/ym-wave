@@ -6,10 +6,10 @@
     <title>Своя волна — дизайн-система</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #121114;
+            --bg: #000000;
             --sheet: #19181B;
             --control: #28272A;
             --yellow: #FEFE00;
@@ -18,7 +18,7 @@
             --text-3: #605F62;
             --fill: rgba(255, 255, 255, .08);
             --fill-press: rgba(255, 255, 255, .16);
-            --border: rgba(255, 255, 255, 0.1);
+            --page-line: rgba(255, 255, 255, 0.1);
         }
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -46,7 +46,7 @@
         }
         section {
             background: var(--sheet);
-            border: 1px solid var(--border);
+            border: 1px solid var(--page-line);
             border-radius: 16px;
             padding: 24px;
             margin-bottom: 24px;
@@ -57,7 +57,7 @@
             font-weight: 700;
             margin-bottom: 16px;
             padding-bottom: 8px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--page-line);
         }
         p.desc {
             color: var(--text-2);
@@ -100,7 +100,7 @@
         th, td {
             text-align: left;
             padding: 10px 12px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--page-line);
         }
         th {
             color: var(--text-2);
@@ -126,180 +126,228 @@
         .chip {
             background: var(--control);
             color: var(--text-1);
-            padding: 10px 16px;
-            border-radius: 20px;
-            font-size: 14px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 16px;
+            border-radius: 999px;
+            font-size: 15px;
             font-weight: 500;
+            letter-spacing: -.15px;
         }
+        .chip.pressed { background: #3A393C; }
         .chip.active {
             background: #F2F2F2;
-            color: #121114;
+            color: #111;
         }
+        .chip.active.pressed { background: #D6D6D6; }
         .btn-yellow {
             background: var(--yellow);
-            color: #121114;
+            color: #000;
             width: 100%;
             text-align: center;
-            padding: 16px;
-            border-radius: 28px;
+            height: 56px;
+            line-height: 56px;
+            border-radius: 999px;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 17px;
+            letter-spacing: -.3px;
         }
+        .btn-yellow.pressed { filter: brightness(.86); }
+        .btn-yellow.disabled { background: #28272A; color: #605F62; }
+        .pal { background: var(--control); border-radius: 10px; padding: 12px; }
+        .pal .nm { font-weight: 600; font-size: 13px; margin-bottom: 8px; }
+        .pal .sw { display: flex; gap: 6px; }
+        .pal .sw div { flex: 1; }
+        .pal .sw i { display: block; height: 28px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.2); }
+        .pal .sw span { display: block; font-size: 10px; color: var(--text-2); font-family: monospace; margin-top: 4px; }
+        .pal .sw b { display: block; font-size: 10px; font-weight: 500; color: var(--text-3); }
+        .note { color: var(--text-2); font-size: 13px; margin-top: 12px; }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Своя волна — дизайн-система</h1>
-        <div class="subtitle">Паргайд и токены для сборки макетов и верстки фичи</div>
+        <div class="subtitle">Гайд и токены для сборки макетов и вёрстки фичи. Источник значений — CSS прототипа (index.html), рядом с названием токена указано имя переменной из кода</div>
 
-        <!-- Цвета -->
         <section>
-            <h2>1. Базовые цвета интерфейса</h2>
-            <p class="desc">Главные цветовые константы плеера и шторки.</p>
+            <h2>1. Цвета и заливки интерфейса</h2>
+            <p class="desc">Константы шторки, плеера и главного экрана. Значки основного тона — <code>--ic-1</code> #FFFFFF.</p>
             <div class="grid-colors">
+                <div class="color-card">
+                    <div class="color-preview" style="background: #000000;"></div>
+                    <div class="color-info">
+                        <div class="name">Фон приложения</div>
+                        <div class="hex">--c-bg · #000000</div>
+                    </div>
+                </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #FEFE00;"></div>
                     <div class="color-info">
-                        <div class="name">Акцент / Play</div>
-                        <div class="hex">#FEFE00</div>
+                        <div class="name">Акцент / Play / кнопка</div>
+                        <div class="hex">--c-yellow · #FEFE00</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: #FFFFFF;"></div>
+                    <div class="color-info">
+                        <div class="name">Текст основной</div>
+                        <div class="hex">--c-text · #FFFFFF</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: #8E8D90;"></div>
+                    <div class="color-info">
+                        <div class="name">Текст вторичный</div>
+                        <div class="hex">--c-text-2 · #8E8D90</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: #605F62;"></div>
+                    <div class="color-info">
+                        <div class="name">Текст третичный / неактивный</div>
+                        <div class="hex">--c-text-3 · #605F62</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #19181B;"></div>
                     <div class="color-info">
                         <div class="name">Фон шторки</div>
-                        <div class="hex">#19181B</div>
+                        <div class="hex">--c-sheet · #19181B</div>
                     </div>
                 </div>
                 <div class="color-card">
                     <div class="color-preview" style="background: #28272A;"></div>
                     <div class="color-info">
-                        <div class="name">Контролы и плашки</div>
-                        <div class="hex">#28272A</div>
+                        <div class="name">Контролы и плашки в шторке</div>
+                        <div class="hex">--c-sheet-control · #28272A</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: #5E5B5F;"></div>
+                    <div class="color-info">
+                        <div class="name">Ручка шторки</div>
+                        <div class="hex">--c-handle · #5E5B5F</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: rgba(0,0,0,.3);"></div>
+                    <div class="color-info">
+                        <div class="name">Тёмная плашка на фоне</div>
+                        <div class="hex">--c-chip-dark · rgba(0,0,0,.3)</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: rgba(255,255,255,.08);"></div>
+                    <div class="color-info">
+                        <div class="name">Заливка кнопок и плашек</div>
+                        <div class="hex">--fill · rgba(255,255,255,.08)</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: rgba(255,255,255,.16);"></div>
+                    <div class="color-info">
+                        <div class="name">Заливка при нажатии</div>
+                        <div class="hex">--fill-press · rgba(255,255,255,.16)</div>
+                    </div>
+                </div>
+                <div class="color-card">
+                    <div class="color-preview" style="background: rgba(255,255,255,.16);"></div>
+                    <div class="color-info">
+                        <div class="name">Заливка кнопки поверх фото</div>
+                        <div class="hex">--fill-media · rgba(255,255,255,.16)</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Цвета настроений -->
         <section>
-            <h2>2. Градиенты настроений для пузырей</h2>
-            <p class="desc">Цветовые переходы, которые меняются на экране в зависимости от выбранного вайба.</p>
+            <h2>2. Палитры пузырей барабана</h2>
+            <p class="desc">13 палитр <code>NAT</code>, снятых с нативного барабана Яндекс Музыки. У каждой четыре цвета: тело пузыря, ободок, иконка и кант иконки.</p>
             <div class="grid-colors">
-                <div class="color-card">
-                    <div class="color-preview" style="background: linear-gradient(135deg, #2A75FF, #0043CE);"></div>
-                    <div class="color-info">
-                        <div class="name">Спокойное / Грустное</div>
-                        <div class="hex">Синяя гамма</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background: linear-gradient(135deg, #FF7300, #C2410C);"></div>
-                    <div class="color-info">
-                        <div class="name">Бодрое</div>
-                        <div class="hex">Оранжевая гамма</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background: linear-gradient(135deg, #EC4899, #BE185D);"></div>
-                    <div class="color-info">
-                        <div class="name">Весёлое / Романтичное</div>
-                        <div class="hex">Розовая гамма</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background: linear-gradient(135deg, #10B981, #047857);"></div>
-                    <div class="color-info">
-                        <div class="name">Свежее / Энергичное</div>
-                        <div class="hex">Зелёная гамма</div>
-                    </div>
-                </div>
-                <div class="color-card">
-                    <div class="color-preview" style="background: linear-gradient(135deg, #A855F7, #6B21A8);"></div>
-                    <div class="color-info">
-                        <div class="name">Мечтательное</div>
-                        <div class="hex">Фиолетовая гамма</div>
-                    </div>
-                </div>
+                <div class="pal"><div class="nm">NAT.cyan</div><div class="sw"><div><i style="background:#009EB9"></i><b>тело c1</b><span>#009EB9</span></div><div><i style="background:#86EFFF"></i><b>ободок rim</b><span>#86EFFF</span></div><div><i style="background:#05A8C6"></i><b>иконка ic</b><span>#05A8C6</span></div><div><i style="background:#7FE3F2"></i><b>кант icr</b><span>#7FE3F2</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.pink</div><div class="sw"><div><i style="background:#DD006A"></i><b>тело c1</b><span>#DD006A</span></div><div><i style="background:#FF84DE"></i><b>ободок rim</b><span>#FF84DE</span></div><div><i style="background:#E22C84"></i><b>иконка ic</b><span>#E22C84</span></div><div><i style="background:#FF9AD0"></i><b>кант icr</b><span>#FF9AD0</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.red</div><div class="sw"><div><i style="background:#FA0401"></i><b>тело c1</b><span>#FA0401</span></div><div><i style="background:#FF8C7A"></i><b>ободок rim</b><span>#FF8C7A</span></div><div><i style="background:#FD832D"></i><b>иконка ic</b><span>#FD832D</span></div><div><i style="background:#FFB585"></i><b>кант icr</b><span>#FFB585</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.orange</div><div class="sw"><div><i style="background:#F65100"></i><b>тело c1</b><span>#F65100</span></div><div><i style="background:#FFBB79"></i><b>ободок rim</b><span>#FFBB79</span></div><div><i style="background:#FC8937"></i><b>иконка ic</b><span>#FC8937</span></div><div><i style="background:#FFC08A"></i><b>кант icr</b><span>#FFC08A</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.green</div><div class="sw"><div><i style="background:#00B670"></i><b>тело c1</b><span>#00B670</span></div><div><i style="background:#7DF5BE"></i><b>ободок rim</b><span>#7DF5BE</span></div><div><i style="background:#2FD08D"></i><b>иконка ic</b><span>#2FD08D</span></div><div><i style="background:#9DF5CC"></i><b>кант icr</b><span>#9DF5CC</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.blue</div><div class="sw"><div><i style="background:#0035DC"></i><b>тело c1</b><span>#0035DC</span></div><div><i style="background:#8FA5FF"></i><b>ободок rim</b><span>#8FA5FF</span></div><div><i style="background:#3A63F2"></i><b>иконка ic</b><span>#3A63F2</span></div><div><i style="background:#A3B6FF"></i><b>кант icr</b><span>#A3B6FF</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.slate</div><div class="sw"><div><i style="background:#395B8C"></i><b>тело c1</b><span>#395B8C</span></div><div><i style="background:#9DB4DA"></i><b>ободок rim</b><span>#9DB4DA</span></div><div><i style="background:#6F8BC8"></i><b>иконка ic</b><span>#6F8BC8</span></div><div><i style="background:#B5C6E8"></i><b>кант icr</b><span>#B5C6E8</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.slate2</div><div class="sw"><div><i style="background:#395B8C"></i><b>тело c1</b><span>#395B8C</span></div><div><i style="background:#9DB4DA"></i><b>ободок rim</b><span>#9DB4DA</span></div><div><i style="background:#5A74A6"></i><b>иконка ic</b><span>#5A74A6</span></div><div><i style="background:#B5C6E8"></i><b>кант icr</b><span>#B5C6E8</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.crimson</div><div class="sw"><div><i style="background:#FA001A"></i><b>тело c1</b><span>#FA001A</span></div><div><i style="background:#FF8A9A"></i><b>ободок rim</b><span>#FF8A9A</span></div><div><i style="background:#ED2C4D"></i><b>иконка ic</b><span>#ED2C4D</span></div><div><i style="background:#FF9AAE"></i><b>кант icr</b><span>#FF9AAE</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.teal</div><div class="sw"><div><i style="background:#05BC99"></i><b>тело c1</b><span>#05BC99</span></div><div><i style="background:#7DF5D8"></i><b>ободок rim</b><span>#7DF5D8</span></div><div><i style="background:#14C6A4"></i><b>иконка ic</b><span>#14C6A4</span></div><div><i style="background:#8FF5DC"></i><b>кант icr</b><span>#8FF5DC</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.purple</div><div class="sw"><div><i style="background:#A400DE"></i><b>тело c1</b><span>#A400DE</span></div><div><i style="background:#E59BFF"></i><b>ободок rim</b><span>#E59BFF</span></div><div><i style="background:#C746E2"></i><b>иконка ic</b><span>#C746E2</span></div><div><i style="background:#EBA8FF"></i><b>кант icr</b><span>#EBA8FF</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.indigo</div><div class="sw"><div><i style="background:#1408E0"></i><b>тело c1</b><span>#1408E0</span></div><div><i style="background:#A3A0FF"></i><b>ободок rim</b><span>#A3A0FF</span></div><div><i style="background:#4B4CF2"></i><b>иконка ic</b><span>#4B4CF2</span></div><div><i style="background:#AFAEFF"></i><b>кант icr</b><span>#AFAEFF</span></div></div></div>
+                <div class="pal"><div class="nm">NAT.magenta</div><div class="sw"><div><i style="background:#D9006E"></i><b>тело c1</b><span>#D9006E</span></div><div><i style="background:#FF8AD0"></i><b>ободок rim</b><span>#FF8AD0</span></div><div><i style="background:#E4398C"></i><b>иконка ic</b><span>#E4398C</span></div><div><i style="background:#FFA8D6"></i><b>кант icr</b><span>#FFA8D6</span></div></div></div>
             </div>
+            <p class="note">Яркость фона-пятна ограничена в коде отдельно (лимиты <code>YMAX</code> по слоям), чтобы заголовки читались поверх него.</p>
         </section>
 
-        <!-- Типографика -->
         <section>
-            <h2>3. Шрифты</h2>
-            <p class="desc">Используем стандартную пару под бренд.</p>
+            <h2>3. Настроение → палитра</h2>
+            <p class="desc">Соответствие по объекту <code>MOOD_COL</code>. Цвет пузыря и плашки настроения берётся из палитры выбранного настроения.</p>
             <table>
-                <tr>
-                    <th>Где используется</th>
-                    <th>Шрифт</th>
-                    <th>Начертание</th>
-                    <th>Зачем нужно</th>
-                </tr>
-                <tr>
-                    <td>Заголовки и названия волн</td>
-                    <td><code>Geologica</code></td>
-                    <td>900 / 700 bold</td>
-                    <td>Брендовый характер для крупных надписей</td>
-                </tr>
-                <tr>
-                    <td>Весь текст и кнопки</td>
-                    <td><code>Inter</code></td>
-                    <td>Regular / Medium</td>
-                    <td>Максимальная читаемость в интерфейсе</td>
-                </tr>
+                <tr><th>Настроение</th><th>Ключ</th><th>Палитра</th><th>Цвет тела</th></tr>
+                <tr><td>Бодрое</td><td><code>energy</code></td><td><code>NAT.orange</code></td><td>#F65100</td></tr><tr><td>Весёлое</td><td><code>fun</code></td><td><code>NAT.pink</code></td><td>#DD006A</td></tr><tr><td>Спокойное</td><td><code>calm</code></td><td><code>NAT.green</code></td><td>#00B670</td></tr><tr><td>Мечтательное</td><td><code>dream</code></td><td><code>NAT.purple</code></td><td>#A400DE</td></tr><tr><td>Грустное</td><td><code>sad</code></td><td><code>NAT.blue</code></td><td>#0035DC</td></tr><tr><td>Романтичное</td><td><code>romantic</code></td><td><code>NAT.crimson</code></td><td>#FA001A</td></tr><tr><td>Без настроения / кнопка «Создать»</td><td><code>none</code></td><td><code>NAT.slate</code></td><td>#395B8C</td></tr>
             </table>
         </section>
 
-        <!-- Отступы и геометрия -->
         <section>
-            <h2>4. Размеры и сетка</h2>
-            <p class="desc">Вся сетка строится на кратных 4 пикселях.</p>
+            <h2>4. Шрифты</h2>
+            <p class="desc">Шрифты Яндекс Музыки закрыты, поэтому использованы ближайшие открытые замены. Оба шрифта встроены в прототип.</p>
             <table>
-                <tr>
-                    <th>Элемент</th>
-                    <th>Размер</th>
-                    <th>Комментарий</th>
-                </tr>
-                <tr>
-                    <td>Скругление шторки</td>
-                    <td>20 px</td>
-                    <td>Мягкие верхние углы модалки</td>
-                </tr>
-                <tr>
-                    <td>Высота чипсов-фильтров</td>
-                    <td>40 px</td>
-                    <td>Удобно для тапа пальцем на мобилке</td>
-                </tr>
-                <tr>
-                    <td>Центральная кнопка Play</td>
-                    <td>96 px</td>
-                    <td>Главный фокусный элемент экрана</td>
-                </tr>
-                <tr>
-                    <td>Строка трека в плеере</td>
-                    <td>56 px</td>
-                    <td>Стандартный плеер-бар</td>
-                </tr>
+                <tr><th>Где используется</th><th>Шрифт</th><th>Начертание</th><th>Параметры из CSS</th></tr>
+                <tr><td>Крупные заголовки и названия волн</td><td><code>--f-display</code> Geologica</td><td>900</td><td>«Моя волна» крупно 64 / 0.92, трекинг −0,027em; имя исполнителя крупно 86 / 0.903; «Моя волна» в шапке 20 / 1</td></tr>
+                <tr><td>Названия в плашках пузырей</td><td><code>--f-display</code> Geologica</td><td>800</td><td>16 / 20, трекинг −0,03em</td></tr>
+                <tr><td>Весь остальной текст и кнопки</td><td><code>--f-text</code> Inter</td><td>400 · 500 · 600 · 700</td><td>Чипсы 500 / 15, кнопка 700 / 17, статус-бар 600 / 17</td></tr>
+                <tr><td>Плеер (размеры подогнаны по приложению)</td><td><code>--f-text</code> Inter</td><td>600 · 500 · 400</td><td>Название трека 600 / 21 / 27, трекинг −0,8px; исполнитель 500 / 16,5 / 21; время 400 / 11,5 / 14, цифры одной ширины</td></tr>
             </table>
         </section>
 
-        <!-- Компоненты UI Kit -->
         <section>
-            <h2>5. Примеры компонентов</h2>
-            <p class="desc">Как выглядят базовые интерактивные элементы вживую.</p>
-            
+            <h2>5. Отступы и размеры</h2>
+            <p class="desc">Шкала отступов фичи: <b>4 · 8 · 12 · 16 · 24 · 32 · 40</b>. Строгой сетки 4 px нет: зазоры между текстами меряются по «чернилам» (от базовой линии верхней строки до верха прописных нижней), а элементы самого приложения сохраняют родные размеры.</p>
+            <table>
+                <tr><th>Элемент</th><th>Значение</th><th>Переменная · комментарий</th></tr>
+                <tr><td>Скругление шторки</td><td>20 px</td><td><code>--r-sheet</code> · верхние углы</td></tr>
+                <tr><td>Пилюля / плашки</td><td>999 px</td><td><code>--r-pill</code></td></tr>
+                <tr><td>Высота чипса</td><td>40 px</td><td>отступы <code>0 16</code>, зазор значок–текст 7, зазор между чипсами 8</td></tr>
+                <tr><td>Кнопка «Создать волну»</td><td>56 px</td><td>на всю ширину, форма пилюли</td></tr>
+                <tr><td>Play на главном экране</td><td>96 px</td><td><code>--play</code></td></tr>
+                <tr><td>Строка текущего трека на главном экране</td><td>56 px</td><td><code>--row-h</code></td></tr>
+                <tr><td>Play в раскрытом плеере</td><td>65 px</td><td>размер как в приложении, не токен</td></tr>
+                <tr><td>Название → подпись (шапка фичи)</td><td>5,7 px</td><td><code>--sp-name-cap</code> · «чернильный» зазор 16,2</td></tr>
+                <tr><td>Подпись → «Настроение»</td><td>32,5 px</td><td><code>--sp-hero-section</code> · зазор 40</td></tr>
+                <tr><td>Плашки → заголовок следующей секции</td><td>28 px</td><td><code>--sp-section</code> · зазор 32</td></tr>
+                <tr><td>Заголовок секции → плашки</td><td>7 px</td><td><code>--sp-head-content</code> · зазор 12</td></tr>
+                <tr><td>Пара в подписи барабана</td><td>2,5 px</td><td><code>--sp-drum-pair</code> · зазор 9</td></tr>
+            </table>
+        </section>
+
+        <section>
+            <h2>6. Компоненты и состояния</h2>
+            <p class="desc">Значения состояний взяты из CSS прототипа.</p>
+
             <div style="margin-bottom: 16px;">
-                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Фильтры (обычный / выбранный):</div>
+                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Чипс: обычный · нажатие (#3A393C) · выбранный (#F2F2F2, текст #111) · выбранный при нажатии (#D6D6D6):</div>
                 <div class="component-row">
                     <div class="chip">Спокойное</div>
-                    <div class="chip active">Бодрое (выбрано)</div>
+                    <div class="chip pressed">Спокойное</div>
+                    <div class="chip active">Бодрое</div>
+                    <div class="chip active pressed">Бодрое</div>
                 </div>
             </div>
 
             <div style="margin-bottom: 16px;">
-                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Кнопка создания волны:</div>
-                <div class="btn-yellow">Создать волну</div>
+                <div style="font-size: 13px; color: var(--text-2); margin-bottom: 8px;">Кнопка «Создать волну»: обычная · нажатие (яркость 86 %) · неактивная (#28272A, текст #605F62):</div>
+                <div class="btn-yellow" style="margin-bottom: 8px;">Создать волну</div>
+                <div class="btn-yellow pressed" style="margin-bottom: 8px;">Создать волну</div>
+                <div class="btn-yellow disabled">Создать волну</div>
             </div>
+
+            <table>
+                <tr><th>Значки</th><th>Значение в коде</th><th>Комментарий</th></tr>
+                <tr><td>Основной значок</td><td><code>--ic-1</code> #FFFFFF</td><td>токен объявлен, в разметке значения заданы напрямую</td></tr>
+                <tr><td>Второстепенный значок</td><td><code>--ic-2</code> rgba(255,255,255,.5)</td><td>токен объявлен, но не используется через <code>var()</code>; в разметке встречаются значения .5 (7 раз), .55 (23 раза, в основном значки плеера) и .6 (1 раз). Единое значение не закреплено, это известное расхождение прототипа</td></tr>
+            </table>
         </section>
     </div>
 </body>
